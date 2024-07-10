@@ -1,14 +1,26 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
+import router from './app/routes';
+import notFound from './app/middlewares/notFound';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
 
-//parsers
+//Using json parser by express and cors parser
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: ['http://localhost:5173'] }));
+
+//application routes
+app.use('/api/v1', router);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('Server Started');
 });
+
+//not found route
+app.all('*', notFound);
+
+//Using global error handler
+app.use(globalErrorHandler);
 
 export default app;
