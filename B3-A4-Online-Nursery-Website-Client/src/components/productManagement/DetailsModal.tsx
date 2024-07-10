@@ -1,5 +1,5 @@
 import { Button } from "../ui/button";
-import { FaInfo } from "react-icons/fa";
+import { MdInfo } from "react-icons/md";
 import {
   Dialog,
   DialogContent,
@@ -14,8 +14,8 @@ const DetailsModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-transparent hover:bg-[#98b2992f] text-lg text-[#757575] hover:text-[#5D7E5F]">
-          <FaInfo />
+        <Button className="bg-transparent hover:bg-[#98b2992f] text-lg text-[#757575] hover:text-[#5D7E5F] rounded-full">
+          <MdInfo />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

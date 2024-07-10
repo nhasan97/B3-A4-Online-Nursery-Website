@@ -27,7 +27,7 @@ const ProductTableRow = () => {
 
       <td className="flex-1">
         <EditProductModal></EditProductModal>
-        <Button className="bg-transparent hover:bg-red-100 text-2xl text-[#757575] hover:text-red-600">
+        <Button className="bg-transparent hover:bg-red-100 text-lg text-[#757575] hover:text-red-600 rounded-full">
           <MdDelete />
         </Button>
       </td>

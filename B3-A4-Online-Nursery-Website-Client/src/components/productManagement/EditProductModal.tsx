@@ -50,7 +50,7 @@ const EditProductModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl text-[#757575] hover:text-[#5D7E5F]">
+        <Button className="bg-transparent hover:bg-[#98b2992f] text-lg text-[#757575] hover:text-[#5D7E5F] rounded-full">
           <MdEditDocument />
         </Button>
       </DialogTrigger>
