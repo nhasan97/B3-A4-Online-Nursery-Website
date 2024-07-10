@@ -3,7 +3,6 @@ import { MdInfo } from "react-icons/md";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,

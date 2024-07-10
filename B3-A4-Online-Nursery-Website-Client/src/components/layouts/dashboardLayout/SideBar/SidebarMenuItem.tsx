@@ -1,6 +1,7 @@
+import { TSidebarMenuItemProps } from "@/types/sidebar.type";
 import { NavLink } from "react-router-dom";
 
-const SidebarMenuItem = ({ icon, menuText, route }) => {
+const SidebarMenuItem = ({ icon, menuText, route }: TSidebarMenuItemProps) => {
   return (
     <NavLink
       to={route}
