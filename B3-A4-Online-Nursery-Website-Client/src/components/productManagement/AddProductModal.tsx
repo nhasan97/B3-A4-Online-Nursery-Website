@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { uploadImage } from "@/utiils/imageUploader";
 
 const AddProductModal = () => {
   const [title, setTitle] = useState("");
@@ -29,10 +30,12 @@ const AddProductModal = () => {
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(0);
   const [stock, setStock] = useState(0);
-  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const image = await uploadImage(imageFile);
 
     const todoDetails: TProduct = {
       title,
@@ -124,6 +127,8 @@ const AddProductModal = () => {
               type="number"
               id="rating"
               min={0}
+              max={5}
+              step={0.5}
               required
               className="col-span-3"
               onBlur={(e) => setRating(Number(e.target.value))}
@@ -153,7 +158,7 @@ const AddProductModal = () => {
               id="picture"
               required
               className="col-span-3"
-              onBlur={(e) => setImage(e.target.value)}
+              onBlur={(e) => setImageFile(e.target.files[0])}
             />
           </div>
 
