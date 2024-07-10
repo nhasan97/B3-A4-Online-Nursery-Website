@@ -1,3 +1,23 @@
 .sb a.active {
     color: hsl(124, 15%, 43%);
 }
+
+.sb a.active::before {
+    content: " ";
+    width: 8px;
+    height: 8px;
+    background: hsl(124, 15%, 43%);
+    position: absolute;
+    left: -10px;
+    border-radius: 50%;
+}
+
+/* .sb a:hover::before {
+    content: " ";
+    width: 8px;
+    height: 8px;
+    background: hsl(124, 15%, 43%);
+    position: absolute;
+    left: -10px;
+    border-radius: 50%;
+} */
