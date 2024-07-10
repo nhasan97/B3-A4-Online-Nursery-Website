@@ -22,8 +22,10 @@ const ProductManagement = () => {
               <tr className="flex  justify-between items-center text-[#757575] p-5 border-b">
                 <th className="flex-1">Image</th>
                 <th className="flex-1">Title</th>
-                <th className="flex-1">Price</th>
+                <th className="flex-1">Details</th>
                 <th className="flex-1">Category</th>
+                <th className="flex-1">Price</th>
+                <th className="flex-1">Stock</th>
                 <th className="flex-1">Actions</th>
               </tr>
             </thead>

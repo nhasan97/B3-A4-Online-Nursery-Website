@@ -12,7 +12,7 @@ const DashboardLayout = () => {
       <Sidebar></Sidebar>
       <div className="flex-1 lg:ml-64 relative">
         <i
-          className="fa-solid fa-arrow-left text-xl text-[#a5a5a5] hover:text-[#5D7E5F] absolute top-[55px] left-5 sm:top-10 sm:left-10"
+          className="fa-solid fa-arrow-left text-xl text-[#808080] hover:text-[#5D7E5F] absolute top-[55px] left-5 sm:top-10 sm:left-10"
           onClick={handleGoBack}
         ></i>
         <Outlet></Outlet>
