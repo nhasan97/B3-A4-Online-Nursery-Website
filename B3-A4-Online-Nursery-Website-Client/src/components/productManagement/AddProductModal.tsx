@@ -23,7 +23,7 @@ import {
 } from "../ui/select";
 import { uploadImage } from "@/utiils/imageUploader";
 
-const AddProductModal = () => {
+const AddProductModal = ({ addProduct }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -37,7 +37,7 @@ const AddProductModal = () => {
 
     const image = await uploadImage(imageFile);
 
-    const todoDetails: TProduct = {
+    const productDetails: TProduct = {
       title,
       description,
       category,
@@ -47,7 +47,9 @@ const AddProductModal = () => {
       image,
     };
 
-    console.log(todoDetails);
+    console.log(productDetails);
+
+    addProduct(productDetails);
   };
 
   return (
