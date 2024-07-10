@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import SideBarMenu from "./SideBarMenu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
-
+  // bg-[#F2F2F2]
   return (
     <div>
       <div className="w-full flex justify-end items-center p-5 lg:hidden fixed z-20">
@@ -15,7 +16,7 @@ const Sidebar = () => {
         />
       </div>
       <div
-        className={`w-64 h-full bg-[#F2F2F2] overflow-y-auto absolute lg:fixed z-20 lg:translate-x-0 ${
+        className={`w-64 h-full bg-white overflow-y-auto rounded-r-xl absolute lg:fixed z-20 lg:translate-x-0 ${
           openSidebar
             ? `translate-x-0 transition duration-300 ease-in-out`
             : `-translate-x-full transition duration-300 ease-in-out`
@@ -26,16 +27,20 @@ const Sidebar = () => {
         </div>
 
         <div className="w-full flex flex-col justify-center items-center gap-3 ">
-          <div className="avatar">
-            <div className="w-16 sm:w-20 mask mask-hexagon">
-              {/* <img src={} /> */}
-            </div>
+          <div className="relative">
+            <Avatar className="size-24">
+              <AvatarImage src="" alt="@shadcn" />
+              <AvatarFallback className="bg-[#98b2992f] text-4xl text-[#a5a5a5]">
+                NH
+              </AvatarFallback>
+            </Avatar>
+            <div className="size-6 bg-green-800 border-4 border-white rounded-full absolute right-0 bottom-2"></div>
           </div>
-          <h1 className="normal-case text-xl sm:text-2xl text-[#71357B] font-medium">
-            jhjkh
+          <h1 className="normal-case text-xl sm:text-2xl text-[#5D7E5F] font-medium">
+            Nazia Hasan
           </h1>
           <p className="normal-case text-base sm:text-lg text-[#a5a5a5]">
-            hkhk
+            nh@gmail.com
           </p>
         </div>
 
