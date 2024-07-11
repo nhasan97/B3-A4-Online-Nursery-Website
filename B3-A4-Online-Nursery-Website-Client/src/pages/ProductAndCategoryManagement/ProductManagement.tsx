@@ -21,7 +21,7 @@ const ProductManagement = () => {
           <title>Blooms & Beyond | Dashboard | Products</title>
         </Helmet>
 
-        <div className="flex justify-between">
+        <div className="w-full flex justify-start">
           <AddProductModal addProduct={addProduct}></AddProductModal>
         </div>
 
