@@ -21,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router}></RouterProvider>
       </Provider>
       <Toaster
+        position="top-right"
         icons={{
           success: <AiFillCheckCircle className="text-xl text-green-800" />,
           info: <AiFillInfoCircle className="text-xl text-blue-500" />,

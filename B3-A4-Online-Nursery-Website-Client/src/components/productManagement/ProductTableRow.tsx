@@ -3,6 +3,7 @@ import { MdDelete } from "react-icons/md";
 import DetailsModal from "./DetailsModal";
 import EditProductModal from "./EditProductModal";
 import { TProductProp } from "@/types/product.type";
+import { toast } from "sonner";
 
 const ProductTableRow = ({
   _id,
@@ -15,6 +16,30 @@ const ProductTableRow = ({
   image,
   deleteProduct,
 }: TProductProp) => {
+  const handleDeleteProduct = () => {
+    toast.warning("Are youAre you sure? You won't be able to revert this!", {
+      action: {
+        label: "Yes, delete it",
+        onClick: async () => {
+          try {
+            const res = await deleteProduct(_id).unwrap();
+            if (res.success && res.statusCode === 200) {
+              toast.success(res.message, {
+                duration: 2000,
+              });
+            }
+          } catch (err) {
+            toast.error(err.data.message, { duration: 2000 });
+          }
+        },
+      },
+      cancel: {
+        label: "Cancel",
+        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
+      },
+    });
+  };
+
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">
@@ -45,7 +70,7 @@ const ProductTableRow = ({
         <EditProductModal></EditProductModal>
         <Button
           className="bg-transparent hover:bg-red-100 text-lg text-[#757575] hover:text-red-600 rounded-full"
-          onClick={() => deleteProduct(_id)}
+          onClick={handleDeleteProduct}
         >
           <MdDelete />
         </Button>
