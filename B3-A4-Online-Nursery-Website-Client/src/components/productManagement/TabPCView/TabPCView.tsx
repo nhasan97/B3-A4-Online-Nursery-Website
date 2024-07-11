@@ -2,7 +2,7 @@ import Loading from "@/components/shared/Loading";
 import ProductTableRow from "./ProductTableRow";
 import NoData from "@/components/shared/NoData";
 
-const TabPCView = ({ loadingProducts, products, handleDeleteProduct }) => {
+const TabPCView = ({ loadingProducts, products }) => {
   return (
     <div className="bg-white hidden sm:block w-full h-[80%] overflow-y-auto rounded-lg border">
       {loadingProducts ? (
@@ -24,11 +24,7 @@ const TabPCView = ({ loadingProducts, products, handleDeleteProduct }) => {
           <tbody>
             {/* row  */}
             {products!.data?.map((product) => (
-              <ProductTableRow
-                key={product._id}
-                {...product}
-                handleDeleteProduct={handleDeleteProduct}
-              />
+              <ProductTableRow key={product._id} {...product} />
             ))}
           </tbody>
         </table>

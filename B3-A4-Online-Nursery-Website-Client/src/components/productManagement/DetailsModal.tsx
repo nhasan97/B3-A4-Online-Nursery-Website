@@ -20,7 +20,7 @@ const DetailsModal = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-transparent hover:bg-[#98b2992f] text-lg text-[#757575] hover:text-[#5D7E5F] rounded-full">
+        <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl sm:text-xl text-[#757575] hover:text-[#5D7E5F] rounded-full">
           <MdInfo />
         </Button>
       </DialogTrigger>

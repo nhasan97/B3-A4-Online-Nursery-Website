@@ -3,6 +3,7 @@ import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SideBarMenu from "./SideBarMenu";
+import MainLogo from "@/components/shared/MainLogo";
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -23,7 +24,7 @@ const Sidebar = () => {
         }`}
       >
         <div className="w-full py-6">
-          {/* <MainLogo caller={"d"}></MainLogo> */}
+          <MainLogo caller={"d"}></MainLogo>
         </div>
 
         <div className="w-full flex flex-col justify-center items-center gap-3 ">

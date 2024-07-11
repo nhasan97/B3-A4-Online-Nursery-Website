@@ -18,7 +18,7 @@ export type TProductProp = {
   rating: number;
   stock: number;
   image: string;
-  handleDeleteProduct?: any;
+  handleDeleteProduct?: unknown;
 };
 
 export type TEditProduct = {

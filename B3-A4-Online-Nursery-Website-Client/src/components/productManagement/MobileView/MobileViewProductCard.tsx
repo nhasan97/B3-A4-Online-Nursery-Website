@@ -54,30 +54,36 @@ const MobileViewProductCard = ({
         </div>
 
         <div className="flex justify-between">
-          <DetailsModal
-            image={image}
-            title={title}
-            description={description}
-            rating={rating}
-          ></DetailsModal>
+          <div className="flex-1 bg-[#98b2992f] rounded-l-full">
+            <DetailsModal
+              image={image}
+              title={title}
+              description={description}
+              rating={rating}
+            ></DetailsModal>
+          </div>
 
-          <EditProductModal
-            _id={_id}
-            title={title}
-            description={description}
-            category={category}
-            price={price}
-            rating={rating}
-            stock={stock}
-            image={image}
-          ></EditProductModal>
+          <div className="flex-1 bg-[#98b2992f]">
+            <EditProductModal
+              _id={_id}
+              title={title}
+              description={description}
+              category={category}
+              price={price}
+              rating={rating}
+              stock={stock}
+              image={image}
+            ></EditProductModal>
+          </div>
 
-          <Button
-            className="bg-transparent hover:bg-red-100 text-lg text-[#757575] hover:text-red-600 rounded-full"
-            onClick={() => handleDeleteProduct(_id)}
-          >
-            <MdDelete />
-          </Button>
+          <div className="flex-1 bg-[#98b2992f] rounded-r-full">
+            <Button
+              className="bg-transparent hover:bg-red-100 text-2xl sm:text-xl text-[#757575] hover:text-red-600 rounded-full"
+              onClick={() => handleDeleteProduct(_id)}
+            >
+              <MdDelete />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

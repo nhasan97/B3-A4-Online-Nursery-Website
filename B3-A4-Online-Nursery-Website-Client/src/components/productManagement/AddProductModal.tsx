@@ -63,7 +63,7 @@ const AddProductModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-[#5D7E5F] text-lg font-semibold mb-5 space-x-2 rounded-full">
+        <Button className="bg-[#5D7E5F] text-lg font-semibold my-5 space-x-2 rounded-full">
           <FaCirclePlus /> <p>Product</p>
         </Button>
       </DialogTrigger>
@@ -175,7 +175,7 @@ const AddProductModal = () => {
           <DialogFooter>
             <Button
               type="submit"
-              className="w-full bg-[#5D7E5F] text-lg font-semibold mb-5 space-x-2 rounded-full"
+              className="w-full bg-[#5D7E5F] text-lg font-semibold space-x-2 rounded-full"
             >
               <IoIosSave /> <p>Save</p>
             </Button>
