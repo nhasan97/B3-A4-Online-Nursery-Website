@@ -18,6 +18,29 @@ const createProductIntoDB = async (productData: TProduct) => {
 };
 /*
 
+----------------service function for updating product data in DB----------------*/
+const updateProductIntoDB = async (
+  id: string,
+  updatedProductData: Partial<TProduct>,
+) => {
+  //checking if the selected product exists or not. If not throwing an error.
+  const loadedProduct = await productModel.doesProductExist(id);
+  if (!loadedProduct) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Product not found');
+  }
+
+  //updating product data in DB
+  const response = await productModel.findByIdAndUpdate(
+    id,
+    updatedProductData,
+    { new: true },
+  );
+
+  //returning response
+  return response;
+};
+/*
+
 ----------------service function for deleting specific product data from DB----------------*/
 const deleteProductFromDB = async (id: string) => {
   //checking if the selected product exists or not. If not throwing an error.
@@ -34,7 +57,7 @@ const deleteProductFromDB = async (id: string) => {
   if (!productDeleted) {
     throw new AppError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      'Failed to delete facility',
+      'Failed to delete product',
     );
   }
 
@@ -43,7 +66,8 @@ const deleteProductFromDB = async (id: string) => {
 
 //exporting all the service functions through productServices object
 export const productServices = {
-  createProductIntoDB,
   getAllProductsFromDB,
+  createProductIntoDB,
+  updateProductIntoDB,
   deleteProductFromDB,
 };

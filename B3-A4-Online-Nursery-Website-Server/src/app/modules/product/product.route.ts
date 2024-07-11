@@ -15,6 +15,13 @@ router.post(
   productControllers.createProduct,
 );
 
+//------------route for updating product data in DB------------
+router.put(
+  '/:id',
+  validateRequest(ProductValidations.updateProductValidationSchema),
+  productControllers.updateProduct,
+);
+
 //------------route for deleting specific product data from DB------------
 router.delete('/:id', productControllers.deleteProduct);
 

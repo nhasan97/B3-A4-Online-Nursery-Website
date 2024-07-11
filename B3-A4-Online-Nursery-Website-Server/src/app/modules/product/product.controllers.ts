@@ -4,22 +4,6 @@ import { sendResponse } from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 /*
 
-----------------controller for inserting new product data in DB----------------*/
-const createProduct = catchAsync(async (req, res) => {
-  //Passing data to service function
-  const response = await productServices.createProductIntoDB(req.body);
-
-  //sending response
-  sendResponse(
-    res,
-    httpStatus.OK,
-    true,
-    'Product added successfully',
-    response,
-  );
-});
-/*
-
 --------------controller for getting all product data from DB----------------*/
 const getAllProducts = catchAsync(async (req, res) => {
   //receiving data from service function
@@ -40,6 +24,41 @@ const getAllProducts = catchAsync(async (req, res) => {
 });
 /*
 
+----------------controller for inserting new product data in DB----------------*/
+const createProduct = catchAsync(async (req, res) => {
+  //Passing data to service function
+  const response = await productServices.createProductIntoDB(req.body);
+
+  //sending response
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Product added successfully',
+    response,
+  );
+});
+/*
+
+--------------controller for updating specific product info in DB----------------*/
+const updateProduct = catchAsync(async (req, res) => {
+  //Passing data to service function
+  const response = await productServices.updateProductIntoDB(
+    req.params.id,
+    req.body,
+  );
+
+  //sending response
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Product updated successfully',
+    response,
+  );
+});
+/*
+
 --------------controller for updating specific product info in DB----------------*/
 const deleteProduct = catchAsync(async (req, res) => {
   //Passing id to service function
@@ -57,7 +76,8 @@ const deleteProduct = catchAsync(async (req, res) => {
 
 //exporting all the controller functions through productControllers object
 export const productControllers = {
-  createProduct,
   getAllProducts,
+  createProduct,
+  updateProduct,
   deleteProduct,
 };
