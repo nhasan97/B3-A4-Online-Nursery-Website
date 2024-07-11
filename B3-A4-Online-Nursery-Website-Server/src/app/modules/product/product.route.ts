@@ -5,6 +5,9 @@ import { productControllers } from './product.controllers';
 
 const router = express.Router();
 
+//------------route for fetching all the product data from DB------------
+router.get('/', productControllers.getAllProducts);
+
 //------------route for inserting new product data in DB------------
 router.post(
   '/',
@@ -12,8 +15,8 @@ router.post(
   productControllers.createProduct,
 );
 
-//------------route for fetching all the facility data from DB------------
-router.get('/', productControllers.getAllProducts);
+//------------route for deleting specific product data from DB------------
+router.delete('/:id', productControllers.deleteProduct);
 
 //exporting routes
 export const productRoutes = router;

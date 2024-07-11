@@ -38,9 +38,26 @@ const getAllProducts = catchAsync(async (req, res) => {
     sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
   }
 });
+/*
+
+--------------controller for updating specific product info in DB----------------*/
+const deleteProduct = catchAsync(async (req, res) => {
+  //Passing id to service function
+  const response = await productServices.deleteProductFromDB(req.params.id);
+
+  //sending response
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Product deleted successfully',
+    response,
+  );
+});
 
 //exporting all the controller functions through productControllers object
 export const productControllers = {
   createProduct,
   getAllProducts,
+  deleteProduct,
 };

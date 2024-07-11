@@ -1,5 +1,14 @@
+import httpStatus from 'http-status';
 import { TProduct } from './product.interface';
 import { productModel } from './product.model';
+import AppError from '../../Errors/AppError';
+/*
+
+----------------service function for fetching all products data from DB----------------*/
+const getAllProductsFromDB = async () => {
+  const response = await productModel.find();
+  return response;
+};
 /*
 
 ----------------service function for inserting product data in DB----------------*/
@@ -9,14 +18,32 @@ const createProductIntoDB = async (productData: TProduct) => {
 };
 /*
 
-----------------service function for fetching all products data from DB----------------*/
-const getAllProductsFromDB = async () => {
-  const response = await productModel.find();
-  return response;
+----------------service function for deleting specific product data from DB----------------*/
+const deleteProductFromDB = async (id: string) => {
+  //checking if the selected product exists or not. If not throwing an error.
+  const loadedProduct = await productModel.doesProductExist(id);
+  if (!loadedProduct) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Product not found');
+  }
+
+  //deleting product from db
+  const productDeleted = await productModel.findByIdAndUpdate(id, {
+    isDeleted: true,
+  });
+
+  if (!productDeleted) {
+    throw new AppError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      'Failed to delete facility',
+    );
+  }
+
+  return productDeleted;
 };
 
 //exporting all the service functions through productServices object
 export const productServices = {
   createProductIntoDB,
   getAllProductsFromDB,
+  deleteProductFromDB,
 };
