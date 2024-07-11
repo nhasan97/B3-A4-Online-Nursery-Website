@@ -12,5 +12,8 @@ router.post(
   productControllers.createProduct,
 );
 
+//------------route for fetching all the facility data from DB------------
+router.get('/', productControllers.getAllProducts);
+
 //exporting routes
 export const productRoutes = router;

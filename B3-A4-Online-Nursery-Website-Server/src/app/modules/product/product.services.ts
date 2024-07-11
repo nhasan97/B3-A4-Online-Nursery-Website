@@ -7,8 +7,16 @@ const createProductIntoDB = async (productData: TProduct) => {
   const response = await productModel.create(productData);
   return response;
 };
+/*
+
+----------------service function for fetching all products data from DB----------------*/
+const getAllProductsFromDB = async () => {
+  const response = await productModel.find();
+  return response;
+};
 
 //exporting all the service functions through productServices object
 export const productServices = {
   createProductIntoDB,
+  getAllProductsFromDB,
 };

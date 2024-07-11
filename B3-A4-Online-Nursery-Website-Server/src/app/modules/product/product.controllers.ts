@@ -18,8 +18,29 @@ const createProduct = catchAsync(async (req, res) => {
     response,
   );
 });
+/*
+
+--------------controller for getting all product data from DB----------------*/
+const getAllProducts = catchAsync(async (req, res) => {
+  //receiving data from service function
+  const response = await productServices.getAllProductsFromDB();
+
+  //sending response
+  if (response.length) {
+    sendResponse(
+      res,
+      httpStatus.OK,
+      true,
+      'Products retrieved successfully',
+      response,
+    );
+  } else {
+    sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
+  }
+});
 
 //exporting all the controller functions through productControllers object
 export const productControllers = {
   createProduct,
+  getAllProducts,
 };
