@@ -1,11 +1,10 @@
-import { TProduct } from "@/types/product.type";
 import { baseApi } from "./baseApi";
 
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     /*
     ------------------------endpoint for getting products from DB------------------------*/
-    getProducts: builder.query<{ status: boolean; data: TProduct[] }, string>({
+    getProducts: builder.query({
       query: () => {
         return { url: "/products", method: "GET" };
       },
@@ -14,10 +13,7 @@ const productApi = baseApi.injectEndpoints({
     /*
 
     ------------------------endpoint for adding product in DB------------------------*/
-    addProduct: builder.mutation<
-      { acknowledged: boolean; insertedId: string },
-      TProduct
-    >({
+    addProduct: builder.mutation({
       query: (productInfo) => {
         return {
           url: "/products",
@@ -29,11 +25,21 @@ const productApi = baseApi.injectEndpoints({
     }),
     /*
 
+    ------------------------endpoint for editing product in DB------------------------*/
+    editProduct: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `/products/${payload._id}`,
+          method: "PUT",
+          body: payload.productDetails,
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
+    /*
+
     ------------------------endpoint for deleting product from DB------------------------*/
-    deleteProduct: builder.mutation<
-      { status: boolean; data: TProduct },
-      string
-    >({
+    deleteProduct: builder.mutation({
       query: (id: string) => {
         return {
           url: `/products/${id}`,

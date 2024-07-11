@@ -23,8 +23,11 @@ import {
 } from "../ui/select";
 import { uploadImage } from "@/utiils/imageUploader";
 import { toast } from "sonner";
+import productApi from "@/redux/api/ProductApi";
 
-const AddProductModal = ({ addProduct }) => {
+const AddProductModal = () => {
+  const [addProduct] = productApi.useAddProductMutation();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");

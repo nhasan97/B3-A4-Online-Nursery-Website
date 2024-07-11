@@ -18,6 +18,10 @@ export type TProductProp = {
   rating: number;
   stock: number;
   image: string;
-  editProduct: any;
-  deleteProduct?: any;
+  handleDeleteProduct?: any;
+};
+
+export type TEditProduct = {
+  _id: string;
+  productDetails: TProduct;
 };

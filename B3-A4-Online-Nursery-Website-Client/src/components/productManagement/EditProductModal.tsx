@@ -10,7 +10,7 @@ import {
 import { Button } from "../ui/button";
 import { MdEditDocument } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
-import { TProduct } from "@/types/product.type";
+import { TProductProp } from "@/types/product.type";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -21,30 +21,62 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { uploadImage } from "@/utiils/imageUploader";
+import { toast } from "sonner";
+import productApi from "@/redux/api/ProductApi";
 
-const EditProductModal = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [stock, setStock] = useState(0);
-  const [image, setImage] = useState("");
+const EditProductModal = ({
+  _id,
+  title,
+  description,
+  category,
+  price,
+  rating,
+  stock,
+  image,
+}: TProductProp) => {
+  const [editProduct] = productApi.useEditProductMutation();
 
-  const onSubmit = (e: FormEvent) => {
+  const [editedTitle, setEditedTitle] = useState(title);
+  const [editedDescription, setEditedDescription] = useState(description);
+  const [editedCategory, setEditedCategory] = useState(category);
+  const [editedPrice, setEditedPrice] = useState(price);
+  const [editedRating, setEditedRating] = useState(rating);
+  const [editedStock, setEditedStock] = useState(stock);
+  const [editedImageFile, setEditedImageFile] = useState(null);
+
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const todoDetails: TProduct = {
-      title,
-      description,
-      category,
-      price,
-      rating,
-      stock,
-      image,
+    let editedImage;
+
+    if (editedImageFile) {
+      editedImage = await uploadImage(editedImageFile);
+    } else {
+      editedImage = image;
+    }
+
+    const payload = {
+      _id,
+      productDetails: {
+        title: editedTitle,
+        description: editedDescription,
+        category: editedCategory,
+        price: editedPrice,
+        rating: editedRating,
+        stock: editedStock,
+        image: editedImage,
+      },
     };
 
-    console.log(todoDetails);
+    try {
+      const res = await editProduct(payload).unwrap();
+      if (res.success && res.statusCode === 200) {
+        toast.success(res.message);
+      }
+    } catch (err) {
+      toast.error(err.data.message);
+    }
   };
 
   return (
@@ -67,7 +99,8 @@ const EditProductModal = () => {
             <Input
               id="title"
               className="col-span-3"
-              onBlur={(e) => setTitle(e.target.value)}
+              defaultValue={title}
+              onBlur={(e) => setEditedTitle(e.target.value)}
             />
           </div>
 
@@ -78,7 +111,8 @@ const EditProductModal = () => {
             <Input
               id="description"
               className="col-span-3"
-              onBlur={(e) => setDescription(e.target.value)}
+              defaultValue={description}
+              onBlur={(e) => setEditedDescription(e.target.value)}
             />
           </div>
 
@@ -86,7 +120,10 @@ const EditProductModal = () => {
             <Label htmlFor="category" className="text-left text-[#757575]">
               Category
             </Label>
-            <Select onValueChange={(value) => setCategory(value)}>
+            <Select
+              defaultValue={category}
+              onValueChange={(value) => setEditedCategory(value)}
+            >
               <SelectTrigger className="col-span-3">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
@@ -109,7 +146,8 @@ const EditProductModal = () => {
               id="price"
               min={0}
               className="col-span-3"
-              onBlur={(e) => setPrice(Number(e.target.value))}
+              defaultValue={price}
+              onBlur={(e) => setEditedPrice(Number(e.target.value))}
             />
           </div>
 
@@ -121,8 +159,11 @@ const EditProductModal = () => {
               type="number"
               id="rating"
               min={0}
+              max={5}
+              step={0.5}
               className="col-span-3"
-              onBlur={(e) => setRating(Number(e.target.value))}
+              defaultValue={rating}
+              onBlur={(e) => setEditedRating(Number(e.target.value))}
             />
           </div>
 
@@ -135,20 +176,27 @@ const EditProductModal = () => {
               id="stock"
               min={0}
               className="col-span-3"
-              onBlur={(e) => setStock(Number(e.target.value))}
+              defaultValue={stock}
+              onBlur={(e) => setEditedStock(Number(e.target.value))}
             />
           </div>
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="picture" className="text-left text-[#757575]">
-              Picture
-            </Label>
-            <Input
-              type="file"
-              id="picture"
-              className="col-span-3"
-              onBlur={(e) => setImage(e.target.value)}
-            />
+          <div className="flex  justify-center items-center gap-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              {/* <Label htmlFor="picture" className="text-left text-[#757575]">
+                Picture
+              </Label> */}
+              <img
+                src={image}
+                alt=""
+                className="size-20 p-[2px] border-2 border-[#5D7E5F] rounded-full"
+              />
+              <Input
+                type="file"
+                id="picture"
+                className="col-span-3"
+                onBlur={(e) => setEditedImageFile(e.target.files[0])}
+              />
+            </div>
           </div>
 
           <DialogFooter>

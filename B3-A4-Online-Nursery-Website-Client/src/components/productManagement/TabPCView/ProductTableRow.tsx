@@ -1,8 +1,9 @@
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
-import DetailsModal from "./DetailsModal";
-import EditProductModal from "./EditProductModal";
+import DetailsModal from "../DetailsModal";
+import EditProductModal from "../EditProductModal";
 import { TProductProp } from "@/types/product.type";
+import productApi from "@/redux/api/ProductApi";
 import { toast } from "sonner";
 
 const ProductTableRow = ({
@@ -14,9 +15,10 @@ const ProductTableRow = ({
   rating,
   stock,
   image,
-  deleteProduct,
 }: TProductProp) => {
-  const handleDeleteProduct = () => {
+  const [deleteProduct] = productApi.useDeleteProductMutation();
+
+  const handleDeleteProduct = (_id) => {
     toast.warning("Are youAre you sure? You won't be able to revert this!", {
       action: {
         label: "Yes, delete it",
@@ -39,7 +41,6 @@ const ProductTableRow = ({
       },
     });
   };
-
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">
@@ -67,10 +68,19 @@ const ProductTableRow = ({
       <td className="flex-1">{stock}</td>
 
       <td className="flex-1">
-        <EditProductModal></EditProductModal>
+        <EditProductModal
+          _id={_id}
+          title={title}
+          description={description}
+          category={category}
+          price={price}
+          rating={rating}
+          stock={stock}
+          image={image}
+        ></EditProductModal>
         <Button
           className="bg-transparent hover:bg-red-100 text-lg text-[#757575] hover:text-red-600 rounded-full"
-          onClick={handleDeleteProduct}
+          onClick={() => handleDeleteProduct(_id)}
         >
           <MdDelete />
         </Button>
