@@ -7,10 +7,12 @@ import productApi from "@/redux/api/ProductApi";
 import { Helmet } from "react-helmet-async";
 
 const ProductManagement = () => {
-  const [addProduct, addProductObject] = productApi.useAddProductMutation();
-
   const { isLoading: loadingProducts, data: products } =
     productApi.useGetProductsQuery(undefined);
+
+  const [addProduct, addProductObject] = productApi.useAddProductMutation();
+  const [deleteProduct, deleteProductObject] =
+    productApi.useDeleteProductMutation();
 
   return (
     <div className="h-screen">
@@ -43,7 +45,11 @@ const ProductManagement = () => {
               <tbody>
                 {/* row  */}
                 {products!.data?.map((product) => (
-                  <ProductTableRow key={product._id} {...product} />
+                  <ProductTableRow
+                    key={product._id}
+                    {...product}
+                    deleteProduct={deleteProduct}
+                  />
                 ))}
               </tbody>
             </table>

@@ -13,6 +13,7 @@ const ProductTableRow = ({
   rating,
   stock,
   image,
+  deleteProduct,
 }: TProductProp) => {
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
@@ -42,7 +43,10 @@ const ProductTableRow = ({
 
       <td className="flex-1">
         <EditProductModal></EditProductModal>
-        <Button className="bg-transparent hover:bg-red-100 text-lg text-[#757575] hover:text-red-600 rounded-full">
+        <Button
+          className="bg-transparent hover:bg-red-100 text-lg text-[#757575] hover:text-red-600 rounded-full"
+          onClick={() => deleteProduct(_id)}
+        >
           <MdDelete />
         </Button>
       </td>
