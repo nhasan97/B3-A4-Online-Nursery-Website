@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { uploadImage } from "@/utiils/imageUploader";
+import { toast } from "sonner";
 
 const AddProductModal = ({ addProduct }) => {
   const [title, setTitle] = useState("");
@@ -46,10 +47,14 @@ const AddProductModal = ({ addProduct }) => {
       stock,
       image,
     };
-
-    console.log(productDetails);
-
-    addProduct(productDetails);
+    try {
+      const res = await addProduct(productDetails).unwrap();
+      if (res.success && res.statusCode === 200) {
+        toast.success(res.message);
+      }
+    } catch (err) {
+      toast.error(err.data.message);
+    }
   };
 
   return (
