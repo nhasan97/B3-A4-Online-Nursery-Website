@@ -1,11 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler } from 'express';
 import { sendResponse } from '../utils/sendResponse';
 
-const globalErrorHandler = (
-  error: any,
-  req: Request,
-  res: Response,
-  next: NextFunction,
+const globalErrorHandler: ErrorRequestHandler = (
+  error,
+  req,
+  res,
+  next,
 ) => {
   if (error) {
     sendResponse(
