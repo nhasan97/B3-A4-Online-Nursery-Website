@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import MainLogo from "../shared/mainLogo";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SideBarMenu from "./SideBarMenu";

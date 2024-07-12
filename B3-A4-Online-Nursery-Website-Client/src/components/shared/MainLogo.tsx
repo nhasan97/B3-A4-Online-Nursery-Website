@@ -5,11 +5,11 @@ const MainLogo = ({ caller }: { caller: string }) => {
     <a
       href="/"
       className={`w-fit flex ${
-        caller === "d" ? "justify-center" : "justify-start hidden md:flex"
+        caller === "d" ? "justify-center" : "justify-start"
       } items-center text-xl text-[#757575]`}
     >
-      <img src={logo} alt="" className="w-[20%]" />
-      <span> | Blooms & Beyond</span>
+      <img src={logo} alt="" className="w-[30%] sm:w-[20%]" />
+      <span className="hidden sm:flex"> | Blooms & Beyond</span>
     </a>
   );
 };
