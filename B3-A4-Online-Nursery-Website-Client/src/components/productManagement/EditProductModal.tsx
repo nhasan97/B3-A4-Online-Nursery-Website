@@ -10,7 +10,7 @@ import {
 import { Button } from "../ui/button";
 import { MdEditDocument } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
-import { TProductProp } from "@/types/product.type";
+import { TProduct } from "@/types/product.type";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -24,26 +24,26 @@ import {
 import { uploadImage } from "@/utiils/imageUploader";
 import { toast } from "sonner";
 import productApi from "@/redux/api/ProductApi";
+import categoryApi from "@/redux/api/CategoryApi";
+import Loading from "../shared/Loading";
+import NoData from "../shared/NoData";
+import { TCategory } from "@/types/category.type";
 
-const EditProductModal = ({
-  _id,
-  title,
-  description,
-  category,
-  price,
-  rating,
-  stock,
-  image,
-}: TProductProp) => {
+const EditProductModal = ({ product }: { product: TProduct }) => {
+  const { isLoading: loadingCategories, data: categories } =
+    categoryApi.useGetCategoriesQuery(undefined);
+
   const [editProduct] = productApi.useEditProductMutation();
 
-  const [editedTitle, setEditedTitle] = useState(title);
-  const [editedDescription, setEditedDescription] = useState(description);
-  const [editedCategory, setEditedCategory] = useState(category);
-  const [editedPrice, setEditedPrice] = useState(price);
-  const [editedRating, setEditedRating] = useState(rating);
-  const [editedStock, setEditedStock] = useState(stock);
-  const [editedImageFile, setEditedImageFile] = useState(null);
+  const [editedTitle, setEditedTitle] = useState(product?.title);
+  const [editedDescription, setEditedDescription] = useState(
+    product?.description
+  );
+  const [editedCategory, setEditedCategory] = useState(product?.category);
+  const [editedPrice, setEditedPrice] = useState(product?.price);
+  const [editedRating, setEditedRating] = useState(product?.rating);
+  const [editedStock, setEditedStock] = useState(product?.stock);
+  const [editedImageFile, setEditedImageFile] = useState<File | null>(null);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -51,13 +51,13 @@ const EditProductModal = ({
     let editedImage;
 
     if (editedImageFile) {
-      editedImage = await uploadImage(editedImageFile);
+      editedImage = await uploadImage(editedImageFile as File);
     } else {
-      editedImage = image;
+      editedImage = product?.image;
     }
 
     const payload = {
-      _id,
+      _id: product?._id,
       productDetails: {
         title: editedTitle,
         description: editedDescription,
@@ -99,7 +99,7 @@ const EditProductModal = ({
             <Input
               id="title"
               className="col-span-3"
-              defaultValue={title}
+              defaultValue={product?.title}
               onBlur={(e) => setEditedTitle(e.target.value)}
             />
           </div>
@@ -111,7 +111,7 @@ const EditProductModal = ({
             <Input
               id="description"
               className="col-span-3"
-              defaultValue={description}
+              defaultValue={product?.description}
               onBlur={(e) => setEditedDescription(e.target.value)}
             />
           </div>
@@ -121,7 +121,7 @@ const EditProductModal = ({
               Category
             </Label>
             <Select
-              defaultValue={category}
+              defaultValue={product?.category}
               onValueChange={(value) => setEditedCategory(value)}
             >
               <SelectTrigger className="col-span-3">
@@ -129,9 +129,17 @@ const EditProductModal = ({
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="high">High</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="low">Low</SelectItem>
+                  {loadingCategories ? (
+                    <Loading></Loading>
+                  ) : categories.data.length <= 0 ? (
+                    <NoData text={"No Categories found"}></NoData>
+                  ) : (
+                    categories.data.map((category: TCategory) => (
+                      <SelectItem key={category._id} value={category.category}>
+                        {category.category}
+                      </SelectItem>
+                    ))
+                  )}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -146,7 +154,7 @@ const EditProductModal = ({
               id="price"
               min={0}
               className="col-span-3"
-              defaultValue={price}
+              defaultValue={product?.price}
               onBlur={(e) => setEditedPrice(Number(e.target.value))}
             />
           </div>
@@ -162,7 +170,7 @@ const EditProductModal = ({
               max={5}
               step={0.5}
               className="col-span-3"
-              defaultValue={rating}
+              defaultValue={product?.rating}
               onBlur={(e) => setEditedRating(Number(e.target.value))}
             />
           </div>
@@ -176,17 +184,14 @@ const EditProductModal = ({
               id="stock"
               min={0}
               className="col-span-3"
-              defaultValue={stock}
+              defaultValue={product?.stock}
               onBlur={(e) => setEditedStock(Number(e.target.value))}
             />
           </div>
           <div className="flex  justify-center items-center gap-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              {/* <Label htmlFor="picture" className="text-left text-[#757575]">
-                Picture
-              </Label> */}
               <img
-                src={image}
+                src={product?.image}
                 alt=""
                 className="size-20 p-[2px] border-2 border-[#5D7E5F] rounded-full"
               />
@@ -194,7 +199,7 @@ const EditProductModal = ({
                 type="file"
                 id="picture"
                 className="col-span-3"
-                onBlur={(e) => setEditedImageFile(e.target.files[0])}
+                onBlur={(e) => setEditedImageFile(e.target.files?.[0] as File)}
               />
             </div>
           </div>

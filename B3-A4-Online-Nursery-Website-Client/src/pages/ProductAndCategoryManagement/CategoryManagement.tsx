@@ -3,13 +3,9 @@ import MobileView from "@/components/categoryManagement/MobileView/MobileView";
 import TabPCView from "@/components/categoryManagement/TabPCView/TabPCView";
 import DashboardContainer from "@/components/layouts/dashboardLayout/DashboardContainer";
 import Title from "@/components/shared/Title";
-import categoryApi from "@/redux/api/CategoryApi";
 import { Helmet } from "react-helmet-async";
 
 const CategoryManagement = () => {
-  const { isLoading: loadingCategories, data: categories } =
-    categoryApi.useGetCategoriesQuery(undefined);
-
   return (
     <div className="h-screen">
       <DashboardContainer>
@@ -24,16 +20,10 @@ const CategoryManagement = () => {
         </div>
 
         {/*tab pc view */}
-        <TabPCView
-          loadingCategories={loadingCategories}
-          categories={categories}
-        />
+        <TabPCView />
 
         {/* mobile view */}
-        <MobileView
-          loadingCategories={loadingCategories}
-          categories={categories}
-        />
+        <MobileView />
       </DashboardContainer>
     </div>
   );

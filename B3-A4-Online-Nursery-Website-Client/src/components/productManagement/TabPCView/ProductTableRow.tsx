@@ -1,21 +1,12 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
 import EditProductModal from "../EditProductModal";
-import { TProductProp } from "@/types/product.type";
+import { TProduct } from "@/types/product.type";
 import productApi from "@/redux/api/ProductApi";
 import { toast } from "sonner";
 import DetailsProductModal from "../DetailsProductModal";
 
-const ProductTableRow = ({
-  _id,
-  title,
-  description,
-  category,
-  price,
-  rating,
-  stock,
-  image,
-}: TProductProp) => {
+const ProductTableRow = ({ product }: { product: TProduct }) => {
   const [deleteProduct] = productApi.useDeleteProductMutation();
 
   const handleDeleteProduct = (_id: string) => {
@@ -45,42 +36,28 @@ const ProductTableRow = ({
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">
         <img
-          src={image}
+          src={product?.image}
           className="size-14 mx-auto p-[2px] border-2 border-[#5D7E5F] rounded-full"
         ></img>
       </td>
 
-      <td className="flex-1 font-semibold text-[#5D7E5F]">{title}</td>
+      <td className="flex-1 font-semibold text-[#5D7E5F]">{product?.title}</td>
 
       <td className="flex-1">
-        <DetailsProductModal
-          image={image}
-          title={title}
-          description={description}
-          rating={rating}
-        ></DetailsProductModal>
+        <DetailsProductModal product={product}></DetailsProductModal>
       </td>
 
-      <td className="flex-1">{category}</td>
+      <td className="flex-1">{product?.category}</td>
 
-      <td className="flex-1">{price}</td>
+      <td className="flex-1">{product?.price}</td>
 
-      <td className="flex-1">{stock}</td>
+      <td className="flex-1">{product?.stock}</td>
 
       <td className="flex-1">
-        <EditProductModal
-          _id={_id}
-          title={title}
-          description={description}
-          category={category}
-          price={price}
-          rating={rating}
-          stock={stock}
-          image={image}
-        ></EditProductModal>
+        <EditProductModal product={product}></EditProductModal>
         <Button
           className="bg-transparent hover:bg-red-100 text-2xl sm:text-xl text-[#757575] hover:text-red-600 rounded-full"
-          onClick={() => handleDeleteProduct(_id)}
+          onClick={() => handleDeleteProduct(product?._id as string)}
         >
           <MdDelete />
         </Button>

@@ -8,13 +8,9 @@ import {
   DialogTrigger,
   DialogClose,
 } from "../ui/dialog";
-import { TCategoryProp } from "@/types/category.type";
+import { TCategory } from "@/types/category.type";
 
-const DetailsCategoryModal = ({
-  image,
-  category,
-  description,
-}: Partial<TCategoryProp>) => {
+const DetailsCategoryModal = ({ category }: { category: TCategory }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -24,12 +20,16 @@ const DetailsCategoryModal = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <img src={image} alt="" className="w-full mb-4" />
-          <DialogTitle className="text-[#757575]">{category}</DialogTitle>
+          <img src={category?.image} alt="" className="w-full mb-4" />
+          <DialogTitle className="text-[#757575]">
+            {category?.category}
+          </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
-          <p className="text-[#808080] text-base leading-7">{description}</p>
+          <p className="text-[#808080] text-base leading-7">
+            {category?.description}
+          </p>
         </div>
 
         <DialogClose asChild>

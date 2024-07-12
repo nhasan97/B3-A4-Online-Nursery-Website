@@ -1,8 +1,13 @@
 import Loading from "@/components/shared/Loading";
 import NoData from "@/components/shared/NoData";
 import CategoryTableRow from "./CategoryTableRow";
+import { TCategory } from "@/types/category.type";
+import categoryApi from "@/redux/api/CategoryApi";
 
-const TabPCView = ({ loadingCategories, categories }) => {
+const TabPCView = () => {
+  const { isLoading: loadingCategories, data: categories } =
+    categoryApi.useGetCategoriesQuery(undefined);
+
   return (
     <div className="bg-white hidden sm:block w-full h-[80%] overflow-y-auto rounded-lg border">
       {loadingCategories ? (
@@ -20,8 +25,8 @@ const TabPCView = ({ loadingCategories, categories }) => {
           </thead>
           <tbody>
             {/* row  */}
-            {categories!.data?.map((category) => (
-              <CategoryTableRow key={category._id} {...category} />
+            {categories!.data?.map((category: TCategory) => (
+              <CategoryTableRow key={category?._id} category={category} />
             ))}
           </tbody>
         </table>

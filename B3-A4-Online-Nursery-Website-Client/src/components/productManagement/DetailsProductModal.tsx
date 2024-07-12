@@ -8,15 +8,10 @@ import {
   DialogTrigger,
   DialogClose,
 } from "../ui/dialog";
-import { TProductProp } from "@/types/product.type";
+import { TProduct } from "@/types/product.type";
 import StarRating from "../shared/StarRating";
 
-const DetailsProductModal = ({
-  image,
-  title,
-  description,
-  rating,
-}: Partial<TProductProp>) => {
+const DetailsProductModal = ({ product }: { product: TProduct }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,13 +21,15 @@ const DetailsProductModal = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <img src={image} alt="" className="w-full mb-4" />
-          <DialogTitle className="text-[#757575]">{title}</DialogTitle>
+          <img src={product?.image} alt="" className="w-full mb-4" />
+          <DialogTitle className="text-[#757575]">{product?.title}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
-          <p className="text-[#808080] text-base leading-7">{description}</p>
-          <StarRating rating={rating!}></StarRating>
+          <p className="text-[#808080] text-base leading-7">
+            {product?.description}
+          </p>
+          <StarRating rating={product?.rating}></StarRating>
         </div>
 
         <DialogClose asChild>

@@ -3,14 +3,10 @@ import AddProductModal from "@/components/productManagement/AddProductModal";
 import MobileView from "@/components/productManagement/MobileView/MobileView";
 import TabPCView from "@/components/productManagement/TabPCView/TabPCView";
 import Title from "@/components/shared/Title";
-import productApi from "@/redux/api/ProductApi";
 
 import { Helmet } from "react-helmet-async";
 
 const ProductManagement = () => {
-  const { isLoading: loadingProducts, data: products } =
-    productApi.useGetProductsQuery(undefined);
-
   return (
     <div className="h-screen">
       <DashboardContainer>
@@ -25,10 +21,10 @@ const ProductManagement = () => {
         </div>
 
         {/*tab pc view */}
-        <TabPCView loadingProducts={loadingProducts} products={products} />
+        <TabPCView />
 
         {/* mobile view */}
-        <MobileView loadingProducts={loadingProducts} products={products} />
+        <MobileView />
       </DashboardContainer>
     </div>
   );

@@ -14,20 +14,17 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { uploadImage } from "@/utiils/imageUploader";
 import { toast } from "sonner";
-import { TCategoryProp } from "@/types/category.type";
+import { TCategory } from "@/types/category.type";
 import categoryApi from "@/redux/api/CategoryApi";
 
-const EditCategoryModal = ({
-  _id,
-  category,
-  description,
-  image,
-}: TCategoryProp) => {
+const EditCategoryModal = ({ category }: { category: TCategory }) => {
   const [editCategory] = categoryApi.useEditCategoryMutation();
 
-  const [editedCategory, setEditedCategory] = useState(category);
-  const [editedDescription, setEditedDescription] = useState(description);
-  const [editedImageFile, setEditedImageFile] = useState(null);
+  const [editedCategory, setEditedCategory] = useState(category?.category);
+  const [editedDescription, setEditedDescription] = useState(
+    category?.description
+  );
+  const [editedImageFile, setEditedImageFile] = useState<File | null>(null);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -35,13 +32,13 @@ const EditCategoryModal = ({
     let editedImage;
 
     if (editedImageFile) {
-      editedImage = await uploadImage(editedImageFile);
+      editedImage = await uploadImage(editedImageFile as File);
     } else {
-      editedImage = image;
+      editedImage = category?.image;
     }
 
     const payload = {
-      _id,
+      _id: category?._id,
       categoryDetails: {
         category: editedCategory,
         description: editedDescription,
@@ -51,8 +48,8 @@ const EditCategoryModal = ({
 
     try {
       const res = await editCategory(payload).unwrap();
-      if (res.success && res.statusCode === 200) {
-        toast.success(res.message);
+      if (res?.success) {
+        toast.success(res?.message);
       }
     } catch (err) {
       toast.error(err.data.message);
@@ -79,7 +76,7 @@ const EditCategoryModal = ({
             <Input
               id="category"
               className="col-span-3"
-              defaultValue={category}
+              defaultValue={category?.category}
               onBlur={(e) => setEditedCategory(e.target.value)}
             />
           </div>
@@ -91,7 +88,7 @@ const EditCategoryModal = ({
             <Input
               id="description"
               className="col-span-3"
-              defaultValue={description}
+              defaultValue={category?.description}
               onBlur={(e) => setEditedDescription(e.target.value)}
             />
           </div>
@@ -99,7 +96,7 @@ const EditCategoryModal = ({
           <div className="flex  justify-center items-center gap-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <img
-                src={image}
+                src={category?.image}
                 alt=""
                 className="size-20 p-[2px] border-2 border-[#5D7E5F] rounded-full"
               />
@@ -107,7 +104,7 @@ const EditCategoryModal = ({
                 type="file"
                 id="picture"
                 className="col-span-3"
-                onBlur={(e) => setEditedImageFile(e.target.files[0])}
+                onBlur={(e) => setEditedImageFile(e.target.files?.[0] as File)}
               />
             </div>
           </div>

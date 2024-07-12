@@ -27,6 +27,7 @@ import productApi from "@/redux/api/ProductApi";
 import categoryApi from "@/redux/api/CategoryApi";
 import Loading from "../shared/Loading";
 import NoData from "../shared/NoData";
+import { TCategory } from "@/types/category.type";
 
 const AddProductModal = () => {
   const { isLoading: loadingCategories, data: categories } =
@@ -40,12 +41,12 @@ const AddProductModal = () => {
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(0);
   const [stock, setStock] = useState(0);
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const image = await uploadImage(imageFile);
+    const image = await uploadImage(imageFile as File);
 
     const productDetails: TProduct = {
       title,
@@ -118,7 +119,7 @@ const AddProductModal = () => {
                   ) : categories.data.length <= 0 ? (
                     <NoData text={"No Categories found"}></NoData>
                   ) : (
-                    categories.data.map((category) => (
+                    categories.data.map((category: TCategory) => (
                       <SelectItem key={category._id} value={category.category}>
                         {category.category}
                       </SelectItem>
@@ -182,7 +183,7 @@ const AddProductModal = () => {
               id="picture"
               required
               className="col-span-3"
-              onBlur={(e) => setImageFile(e.target.files[0])}
+              onBlur={(e) => setImageFile(e.target.files?.[0] as File)}
             />
           </div>
 

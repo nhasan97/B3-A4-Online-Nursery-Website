@@ -1,8 +1,13 @@
 import Loading from "@/components/shared/Loading";
 import ProductTableRow from "./ProductTableRow";
 import NoData from "@/components/shared/NoData";
+import productApi from "@/redux/api/ProductApi";
+import { TProduct } from "@/types/product.type";
 
-const TabPCView = ({ loadingProducts, products }) => {
+const TabPCView = () => {
+  const { isLoading: loadingProducts, data: products } =
+    productApi.useGetProductsQuery(undefined);
+
   return (
     <div className="bg-white hidden sm:block w-full h-[80%] overflow-y-auto rounded-lg border">
       {loadingProducts ? (
@@ -23,8 +28,8 @@ const TabPCView = ({ loadingProducts, products }) => {
           </thead>
           <tbody>
             {/* row  */}
-            {products!.data?.map((product) => (
-              <ProductTableRow key={product._id} {...product} />
+            {products!.data?.map((product: TProduct) => (
+              <ProductTableRow key={product._id} product={product} />
             ))}
           </tbody>
         </table>
