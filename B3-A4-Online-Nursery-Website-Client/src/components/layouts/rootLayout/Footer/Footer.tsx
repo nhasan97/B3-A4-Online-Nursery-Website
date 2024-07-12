@@ -9,6 +9,7 @@ import {
 import { RiInstagramFill, RiArrowRightLine } from "react-icons/ri";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import "../../../cssStyles/Footer.css";
 
 const Footer = () => {
   return (
@@ -30,7 +31,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-1 lg:px-4 lg:border-r border-[#467458]">
-            <p className="text-[#757575] text-lg font-medium mb-2">
+            <p className="ft text-[#757575] text-lg font-medium mb-2 relative">
               Customer Service
             </p>
             <Link to="" className="text-[#808080] text-base hover:underline">
@@ -48,7 +49,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-1 lg:px-4 lg:border-r border-[#467458]">
-            <p className="text-[#757575] text-lg font-medium mb-2">
+            <p className="ft text-[#757575] text-lg font-medium mb-2 relative">
               Quick Links
             </p>
             <Link to="" className="text-[#808080] text-base hover:underline">
@@ -67,7 +68,7 @@ const Footer = () => {
 
           <div className="col-span-2 space-y-6">
             <div>
-              <p className="text-[#757575] text-lg font-medium mb-2">
+              <p className="ft text-[#757575] text-lg font-medium mb-2 relative">
                 Subscribe to Our Newsletter
               </p>
               <p className="text-[#808080] text-base leading-6 text-justify">
