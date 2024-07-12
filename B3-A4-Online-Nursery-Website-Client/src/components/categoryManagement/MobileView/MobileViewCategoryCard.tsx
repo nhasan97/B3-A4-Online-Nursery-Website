@@ -1,30 +1,26 @@
-import { TProductProp } from "@/types/product.type";
-import EditProductModal from "../EditProductModal";
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
 import { toast } from "sonner";
-import productApi from "@/redux/api/ProductApi";
-import DetailsProductModal from "../DetailsProductModal";
+import { TCategoryProp } from "@/types/category.type";
+import categoryApi from "@/redux/api/CategoryApi";
+import DetailsCategoryModal from "../DetailsCategoryModal";
+import EditCategoryModal from "../EditCategoryModal";
 
-const MobileViewProductCard = ({
+const MobileViewCategoryCard = ({
   _id,
-  title,
-  description,
   category,
-  price,
-  rating,
-  stock,
+  description,
   image,
-}: TProductProp) => {
-  const [deleteProduct] = productApi.useDeleteProductMutation();
+}: TCategoryProp) => {
+  const [deleteCategory] = categoryApi.useDeleteCategoryMutation();
 
-  const handleDeleteProduct = (_id: string) => {
-    toast.warning("Are you sure? You won't be able to revert this!", {
+  const handleDeleteCategory = (_id: string) => {
+    toast.warning("Are youAre you sure? You won't be able to revert this!", {
       action: {
         label: "Yes, delete it",
         onClick: async () => {
           try {
-            const res = await deleteProduct(_id).unwrap();
+            const res = await deleteCategory(_id).unwrap();
             if (res.success && res.statusCode === 200) {
               toast.success(res.message, {
                 duration: 2000,
@@ -50,36 +46,30 @@ const MobileViewProductCard = ({
             className="size-14 p-[2px] border-2 border-[#5D7E5F] rounded-full"
           ></img>
 
-          <h2 className=" text-[#5D7E5F] font-semibold ">{title}</h2>
+          <h2 className=" text-[#5D7E5F] font-semibold ">{category}</h2>
         </div>
 
         <div className="flex justify-between">
           <div className="flex-1 flex justify-center items-center bg-[#98b2992f] rounded-l-full">
-            <DetailsProductModal
+            <DetailsCategoryModal
               image={image}
-              title={title}
               description={description}
-              rating={rating}
-            ></DetailsProductModal>
+            ></DetailsCategoryModal>
           </div>
 
           <div className="flex-1 flex justify-center items-center bg-[#98b2992f] border-x-2">
-            <EditProductModal
+            <EditCategoryModal
               _id={_id}
-              title={title}
               description={description}
               category={category}
-              price={price}
-              rating={rating}
-              stock={stock}
               image={image}
-            ></EditProductModal>
+            ></EditCategoryModal>
           </div>
 
           <div className="flex-1 flex justify-center items-center bg-[#98b2992f] rounded-r-full">
             <Button
               className="bg-transparent hover:bg-red-100 text-2xl sm:text-xl text-[#757575] hover:text-red-600 rounded-full"
-              onClick={() => handleDeleteProduct(_id)}
+              onClick={() => handleDeleteCategory(_id)}
             >
               <MdDelete />
             </Button>
@@ -90,4 +80,4 @@ const MobileViewProductCard = ({
   );
 };
 
-export default MobileViewProductCard;
+export default MobileViewCategoryCard;

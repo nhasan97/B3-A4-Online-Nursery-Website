@@ -24,8 +24,14 @@ import {
 import { uploadImage } from "@/utiils/imageUploader";
 import { toast } from "sonner";
 import productApi from "@/redux/api/ProductApi";
+import categoryApi from "@/redux/api/CategoryApi";
+import Loading from "../shared/Loading";
+import NoData from "../shared/NoData";
 
 const AddProductModal = () => {
+  const { isLoading: loadingCategories, data: categories } =
+    categoryApi.useGetCategoriesQuery(undefined);
+
   const [addProduct] = productApi.useAddProductMutation();
 
   const [title, setTitle] = useState("");
@@ -107,9 +113,17 @@ const AddProductModal = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="high">High</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="low">Low</SelectItem>
+                  {loadingCategories ? (
+                    <Loading></Loading>
+                  ) : categories.data.length <= 0 ? (
+                    <NoData text={"No Categories found"}></NoData>
+                  ) : (
+                    categories.data.map((category) => (
+                      <SelectItem key={category._id} value={category.category}>
+                        {category.category}
+                      </SelectItem>
+                    ))
+                  )}
                 </SelectGroup>
               </SelectContent>
             </Select>

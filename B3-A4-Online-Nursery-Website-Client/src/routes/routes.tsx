@@ -3,6 +3,7 @@ import Home from "@/pages/Home";
 import Root from "@/components/layouts/rootLayout/Root";
 import DashboardLayout from "@/components/layouts/dashboardLayout/DashboardLayout";
 import ProductManagement from "@/pages/ProductAndCategoryManagement/ProductManagement";
+import CategoryManagement from "@/pages/ProductAndCategoryManagement/CategoryManagement";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <ProductManagement></ProductManagement>,
+      },
+      {
+        path: "categories",
+        element: <CategoryManagement></CategoryManagement>,
       },
     ],
   },
