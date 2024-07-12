@@ -3,20 +3,21 @@ import { NavLink } from "react-router-dom";
 import Container from "../Container";
 import NavLinkDropdown from "./NavLinkDropdown";
 import { NavbarLinks } from "./NavbarLinks";
+import "../../../cssStyles/Navbar.css";
 
 const Navbar = () => {
   return (
-    <div className="w-full bg-[#578f5409]">
+    <div className="w-full py-2">
       <Container>
         <div className="flex justify-between items-center">
           <div className="">
             <MainLogo caller={"n"}></MainLogo>
           </div>
-          <div className="hidden lg:flex justify-center items-center gap-6 text-[#808080]">
+          <div className="nv hidden lg:flex justify-center items-center gap-2 text-[#808080]">
             {NavbarLinks.map((link) => (
               <NavLink
                 to={link.path}
-                className="p-2 rounded-full hover:bg-[#98B299] hover:text-white transition duration-300 ease-in-out"
+                className="p-2 rounded-full hover:bg-[#98b2992f]  transition duration-300 ease-in-out"
               >
                 {link.name}
               </NavLink>
