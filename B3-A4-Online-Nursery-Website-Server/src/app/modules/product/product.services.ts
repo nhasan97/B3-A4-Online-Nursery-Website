@@ -5,10 +5,20 @@ import AppError from '../../Errors/AppError';
 /*
 
 ----------------service function for fetching all products data from DB----------------*/
-const getAllProductsFromDB = async () => {
-  const response = await productModel.find();
+const getAllProductsFromDB = async (category) => {
+  let query = {};
+  if (category) {
+    query = { category: category };
+  }
+  const response = await productModel.find(query);
   return response;
 };
+
+const getSingleProductFromDB = async (id: string) => {
+  const response = await productModel.findById(id);
+  return response;
+};
+
 /*
 
 ----------------service function for inserting product data in DB----------------*/
@@ -67,6 +77,7 @@ const deleteProductFromDB = async (id: string) => {
 //exporting all the service functions through productServices object
 export const productServices = {
   getAllProductsFromDB,
+  getSingleProductFromDB,
   createProductIntoDB,
   updateProductIntoDB,
   deleteProductFromDB,

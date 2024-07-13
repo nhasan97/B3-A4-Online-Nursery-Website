@@ -8,6 +8,8 @@ const router = express.Router();
 //------------route for fetching all the product data from DB------------
 router.get('/', productControllers.getAllProducts);
 
+router.get('/:id', productControllers.getSingleProduct);
+
 //------------route for inserting new product data in DB------------
 router.post(
   '/',
