@@ -4,6 +4,10 @@ export const NavbarLinks = [
     name: "Home",
   },
   {
+    path: "/products-page",
+    name: "All Products",
+  },
+  {
     path: "/dashboard",
     name: "Product & Category Management",
   },
