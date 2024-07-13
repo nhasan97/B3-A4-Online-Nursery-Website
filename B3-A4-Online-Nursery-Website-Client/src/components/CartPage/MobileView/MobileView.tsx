@@ -3,6 +3,7 @@ import { useAppSelector } from "@/redux/hooks";
 import CartMobileCard from "./CartMobileCard";
 import { TCartItem } from "@/types/cart.type";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const MobileView = () => {
   const itemsInCart = useAppSelector(
@@ -49,9 +50,14 @@ const MobileView = () => {
           </p>
         </div>
 
-        <Button className="w-full bg-[#5D7E5F] text-lg rounded-full">
-          Checkout
-        </Button>
+        <Link to="/checkout-page">
+          <Button
+            className="w-full bg-[#5D7E5F] text-lg  mt-6 rounded-full"
+            disabled={itemsInCart.length <= 0}
+          >
+            Checkout
+          </Button>
+        </Link>
       </div>
     </div>
   );

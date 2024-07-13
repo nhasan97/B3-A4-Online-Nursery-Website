@@ -3,6 +3,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { TCartItem } from "@/types/cart.type";
 import CartTableRow from "./CartTableRow";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const TabPCView = () => {
   const itemsInCart = useAppSelector(
@@ -63,9 +64,14 @@ const TabPCView = () => {
           </p>
         </div>
 
-        <Button className="w-full bg-[#5D7E5F] text-lg rounded-full">
-          Checkout
-        </Button>
+        <Link to="/checkout-page">
+          <Button
+            className="w-full bg-[#5D7E5F] text-lg rounded-full mt-6"
+            disabled={itemsInCart.length <= 0}
+          >
+            Checkout
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -5,8 +5,19 @@ const productApi = baseApi.injectEndpoints({
     /*
     ------------------------endpoint for getting products from DB------------------------*/
     getProducts: builder.query({
-      query: () => {
-        return { url: "/products", method: "GET" };
+      query: (category) => {
+        const params = new URLSearchParams();
+        if (category) {
+          params.append("category", category);
+        }
+        return { url: "/products", method: "GET", params: params };
+      },
+      providesTags: ["product"],
+    }),
+
+    getSingleProduct: builder.query({
+      query: (_id) => {
+        return { url: `/products/${_id}`, method: "GET" };
       },
       providesTags: ["product"],
     }),

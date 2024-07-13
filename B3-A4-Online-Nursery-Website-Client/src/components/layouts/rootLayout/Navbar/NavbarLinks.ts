@@ -4,7 +4,7 @@ export const NavbarLinks = [
     name: "Home",
   },
   {
-    path: "/products-page",
+    path: "/all-products",
     name: "All Products",
   },
   {
