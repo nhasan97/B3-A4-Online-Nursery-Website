@@ -1,6 +1,6 @@
 import Container from "../layouts/rootLayout/Container";
+import SiteTitle from "../shared/SiteTitle";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import Title from "@/components/shared/Title";
 
 const images = [
   "https://i.ibb.co/YRFRdZ7/senior-portrait-photographers-emily-brunner-31.jpg",
@@ -25,25 +25,27 @@ const images = [
 
 const ImageGallery = () => {
   return (
-    <div>
+    <div className="w-full h-full py-10 my-20">
       <Container>
-        <Title title={"Image Gallery"}></Title>
+        <div className="w-full h-full flex flex-col gap-8 sm:gap-16">
+          <SiteTitle title={"Image Gallery"}></SiteTitle>
 
-        <div className="my-5 rounded-lg border-2 overflow-hidden">
-          <ResponsiveMasonry
-            columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 5 }}
-          >
-            <Masonry gutter="24px">
-              {images.map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  style={{ width: "100%", display: "block" }}
-                  alt=""
-                />
-              ))}
-            </Masonry>
-          </ResponsiveMasonry>
+          <div className="rounded-lg overflow-hidden">
+            <ResponsiveMasonry
+              columnsCountBreakPoints={{ 350: 1, 750: 3, 900: 5 }}
+            >
+              <Masonry gutter="24px">
+                {images.map((image, i) => (
+                  <img
+                    key={i}
+                    src={image}
+                    style={{ width: "100%", display: "block" }}
+                    alt=""
+                  />
+                ))}
+              </Masonry>
+            </ResponsiveMasonry>
+          </div>
         </div>
       </Container>
     </div>

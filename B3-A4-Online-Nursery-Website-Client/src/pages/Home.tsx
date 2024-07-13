@@ -1,6 +1,7 @@
 import Banner from "@/components/Home/Banner";
 import CategorySection from "@/components/Home/CategorySection/CategorySection";
 import ImageGallery from "@/components/Home/ImageGallery";
+import ProductList from "@/components/Home/ProductList";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
 
       <Banner />
       <CategorySection />
+      <ProductList />
       <ImageGallery />
     </div>
   );
