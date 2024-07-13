@@ -5,6 +5,7 @@ import DashboardLayout from "@/components/layouts/dashboardLayout/DashboardLayou
 import ProductManagement from "@/pages/ProductAndCategoryManagement/ProductManagement";
 import CategoryManagement from "@/pages/ProductAndCategoryManagement/CategoryManagement";
 import ProductsPage from "@/pages/ProductsPage";
+import CartPage from "@/pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/products-page",
         element: <ProductsPage></ProductsPage>,
+      },
+      {
+        path: "/cart-page",
+        element: <CartPage></CartPage>,
       },
     ],
   },

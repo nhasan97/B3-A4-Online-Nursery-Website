@@ -8,6 +8,10 @@ export const NavbarLinks = [
     name: "All Products",
   },
   {
+    path: "/cart-page",
+    name: "Cart",
+  },
+  {
     path: "/dashboard",
     name: "Product & Category Management",
   },

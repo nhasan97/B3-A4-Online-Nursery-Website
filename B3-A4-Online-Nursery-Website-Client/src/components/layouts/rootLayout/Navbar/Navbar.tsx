@@ -7,7 +7,7 @@ import "../../../cssStyles/Navbar.css";
 
 const Navbar = () => {
   return (
-    <div className="w-full py-2">
+    <div className="w-full py-5">
       <Container>
         <div className="flex justify-between items-center">
           <div className="">
