@@ -4,11 +4,38 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     /*
     ------------------------endpoint for getting products from DB------------------------*/
+
     getProducts: builder.query({
-      query: (category) => {
+      query: ({
+        searchTerm,
+        categoryToLoad,
+        sort,
+        currentPage,
+        itemsPerPage,
+      }) => {
+        console.log(
+          searchTerm,
+          categoryToLoad,
+          sort,
+          currentPage,
+          itemsPerPage
+        );
+
         const params = new URLSearchParams();
-        if (category) {
-          params.append("category", category);
+        if (searchTerm) {
+          params.append("searchTerm", searchTerm);
+        }
+        if (categoryToLoad) {
+          params.append("category", categoryToLoad);
+        }
+        if (sort) {
+          params.append("sort", sort);
+        }
+        if (currentPage) {
+          params.append("page", currentPage);
+        }
+        if (itemsPerPage) {
+          params.append("limit", itemsPerPage);
         }
         return { url: "/products", method: "GET", params: params };
       },
@@ -21,6 +48,14 @@ const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["product"],
     }),
+
+    getProductCount: builder.query({
+      query: () => {
+        return { url: "/products/count/prod", method: "GET" };
+      },
+      providesTags: ["product"],
+    }),
+
     /*
 
     ------------------------endpoint for adding product in DB------------------------*/

@@ -1,20 +1,12 @@
 import NoData from "@/components/shared/NoData";
-import { useAppSelector } from "@/redux/hooks";
 import CartMobileCard from "./CartMobileCard";
-import { TCartItem } from "@/types/cart.type";
+import { TCartContext, TCartItem } from "@/types/cart.type";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import useCartContext from "@/hooks/useCartContext";
 
 const MobileView = () => {
-  const itemsInCart = useAppSelector(
-    (currentState) => currentState.cart.cartItems
-  );
-
-  const total = Number(
-    itemsInCart
-      .reduce((partialSum, a) => partialSum + a?.price * a?.qty, 0)
-      .toFixed(2)
-  );
+  const { itemsInCart, total } = useCartContext() as TCartContext;
 
   return (
     <div className="sm:hidden w-full h-screen flex flex-col gap-6">

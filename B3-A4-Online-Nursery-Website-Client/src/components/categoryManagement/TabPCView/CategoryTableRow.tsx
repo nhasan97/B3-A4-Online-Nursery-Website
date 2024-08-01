@@ -1,37 +1,13 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
-import { toast } from "sonner";
-import { TCategory } from "@/types/category.type";
-import categoryApi from "@/redux/api/CategoryApi";
+import { TCategoryContext, TCategoryProp } from "@/types/category.type";
 import EditCategoryModal from "../EditCategoryModal";
 import DetailsCategoryModal from "../DetailsCategoryModal";
+import useCategoryContext from "@/hooks/useCategoryContext";
 
-const CategoryTableRow = ({ category }: { category: TCategory }) => {
-  const [deleteCategory] = categoryApi.useDeleteCategoryMutation();
+const CategoryTableRow = ({ category }: TCategoryProp) => {
+  const { handleDeleteCategory } = useCategoryContext() as TCategoryContext;
 
-  const handleDeleteCategory = (_id: string) => {
-    toast.warning("Are you sure? You won't be able to revert this!", {
-      action: {
-        label: "Yes, delete it",
-        onClick: async () => {
-          try {
-            const res = await deleteCategory(_id).unwrap();
-            if (res.success && res.statusCode === 200) {
-              toast.success(res.message, {
-                duration: 2000,
-              });
-            }
-          } catch (err) {
-            toast.error(err.data.message, { duration: 2000 });
-          }
-        },
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
-      },
-    });
-  };
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">

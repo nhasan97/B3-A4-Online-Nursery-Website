@@ -10,8 +10,15 @@ import {
 import { NavLink } from "react-router-dom";
 import { NavbarLinks } from "./NavbarLinks";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { NavHashLink } from "react-router-hash-link";
 
 const NavLinkDropdown = () => {
+  const scrollWithOffset = (el: HTMLElement) => {
+    const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -80;
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -27,6 +34,35 @@ const NavLinkDropdown = () => {
               <NavLink to={link.path}>{link.name}</NavLink>
             </DropdownMenuRadioItem>
           ))}
+          <DropdownMenuRadioItem value="">
+            <NavHashLink
+              smooth
+              to="#category"
+              scroll={(el) => scrollWithOffset(el)}
+            >
+              Categories
+            </NavHashLink>
+          </DropdownMenuRadioItem>
+
+          <DropdownMenuRadioItem value="">
+            <NavHashLink
+              smooth
+              to="#productList"
+              scroll={(el) => scrollWithOffset(el)}
+            >
+              Products List
+            </NavHashLink>
+          </DropdownMenuRadioItem>
+
+          <DropdownMenuRadioItem value="">
+            <NavHashLink
+              smooth
+              to="#gallery"
+              scroll={(el) => scrollWithOffset(el)}
+            >
+              Gallery
+            </NavHashLink>
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

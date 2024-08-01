@@ -8,10 +8,10 @@ import {
   DialogTrigger,
   DialogClose,
 } from "../ui/dialog";
-import { TProduct } from "@/types/product.type";
+import { TProductProp } from "@/types/product.type";
 import StarRating from "../shared/StarRating";
 
-const DetailsProductModal = ({ product }: { product: TProduct }) => {
+const DetailsProductModal = ({ product }: TProductProp) => {
   return (
     <Dialog>
       <DialogTrigger asChild>

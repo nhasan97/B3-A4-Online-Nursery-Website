@@ -1,4 +1,3 @@
-import { FormEvent, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,49 +11,12 @@ import { MdEditDocument } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { uploadImage } from "@/utiils/imageUploader";
-import { toast } from "sonner";
-import { TCategory } from "@/types/category.type";
-import categoryApi from "@/redux/api/CategoryApi";
+import { TCategoryContext, TCategoryProp } from "@/types/category.type";
+import useCategoryContext from "@/hooks/useCategoryContext";
 
-const EditCategoryModal = ({ category }: { category: TCategory }) => {
-  const [editCategory] = categoryApi.useEditCategoryMutation();
-
-  const [editedCategory, setEditedCategory] = useState(category?.category);
-  const [editedDescription, setEditedDescription] = useState(
-    category?.description
-  );
-  const [editedImageFile, setEditedImageFile] = useState<File | null>(null);
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    let editedImage;
-
-    if (editedImageFile) {
-      editedImage = await uploadImage(editedImageFile as File);
-    } else {
-      editedImage = category?.image;
-    }
-
-    const payload = {
-      _id: category?._id,
-      categoryDetails: {
-        category: editedCategory,
-        description: editedDescription,
-        image: editedImage,
-      },
-    };
-
-    try {
-      const res = await editCategory(payload).unwrap();
-      if (res?.success) {
-        toast.success(res?.message);
-      }
-    } catch (err) {
-      toast.error(err.data.message);
-    }
-  };
+const EditCategoryModal = ({ category }: TCategoryProp) => {
+  const { setCategory, setDescription, setImageFile, handleEditCategory } =
+    useCategoryContext() as TCategoryContext;
 
   return (
     <Dialog>
@@ -68,7 +30,10 @@ const EditCategoryModal = ({ category }: { category: TCategory }) => {
           <DialogTitle className="text-[#757575]">Edit Category</DialogTitle>
         </DialogHeader>
 
-        <form className="grid gap-4 py-4" onSubmit={onSubmit}>
+        <form
+          className="grid gap-4 py-4"
+          onSubmit={(e) => handleEditCategory(e, category)}
+        >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="category" className="text-left text-[#757575]">
               Category
@@ -77,7 +42,7 @@ const EditCategoryModal = ({ category }: { category: TCategory }) => {
               id="category"
               className="col-span-3"
               defaultValue={category?.category}
-              onBlur={(e) => setEditedCategory(e.target.value)}
+              onBlur={(e) => setCategory(e.target.value)}
             />
           </div>
 
@@ -89,7 +54,7 @@ const EditCategoryModal = ({ category }: { category: TCategory }) => {
               id="description"
               className="col-span-3"
               defaultValue={category?.description}
-              onBlur={(e) => setEditedDescription(e.target.value)}
+              onBlur={(e) => setDescription(e.target.value)}
             />
           </div>
 
@@ -104,7 +69,7 @@ const EditCategoryModal = ({ category }: { category: TCategory }) => {
                 type="file"
                 id="picture"
                 className="col-span-3"
-                onBlur={(e) => setEditedImageFile(e.target.files?.[0] as File)}
+                onBlur={(e) => setImageFile(e.target.files?.[0] as File)}
               />
             </div>
           </div>

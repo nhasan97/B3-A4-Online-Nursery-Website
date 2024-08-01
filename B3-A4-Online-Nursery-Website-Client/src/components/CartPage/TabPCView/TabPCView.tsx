@@ -1,20 +1,15 @@
 import NoData from "@/components/shared/NoData";
-import { useAppSelector } from "@/redux/hooks";
-import { TCartItem } from "@/types/cart.type";
+
+import { TCartContext, TCartItem } from "@/types/cart.type";
 import CartTableRow from "./CartTableRow";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useCartContext from "@/hooks/useCartContext";
 
 const TabPCView = () => {
-  const itemsInCart = useAppSelector(
-    (currentState) => currentState.cart.cartItems
-  );
+  const { itemsInCart, total } = useCartContext() as TCartContext;
 
-  const total = Number(
-    itemsInCart
-      .reduce((partialSum, a) => partialSum + a?.price * a?.qty, 0)
-      .toFixed(2)
-  );
+  const navigate = useNavigate();
 
   return (
     <div className="hidden w-full h-[80%] sm:flex gap-6">
@@ -64,14 +59,13 @@ const TabPCView = () => {
           </p>
         </div>
 
-        <Link to="/checkout-page">
-          <Button
-            className="w-full bg-[#5D7E5F] text-lg rounded-full mt-6"
-            disabled={itemsInCart.length <= 0}
-          >
-            Checkout
-          </Button>
-        </Link>
+        <Button
+          className="w-full bg-[#5D7E5F] text-lg rounded-full mt-6"
+          disabled={itemsInCart.length <= 0}
+          onClick={() => navigate("/checkout-page")}
+        >
+          Checkout
+        </Button>
       </div>
     </div>
   );

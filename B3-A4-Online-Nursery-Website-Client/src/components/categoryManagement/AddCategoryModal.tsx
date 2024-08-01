@@ -1,4 +1,3 @@
-import { FormEvent, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,37 +11,12 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoIosSave } from "react-icons/io";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { uploadImage } from "@/utiils/imageUploader";
-import { toast } from "sonner";
-import categoryApi from "@/redux/api/CategoryApi";
-import { TCategory } from "@/types/category.type";
+import { TCategoryContext } from "@/types/category.type";
+import useCategoryContext from "@/hooks/useCategoryContext";
 
 const AddCategoryModal = () => {
-  const [addCategory] = categoryApi.useAddCategoryMutation();
-
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const image = await uploadImage(imageFile as File);
-
-    const categoryDetails: TCategory = {
-      category,
-      description,
-      image,
-    };
-    try {
-      const res = await addCategory(categoryDetails).unwrap();
-      if (res.success && res.statusCode === 200) {
-        toast.success(res.message);
-      }
-    } catch (err) {
-      toast.error(err.data.message);
-    }
-  };
+  const { setCategory, setDescription, setImageFile, handleAddCategory } =
+    useCategoryContext() as TCategoryContext;
 
   return (
     <Dialog>
@@ -56,7 +30,10 @@ const AddCategoryModal = () => {
           <DialogTitle className="text-[#757575]">Add Category</DialogTitle>
         </DialogHeader>
 
-        <form className="grid gap-4 py-4" onSubmit={onSubmit}>
+        <form
+          className="grid gap-4 py-4"
+          onSubmit={(e) => handleAddCategory(e)}
+        >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="category" className="text-left text-[#757575]">
               Category

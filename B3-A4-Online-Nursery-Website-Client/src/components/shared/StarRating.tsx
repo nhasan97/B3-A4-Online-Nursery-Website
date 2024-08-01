@@ -21,7 +21,7 @@ const customStyles = {
 const StarRating = ({ rating }: { rating: number }) => {
   return (
     <Rating
-      style={{ maxWidth: 120 }}
+      style={{ maxWidth: 100 }}
       value={rating}
       readOnly
       itemStyles={customStyles}

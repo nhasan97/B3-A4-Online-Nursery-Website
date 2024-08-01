@@ -8,9 +8,9 @@ import {
   DialogTrigger,
   DialogClose,
 } from "../ui/dialog";
-import { TCategory } from "@/types/category.type";
+import { TCategoryProp } from "@/types/category.type";
 
-const DetailsCategoryModal = ({ category }: { category: TCategory }) => {
+const DetailsCategoryModal = ({ category }: TCategoryProp) => {
   return (
     <Dialog>
       <DialogTrigger asChild>

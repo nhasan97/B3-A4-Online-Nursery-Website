@@ -13,7 +13,7 @@ import "../../../cssStyles/Footer.css";
 
 const Footer = () => {
   return (
-    <div className="w-full h-full bg-[#547256] py-20 mt-20">
+    <div className="w-full h-full bg-[#547256] py-10">
       <Container>
         <footer className="w-full grid grid-cols-1 lg:grid-cols-6 gap-6">
           <div className="lg:col-span-2 space-y-3">

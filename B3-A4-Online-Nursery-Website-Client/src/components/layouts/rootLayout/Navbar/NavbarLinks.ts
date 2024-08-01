@@ -13,6 +13,6 @@ export const NavbarLinks = [
   },
   {
     path: "/dashboard",
-    name: "Product & Category Management",
+    name: "Dashboard",
   },
 ];

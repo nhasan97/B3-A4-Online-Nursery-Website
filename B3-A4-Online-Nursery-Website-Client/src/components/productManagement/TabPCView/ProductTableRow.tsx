@@ -1,37 +1,13 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
 import EditProductModal from "../EditProductModal";
-import { TProduct } from "@/types/product.type";
-import productApi from "@/redux/api/ProductApi";
-import { toast } from "sonner";
+import { TProductContext, TProductProp } from "@/types/product.type";
 import DetailsProductModal from "../DetailsProductModal";
+import useProductContext from "@/hooks/useProductContext";
 
-const ProductTableRow = ({ product }: { product: TProduct }) => {
-  const [deleteProduct] = productApi.useDeleteProductMutation();
+const ProductTableRow = ({ product }: TProductProp) => {
+  const { handleDeleteProduct } = useProductContext() as TProductContext;
 
-  const handleDeleteProduct = (_id: string) => {
-    toast.warning("Are you sure? You won't be able to revert this!", {
-      action: {
-        label: "Yes, delete it",
-        onClick: async () => {
-          try {
-            const res = await deleteProduct(_id).unwrap();
-            if (res.success && res.statusCode === 200) {
-              toast.success(res.message, {
-                duration: 2000,
-              });
-            }
-          } catch (err) {
-            toast.error(err.data.message, { duration: 2000 });
-          }
-        },
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
-      },
-    });
-  };
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">

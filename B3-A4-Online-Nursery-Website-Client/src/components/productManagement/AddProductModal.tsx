@@ -1,4 +1,3 @@
-import { FormEvent, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +9,7 @@ import {
 import { Button } from "../ui/button";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoIosSave } from "react-icons/io";
-import { TProduct } from "@/types/product.type";
+import { TProductContext } from "@/types/product.type";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -21,51 +20,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { uploadImage } from "@/utiils/imageUploader";
-import { toast } from "sonner";
-import productApi from "@/redux/api/ProductApi";
-import categoryApi from "@/redux/api/CategoryApi";
 import Loading from "../shared/Loading";
 import NoData from "../shared/NoData";
-import { TCategory } from "@/types/category.type";
+import { TCategory, TCategoryContext } from "@/types/category.type";
+import useCategoryContext from "@/hooks/useCategoryContext";
+import useProductContext from "@/hooks/useProductContext";
 
 const AddProductModal = () => {
-  const { isLoading: loadingCategories, data: categories } =
-    categoryApi.useGetCategoriesQuery(undefined);
+  const { loadingCategories, categories } =
+    useCategoryContext() as TCategoryContext;
 
-  const [addProduct] = productApi.useAddProductMutation();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [stock, setStock] = useState(0);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const image = await uploadImage(imageFile as File);
-
-    const productDetails: TProduct = {
-      title,
-      description,
-      category,
-      price,
-      rating,
-      stock,
-      image,
-    };
-    try {
-      const res = await addProduct(productDetails).unwrap();
-      if (res.success && res.statusCode === 200) {
-        toast.success(res.message);
-      }
-    } catch (err) {
-      toast.error(err.data.message);
-    }
-  };
+  const {
+    setTitle,
+    setDescription,
+    setCategory,
+    setPrice,
+    setRating,
+    setStock,
+    setImageFile,
+    handleAddProduct,
+  } = useProductContext() as TProductContext;
 
   return (
     <Dialog>
@@ -79,7 +53,7 @@ const AddProductModal = () => {
           <DialogTitle className="text-[#757575]">Add Product</DialogTitle>
         </DialogHeader>
 
-        <form className="grid gap-4 py-4" onSubmit={onSubmit}>
+        <form className="grid gap-4 py-4" onSubmit={(e) => handleAddProduct(e)}>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-left text-[#757575]">
               Title
@@ -116,10 +90,10 @@ const AddProductModal = () => {
                 <SelectGroup>
                   {loadingCategories ? (
                     <Loading></Loading>
-                  ) : categories.data.length <= 0 ? (
+                  ) : categories?.length <= 0 ? (
                     <NoData text={"No Categories found"}></NoData>
                   ) : (
-                    categories.data.map((category: TCategory) => (
+                    categories?.map((category: TCategory) => (
                       <SelectItem key={category._id} value={category.category}>
                         {category.category}
                       </SelectItem>
@@ -138,6 +112,7 @@ const AddProductModal = () => {
               type="number"
               id="price"
               min={0}
+              step={0.01}
               required
               className="col-span-3"
               onBlur={(e) => setPrice(Number(e.target.value))}

@@ -1,18 +1,18 @@
 import Loading from "@/components/shared/Loading";
 import NoData from "@/components/shared/NoData";
 import CategoryTableRow from "./CategoryTableRow";
-import { TCategory } from "@/types/category.type";
-import categoryApi from "@/redux/api/CategoryApi";
+import { TCategory, TCategoryContext } from "@/types/category.type";
+import useCategoryContext from "@/hooks/useCategoryContext";
 
 const TabPCView = () => {
-  const { isLoading: loadingCategories, data: categories } =
-    categoryApi.useGetCategoriesQuery(undefined);
+  const { loadingCategories, categories } =
+    useCategoryContext() as TCategoryContext;
 
   return (
     <div className="bg-white hidden sm:block w-full h-[80%] overflow-y-auto rounded-lg border">
       {loadingCategories ? (
         <Loading></Loading>
-      ) : categories!.data?.length > 0 ? (
+      ) : categories?.length > 0 ? (
         <table className="w-full">
           {/* head */}
           <thead>
@@ -25,7 +25,7 @@ const TabPCView = () => {
           </thead>
           <tbody>
             {/* row  */}
-            {categories!.data?.map((category: TCategory) => (
+            {categories?.map((category: TCategory) => (
               <CategoryTableRow key={category?._id} category={category} />
             ))}
           </tbody>

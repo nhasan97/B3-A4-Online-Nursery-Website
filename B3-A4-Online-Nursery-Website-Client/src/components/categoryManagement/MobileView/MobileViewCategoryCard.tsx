@@ -1,37 +1,13 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
-import { toast } from "sonner";
-import { TCategory } from "@/types/category.type";
-import categoryApi from "@/redux/api/CategoryApi";
+import { TCategoryContext, TCategoryProp } from "@/types/category.type";
 import DetailsCategoryModal from "../DetailsCategoryModal";
 import EditCategoryModal from "../EditCategoryModal";
+import useCategoryContext from "@/hooks/useCategoryContext";
 
-const MobileViewCategoryCard = ({ category }: { category: TCategory }) => {
-  const [deleteCategory] = categoryApi.useDeleteCategoryMutation();
+const MobileViewCategoryCard = ({ category }: TCategoryProp) => {
+  const { handleDeleteCategory } = useCategoryContext() as TCategoryContext;
 
-  const handleDeleteCategory = (_id: string) => {
-    toast.warning("Are youAre you sure? You won't be able to revert this!", {
-      action: {
-        label: "Yes, delete it",
-        onClick: async () => {
-          try {
-            const res = await deleteCategory(_id).unwrap();
-            if (res.success && res.statusCode === 200) {
-              toast.success(res.message, {
-                duration: 2000,
-              });
-            }
-          } catch (err) {
-            toast.error(err.data.message, { duration: 2000 });
-          }
-        },
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
-      },
-    });
-  };
   return (
     <div className="h-fit  bg-white rounded-md shadow-md">
       <div className=" p-5 space-y-3">

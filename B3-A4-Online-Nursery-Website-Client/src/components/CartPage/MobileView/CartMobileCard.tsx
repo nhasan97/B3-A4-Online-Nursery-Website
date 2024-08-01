@@ -1,44 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { editQty, removeItem } from "@/redux/features/cartSlice";
-import { useAppDispatch } from "@/redux/hooks";
-import { TCartItem } from "@/types/cart.type";
-import { toast } from "sonner";
+import { TCartContext, TCartItemProp } from "@/types/cart.type";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import useCartContext from "@/hooks/useCartContext";
 
-const CartMobileCard = ({ item }: { item: TCartItem }) => {
-  const dispatch = useAppDispatch();
-
-  const handleEditQty = (editedQty: number) => {
-    if (item?.qty + editedQty > 0 && item?.qty + editedQty <= item?.stock) {
-      const payload = {
-        _id: item?._id,
-        qty: item?.qty + editedQty,
-      };
-
-      dispatch(editQty(payload));
-    } else if (item?.qty + editedQty > item?.stock) {
-      toast.error("No more left");
-    }
-  };
-
-  const handleDeleteCartItem = (_id: string) => {
-    toast.warning("Are youAre you sure? You won't be able to revert this!", {
-      action: {
-        label: "Yes, delete it",
-        onClick: async () => {
-          dispatch(removeItem(_id));
-          toast.success("Product removed from cart", {
-            duration: 2000,
-          });
-        },
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
-      },
-    });
-  };
+const CartMobileCard = ({ item }: TCartItemProp) => {
+  const { handleEditQty, handleDeleteCartItem } =
+    useCartContext() as TCartContext;
 
   return (
     <div className="text-[#808080] p-4 space-y-2 border-b">
@@ -62,11 +30,11 @@ const CartMobileCard = ({ item }: { item: TCartItem }) => {
             <div className="text-2xl">
               <IoMdArrowDropup
                 className="hover:text-green-500"
-                onClick={() => handleEditQty(1)}
+                onClick={() => handleEditQty(1, item)}
               />
               <IoMdArrowDropdown
                 className="hover:text-red-500"
-                onClick={() => handleEditQty(-1)}
+                onClick={() => handleEditQty(-1, item)}
               />
             </div>
           </div>

@@ -1,6 +1,6 @@
 import Banner from "@/components/Home/Banner";
 import CategorySection from "@/components/Home/CategorySection/CategorySection";
-import ImageGallery from "@/components/Home/ImageGallery";
+import ImageGallery from "@/components/Home/ImageGallery/ImageGallery";
 import ProductList from "@/components/Home/ProductList";
 import { Helmet } from "react-helmet-async";
 

@@ -1,44 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { editQty, removeItem } from "@/redux/features/cartSlice";
-import { useAppDispatch } from "@/redux/hooks";
-import { TCartItem } from "@/types/cart.type";
+import useCartContext from "@/hooks/useCartContext";
+import { TCartContext, TCartItemProp } from "@/types/cart.type";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import { toast } from "sonner";
 
-const CartTableRow = ({ item }: { item: TCartItem }) => {
-  const dispatch = useAppDispatch();
-
-  const handleEditQty = (editedQty: number) => {
-    if (item?.qty + editedQty > 0 && item?.qty + editedQty <= item?.stock) {
-      const payload = {
-        _id: item?._id,
-        qty: item?.qty + editedQty,
-      };
-
-      dispatch(editQty(payload));
-    } else if (item?.qty + editedQty > item?.stock) {
-      toast.error("No more left");
-    }
-  };
-
-  const handleDeleteCartItem = (_id: string) => {
-    toast.warning("Are youAre you sure? You won't be able to revert this!", {
-      action: {
-        label: "Yes, delete it",
-        onClick: async () => {
-          dispatch(removeItem(_id));
-          toast.success("Product removed from cart", {
-            duration: 2000,
-          });
-        },
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
-      },
-    });
-  };
+const CartTableRow = ({ item }: TCartItemProp) => {
+  const { handleEditQty, handleDeleteCartItem } =
+    useCartContext() as TCartContext;
 
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
@@ -59,11 +27,11 @@ const CartTableRow = ({ item }: { item: TCartItem }) => {
           <div className="text-2xl">
             <IoMdArrowDropup
               className="hover:text-green-500"
-              onClick={() => handleEditQty(1)}
+              onClick={() => handleEditQty(1, item)}
             />
             <IoMdArrowDropdown
               className="hover:text-red-500"
-              onClick={() => handleEditQty(-1)}
+              onClick={() => handleEditQty(-1, item)}
             />
           </div>
         </div>

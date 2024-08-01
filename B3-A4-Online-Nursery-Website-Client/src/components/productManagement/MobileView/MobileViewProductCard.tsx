@@ -1,37 +1,13 @@
-import { TProduct } from "@/types/product.type";
+import { TProductContext, TProductProp } from "@/types/product.type";
 import EditProductModal from "../EditProductModal";
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
-import { toast } from "sonner";
-import productApi from "@/redux/api/ProductApi";
 import DetailsProductModal from "../DetailsProductModal";
+import useProductContext from "@/hooks/useProductContext";
 
-const MobileViewProductCard = ({ product }: { product: TProduct }) => {
-  const [deleteProduct] = productApi.useDeleteProductMutation();
+const MobileViewProductCard = ({ product }: TProductProp) => {
+  const { handleDeleteProduct } = useProductContext() as TProductContext;
 
-  const handleDeleteProduct = (_id: string) => {
-    toast.warning("Are you sure? You won't be able to revert this!", {
-      action: {
-        label: "Yes, delete it",
-        onClick: async () => {
-          try {
-            const res = await deleteProduct(_id).unwrap();
-            if (res.success && res.statusCode === 200) {
-              toast.success(res.message, {
-                duration: 2000,
-              });
-            }
-          } catch (err) {
-            toast.error(err.data.message, { duration: 2000 });
-          }
-        },
-      },
-      cancel: {
-        label: "Cancel",
-        onClick: () => toast.info("Cancelled!", { duration: 2000 }),
-      },
-    });
-  };
   return (
     <div className="h-fit  bg-white rounded-md shadow-md">
       <div className=" p-5 space-y-3">

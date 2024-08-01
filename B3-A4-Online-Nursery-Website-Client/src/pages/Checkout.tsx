@@ -13,8 +13,11 @@ import {
 } from "../components/ui/select";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "@/redux/hooks";
 import orderApi from "@/redux/api/orderApi";
+import { toast } from "sonner";
+import useReloadWarner from "@/hooks/useReloadWarner";
+import useCartContext from "@/hooks/useCartContext";
+import { TCartContext } from "@/types/cart.type";
 
 const Checkout = () => {
   const [name, setName] = useState("");
@@ -23,25 +26,18 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("");
 
-  const itemsInCart = useAppSelector(
-    (currentState) => currentState.cart.cartItems
-  );
+  useReloadWarner();
 
-  const total = Number(
-    itemsInCart
-      .reduce((partialSum, a) => partialSum + a?.price * a?.qty, 0)
-      .toFixed(2)
-  );
+  const { itemsInCart, total } = useCartContext() as TCartContext;
 
   const navigate = useNavigate();
 
   const [placeOrder] = orderApi.usePlaceOrderMutation();
-  //   const dispatch = useAppDispatch();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const orderId = "wer78r7r4r";
+    const orderId = Math.round(Math.random() * 100000).toString();
 
     const order = {
       orderId,
@@ -49,7 +45,7 @@ const Checkout = () => {
       email,
       phone,
       address,
-      Items: itemsInCart,
+      items: itemsInCart,
       totalAmount: total,
       paymentMethod: payment === "cod" ? "COD" : "Stripe",
       paymentStatus: "Due",
@@ -59,8 +55,16 @@ const Checkout = () => {
     // dispatch(setCustomer(customerDetails));
 
     if (payment === "cod") {
-      placeOrder(order);
-      navigate("/success-page");
+      try {
+        const res = await placeOrder(order).unwrap();
+        if (res.success && res.statusCode === 200) {
+          toast.success(res.message);
+          navigate("/success-page");
+        }
+      } catch (err) {
+        // console.log(err);
+        // toast.error(err.data.message);
+      }
     } else {
       navigate("/stripe-page");
     }

@@ -1,8 +1,8 @@
-import { TCategory } from "@/types/category.type";
+import { TCategoryProp } from "@/types/category.type";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Link } from "react-router-dom";
 
-const CategoryCards = ({ category }: { category: TCategory }) => {
+const CategoryCards = ({ category }: TCategoryProp) => {
   return (
     <Link to={`/products-page/${category?.category}`}>
       <div>
