@@ -67,6 +67,7 @@ const orderSchema = new Schema<TOrder, OrderModel>({
 
   items: {
     type: [TCartItemSchema],
+    required: true,
   },
 
   totalAmount: {

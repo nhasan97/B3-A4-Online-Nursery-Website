@@ -10,6 +10,8 @@ router.get('/', productControllers.getAllProducts);
 
 router.get('/:id', productControllers.getSingleProduct);
 
+router.get('/count/prod', productControllers.getProductCount);
+
 //------------route for inserting new product data in DB------------
 router.post(
   '/',

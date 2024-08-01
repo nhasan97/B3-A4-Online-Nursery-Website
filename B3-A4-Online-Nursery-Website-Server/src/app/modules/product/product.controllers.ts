@@ -7,9 +7,7 @@ import httpStatus from 'http-status';
 --------------controller for getting all product data from DB----------------*/
 const getAllProducts = catchAsync(async (req, res) => {
   //receiving data from service function
-  const response = await productServices.getAllProductsFromDB(
-    req?.query?.category,
-  );
+  const response = await productServices.getAllProductsFromDB(req?.query);
 
   //sending response
   if (response.length) {
@@ -27,6 +25,18 @@ const getAllProducts = catchAsync(async (req, res) => {
 
 const getSingleProduct = catchAsync(async (req, res) => {
   const response = await productServices.getSingleProductFromDB(req.params.id);
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Department fetched successfully!',
+    response,
+  );
+});
+
+const getProductCount = catchAsync(async (req, res) => {
+  const response = await productServices.getProductCountFromDB();
+
   sendResponse(
     res,
     httpStatus.OK,
@@ -92,6 +102,7 @@ const deleteProduct = catchAsync(async (req, res) => {
 export const productControllers = {
   getAllProducts,
   getSingleProduct,
+  getProductCount,
   createProduct,
   updateProduct,
   deleteProduct,

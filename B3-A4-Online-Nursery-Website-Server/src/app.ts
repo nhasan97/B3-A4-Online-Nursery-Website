@@ -8,7 +8,7 @@ const app: Application = express();
 
 //Using json parser by express and cors parser
 app.use(express.json());
-app.use(cors({ origin: ['http://localhost:5173'] }));
+app.use(cors({ origin: '*' }));
 
 //application routes
 app.use('/api/v1', router);
