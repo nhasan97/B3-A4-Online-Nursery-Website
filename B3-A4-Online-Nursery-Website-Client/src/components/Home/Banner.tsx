@@ -23,10 +23,10 @@ const Banner = () => {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
-    <div className="w-full h-full bg-[#98b2992f] md:bg-[url(../public/palm2.png)] bg-no-repeat bg-top-left bg-auto">
+    <div className="w-full  bg-[#98b2992f] md:bg-[url(../public/palm2.png)] bg-no-repeat bg-top-left bg-auto">
       <Container>
-        <div className="w-full h-full flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-3 py-6">
-          <div className="w-full md:w-1/2 h-full text-center sm:text-left space-y-3 lg:space-y-6 relative">
+        <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-3 py-6">
+          <div className="w-full md:w-1/2 text-center sm:text-left space-y-3 lg:space-y-6 relative">
             <h1 className="text-center sm:text-left text-[#5D7E5F] text-3xl md:text-[40px] lg:text-[50px] font-bold leading-[40px] md:leading-[55px] lg:leading-[70px]">
               Bringing Nature Home
             </h1>
@@ -61,32 +61,31 @@ const Banner = () => {
             <img
               src={plant}
               alt=""
-              className="hidden lg:flex w-[55%] absolute bottom-0 right-16 translate-x-[40%] translate-y-[75%] z-20"
+              className="hidden lg:flex w-[55%] absolute bottom-0 right-0 lg:translate-x-[70%] xl:translate-x-[50%] lg:translate-y-[55%] xl:translate-y-[62%] z-20"
             />
           </div>
-          <div className="w-full md:w-1/2 h-full bg-[#98b299a6] p-10">
-            <div className="w-full h-full">
-              <Carousel
-                plugins={[plugin.current]}
-                className=""
-                onMouseEnter={plugin.current.stop}
-                onMouseLeave={plugin.current.reset}
-              >
-                <CarouselContent>
-                  <CarouselItem>
-                    <img src={bannerImg1} alt="" className="w-full" />
-                  </CarouselItem>
-                  <CarouselItem>
-                    <img src={bannerImg2} alt="" className="w-full" />
-                  </CarouselItem>
-                  <CarouselItem>
-                    <img src={bannerImg3} alt="" className="w-full" />
-                  </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
-            </div>
+
+          <div className="w-full h-fit md:w-1/2 lg:w-1/3  bg-[#98b299a6] p-10">
+            <Carousel
+              plugins={[plugin.current]}
+              className=""
+              onMouseEnter={plugin.current.stop}
+              onMouseLeave={plugin.current.reset}
+            >
+              <CarouselContent>
+                <CarouselItem>
+                  <img src={bannerImg1} alt="" className="w-full" />
+                </CarouselItem>
+                <CarouselItem>
+                  <img src={bannerImg2} alt="" className="w-full" />
+                </CarouselItem>
+                <CarouselItem>
+                  <img src={bannerImg3} alt="" className="w-full" />
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </div>
       </Container>
