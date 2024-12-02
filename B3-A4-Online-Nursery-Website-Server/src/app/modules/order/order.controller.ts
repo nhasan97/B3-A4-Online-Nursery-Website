@@ -2,6 +2,25 @@ import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import httpStatus from 'http-status';
 import { orderServices } from './order.service';
+/*
+
+----------------controller for getting all orders from DB----------------*/
+const getAllOrders = catchAsync(async (req, res) => {
+  const response = await orderServices.getAllOrdersFromDB();
+
+  //sending response
+  if (response.length) {
+    sendResponse(
+      res,
+      httpStatus.OK,
+      true,
+      'orders retrieved successfully',
+      response,
+    );
+  } else {
+    sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
+  }
+});
 
 /*
 
@@ -14,7 +33,34 @@ const createOrder = catchAsync(async (req, res) => {
   sendResponse(res, httpStatus.OK, true, 'Order added successfully', response);
 });
 
+const getPaymentIntent = catchAsync(async (req, res) => {
+  const { price } = req.body;
+
+  const response = await orderServices.getPaymentIntentFromStirpe(price);
+
+  //sending response
+  sendResponse(res, httpStatus.OK, true, 'Order added successfully', response);
+});
+
+const updateOrderStatus = catchAsync(async (req, res) => {
+  const order = await orderServices.updateOrderStatusIntoDB(
+    req?.params?.id,
+    req?.body?.status as string,
+  );
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'order status changed Successfully',
+    order,
+  );
+});
+
 //exporting all the controller functions through orderControllers object
 export const orderControllers = {
+  getAllOrders,
   createOrder,
+  getPaymentIntent,
+  updateOrderStatus,
 };

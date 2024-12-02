@@ -115,6 +115,28 @@ const createOrderValidationSchema = z.object({
       })
       .nonnegative({ message: 'Paid amount cannot be a negative number' })
       .finite({ message: 'Paid amount must be finite' }),
+
+    transactionID: z
+      .string({
+        required_error: 'TransactionID is required',
+        invalid_type_error: 'TransactionID must be string',
+      })
+      .trim(),
+
+    estimatedDelivery: z
+      .number({
+        required_error: 'Estimated date is required',
+        invalid_type_error: 'Estimated date must be a number',
+      })
+      .nonnegative({ message: 'Estimated date cannot be a negative number' })
+      .finite({ message: 'Estimated date must be finite' }),
+
+    status: z
+      .string({
+        required_error: 'Status is required',
+        invalid_type_error: 'Status must be string',
+      })
+      .trim(),
   }),
 });
 
@@ -195,6 +217,31 @@ const updateOrderValidationSchema = z.object({
       })
       .nonnegative({ message: 'Paid amount cannot be a negative number' })
       .finite({ message: 'Paid amount must be finite' })
+      .optional(),
+
+    transactionID: z
+      .string({
+        required_error: 'TransactionID is required',
+        invalid_type_error: 'TransactionID must be string',
+      })
+      .trim()
+      .optional(),
+
+    estimatedDelivery: z
+      .number({
+        required_error: 'Estimated date is required',
+        invalid_type_error: 'Estimated date must be a number',
+      })
+      .nonnegative({ message: 'Estimated date cannot be a negative number' })
+      .finite({ message: 'Estimated date must be finite' })
+      .optional(),
+
+    status: z
+      .string({
+        required_error: 'Status is required',
+        invalid_type_error: 'Status must be string',
+      })
+      .trim()
       .optional(),
   }),
 });

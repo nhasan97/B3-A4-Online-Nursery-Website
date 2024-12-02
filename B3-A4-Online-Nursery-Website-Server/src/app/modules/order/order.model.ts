@@ -90,6 +90,24 @@ const orderSchema = new Schema<TOrder, OrderModel>({
     type: Number,
     required: true,
   },
+
+  transactionID: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+
+  estimatedDelivery: {
+    type: Number,
+    required: true,
+  },
+
+  status: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+
   isDeleted: {
     type: Boolean,
     required: false,
@@ -110,6 +128,9 @@ orderSchema.pre('save', async function (next) {
     paymentMethod: this.paymentMethod,
     paymentStatus: this.paymentStatus,
     paid: this.paid,
+    transactionID: this.transactionID,
+    estimatedDelivery: this.estimatedDelivery,
+    status: this.status,
   });
   if (doesExist) {
     throw new AppError(

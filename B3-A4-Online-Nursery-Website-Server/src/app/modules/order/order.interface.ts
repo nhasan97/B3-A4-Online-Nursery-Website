@@ -22,6 +22,9 @@ export interface TOrder {
   paymentMethod: string;
   paymentStatus: string;
   paid: number;
+  transactionID: string;
+  estimatedDelivery: number;
+  status: string;
   isDeleted?: boolean;
 }
 
