@@ -8,7 +8,19 @@ const app: Application = express();
 
 //Using json parser by express and cors parser
 app.use(express.json());
-app.use(cors({ origin: '*' }));
+
+// app.use(cors({ origin: '*' }));
+
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://blooms-and-beyond.vercel.app',
+      'https://b3-a4-online-nursery-website-client.vercel.app',
+    ],
+    credentials: true,
+  }),
+);
 
 //application routes
 app.use('/api/v1', router);
