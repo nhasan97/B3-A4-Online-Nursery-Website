@@ -5,14 +5,22 @@ export const NavbarLinks = [
   },
   {
     path: "/all-products",
-    name: "All Products",
+    name: "Shop",
   },
   {
-    path: "/cart-page",
-    name: "Cart",
+    path: "/all-blogs",
+    name: "Blogs",
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/plantcare-page",
+    name: "Plant Care",
+  },
+  {
+    path: "/about-page",
+    name: "About Us",
+  },
+  {
+    path: "/contact-page",
+    name: "Contact",
   },
 ];
