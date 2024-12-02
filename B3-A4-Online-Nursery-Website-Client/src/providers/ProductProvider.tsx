@@ -16,7 +16,7 @@ const ProductProvider = ({ children }: TChildren) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryToLoad, setCategoryToLoad] = useState("");
   const [sort, setSort] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
 
   //States for DB operations
@@ -108,6 +108,17 @@ const ProductProvider = ({ children }: TChildren) => {
     });
   };
 
+  const resetBrower = () => {
+    setSearchTerm("");
+    setCategoryToLoad("");
+    setSort("");
+  };
+
+  const resetPagination = () => {
+    setItemsPerPage(10);
+    setCurrentPage(0);
+  };
+
   const productInfo: TProductContext = {
     loadingProducts,
     products: loadedProducts?.data,
@@ -133,6 +144,8 @@ const ProductProvider = ({ children }: TChildren) => {
     handleAddProduct,
     handleEditProduct,
     handleDeleteProduct,
+    resetBrower,
+    resetPagination,
   };
 
   return (
