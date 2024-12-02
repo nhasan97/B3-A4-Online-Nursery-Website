@@ -38,4 +38,12 @@ export type TProductContext = {
   handleAddProduct: (e: FormEvent) => Promise<void>;
   handleEditProduct: (e: FormEvent, passedProduct: TProduct) => Promise<void>;
   handleDeleteProduct: (_id: string) => void;
+  resetBrower: () => void;
+  resetPagination: () => void;
+};
+
+export type TProductManagementProp = {
+  loadingProducts: boolean;
+  products: TProduct[];
+  loadingNumberOfProducts: boolean;
 };
