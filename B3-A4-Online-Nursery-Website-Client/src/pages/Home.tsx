@@ -1,7 +1,12 @@
+import FAQSection from "@/components/Home/FAQSection/FAQSection";
 import Banner from "@/components/Home/Banner";
+import BlogSection from "@/components/Home/BlogSection/BlogSection";
 import CategorySection from "@/components/Home/CategorySection/CategorySection";
+import CustomerReviewSection from "@/components/Home/CustomerReviewSection/CustomerReviewSection";
+import FeaturedProducts from "@/components/Home/FeaturedProducts";
+import HowToOrder from "@/components/Home/HowToOrder/HowToOrder";
 import ImageGallery from "@/components/Home/ImageGallery/ImageGallery";
-import ProductList from "@/components/Home/ProductList";
+import SpecialOfferSection from "@/components/Home/SpecialOfferSection/SpecialOfferSection";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {
@@ -13,8 +18,13 @@ const Home = () => {
 
       <Banner />
       <CategorySection />
-      <ProductList />
+      <FeaturedProducts />
+      <SpecialOfferSection />
+      <CustomerReviewSection />
+      <HowToOrder />
       <ImageGallery />
+      <BlogSection />
+      <FAQSection />
     </div>
   );
 };
