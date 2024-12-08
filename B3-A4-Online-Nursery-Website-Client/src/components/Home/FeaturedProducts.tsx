@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
+import "../cssStyles/Tab.css";
 
 const FeaturedProducts = () => {
   const {
@@ -46,12 +47,19 @@ const FeaturedProducts = () => {
 
           <SiteTitle title={"Featured Plants"}></SiteTitle>
 
-          <Tabs defaultValue="featured" className="flex flex-col items-center">
-            <TabsList>
-              <TabsTrigger value="featured">Featured</TabsTrigger>
-              <TabsTrigger value="newArrivals">New Arrivals</TabsTrigger>
-              <TabsTrigger value="bestSeller">Best Seller</TabsTrigger>
+          <Tabs defaultValue="featured" className="flex flex-col items-center ">
+            <TabsList className="TabsList bg-white px-2">
+              <TabsTrigger className="TabsTrigger bg-black" value="featured">
+                Featured
+              </TabsTrigger>
+              <TabsTrigger className="TabsTrigger" value="newArrivals">
+                New Arrivals
+              </TabsTrigger>
+              <TabsTrigger className="TabsTrigger" value="bestSeller">
+                Best Seller
+              </TabsTrigger>
             </TabsList>
+
             <TabsContent value="featured">
               {loadingProducts || loadingNumberOfProducts ? (
                 <Loading></Loading>
