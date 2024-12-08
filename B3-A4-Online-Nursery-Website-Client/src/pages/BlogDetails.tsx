@@ -27,7 +27,7 @@ const BlogDetails = () => {
   return (
     <div>
       <Container>
-        <div className="w-full min-h-screen flex flex-col lg:flex-row lg:p-5">
+        <div className="w-full min-h-screen flex flex-col lg:flex-row lg:py-5">
           <div className="w-full lg:w-1/2">
             <img
               src={matchedBlog?.thumbnail}
