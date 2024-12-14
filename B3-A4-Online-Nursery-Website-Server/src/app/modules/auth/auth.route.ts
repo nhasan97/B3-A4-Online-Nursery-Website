@@ -26,7 +26,4 @@ router.post(
   authControllers.refreshToken,
 );
 
-//------------route for getting user from DB------------
-router.get('/users/:id', authControllers.getUser);
-
 export const authRoutes = router;

@@ -65,28 +65,10 @@ const refreshToken = catchAsync(async (req, res) => {
     response,
   );
 });
-/*
-
---------------------------controller for getting the user--------------------------*/
-const getUser = catchAsync(async (req, res) => {
-  //receiving data from service function
-  const response = await authServices.getUserFromDB(req.params.id);
-
-  //sending response
-
-  sendResponse(
-    res,
-    httpStatus.OK,
-    true,
-    'User retrieved successfully',
-    response,
-  );
-});
 
 //exporting all the controller functions through authControllers object
 export const authControllers = {
   userSignup,
   userLogin,
   refreshToken,
-  getUser,
 };

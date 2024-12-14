@@ -1,10 +1,12 @@
 import httpStatus from 'http-status';
-import { TUser, TUserLogin } from './auth.interface';
-import { userModel } from './auth.model';
+
+import { userModel } from '../user/user.model';
 import config from '../../config';
 import { generateToken } from './auth.utils';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import AppError from '../../Errors/AppError';
+import { TUserLogin } from './auth.interface';
+import { TUser } from '../user/user.interface';
 /*
 
 ----------------service function for saving user data in DB----------------*/
@@ -101,24 +103,10 @@ const refreshToken = async (token: string) => {
     accessToken,
   };
 };
-/*
-
-----------------service function for getting user----------------*/
-const getUserFromDB = async (id: string) => {
-  //seraching user data in DB
-  const response = await userModel.findById(id);
-
-  if (!response) {
-    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
-  }
-  //returning response
-  return response;
-};
 
 //exporting all the service functions through authServices object
 export const authServices = {
   saveUserIntoDB,
   loginUser,
   refreshToken,
-  getUserFromDB,
 };
