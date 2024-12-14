@@ -6,7 +6,7 @@ import { orderServices } from './order.service';
 
 ----------------controller for getting all orders from DB----------------*/
 const getAllOrders = catchAsync(async (req, res) => {
-  const response = await orderServices.getAllOrdersFromDB();
+  const response = await orderServices.getAllOrdersFromDB(req?.query);
 
   //sending response
   if (response.length) {
@@ -21,7 +21,58 @@ const getAllOrders = catchAsync(async (req, res) => {
     sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
   }
 });
+/*
 
+--------------------------controller for getting all orders count--------------------------*/
+const getAllOrdersCount = catchAsync(async (req, res) => {
+  const response = await orderServices.getAllOrdersCountFromDB();
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Data fetched successfully!',
+    response,
+  );
+});
+/*
+
+----------------controller for getting logged in users orders from DB----------------*/
+const getLoggedInUsersOrders = catchAsync(async (req, res) => {
+  const response = await orderServices.getLoggedInUsersOrdersFromDB(
+    req?.params?.logggedInUserEmail,
+    req?.query,
+  );
+
+  //sending response
+  if (response.length) {
+    sendResponse(
+      res,
+      httpStatus.OK,
+      true,
+      'orders retrieved successfully',
+      response,
+    );
+  } else {
+    sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
+  }
+});
+/*
+
+--------------------------controller for getting logged in users orders count--------------------------*/
+const getLoggedInUsersOrdersCount = catchAsync(async (req, res) => {
+  const response = await orderServices.getLoggedInUsersOrdersCountFromDB(
+    req.params.logggedInUserEmail,
+  );
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Data fetched successfully!',
+    response,
+  );
+});
 /*
 
 ----------------controller for inserting new order data in DB----------------*/
@@ -60,6 +111,9 @@ const updateOrderStatus = catchAsync(async (req, res) => {
 //exporting all the controller functions through orderControllers object
 export const orderControllers = {
   getAllOrders,
+  getAllOrdersCount,
+  getLoggedInUsersOrders,
+  getLoggedInUsersOrdersCount,
   createOrder,
   getPaymentIntent,
   updateOrderStatus,

@@ -22,7 +22,10 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
   const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
 
   excludeFields.forEach((el) => delete queryObject[el]);
-  const filterQuery = searchQuery.find(queryObject);
+  const filterQuery = searchQuery.find({
+    isDeleted: { $ne: true },
+    ...queryObject,
+  });
 
   let sort = 'title';
   if (query?.sort) {

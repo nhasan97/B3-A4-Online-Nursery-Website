@@ -2,10 +2,24 @@ import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
 import { OrderValidations } from './order.validation';
 import { orderControllers } from './order.controller';
+// import auth from '../../middlewares/auth';
+// import { userRole } from '../user/user.constant';
 
 const router = express.Router();
 
 router.get('/get-all-orders', orderControllers.getAllOrders);
+
+router.get('/get-all-orders-count', orderControllers.getAllOrdersCount);
+
+router.get(
+  '/get-loggedIn-Users-orders/:logggedInUserEmail',
+  orderControllers.getLoggedInUsersOrders,
+);
+
+router.get(
+  '/get-loggedIn-Users-orders-count/:logggedInUserEmail',
+  orderControllers.getLoggedInUsersOrdersCount,
+);
 
 //------------route for inserting new order data in DB------------
 router.post(
@@ -15,8 +29,8 @@ router.post(
 );
 
 router.patch(
-  'edit-order-status/:id',
-  // auth(USER_ROLE.ADMIN),
+  '/edit-order-status/:id',
+  // auth(userRole.admin),
   orderControllers.updateOrderStatus,
 );
 
