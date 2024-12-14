@@ -1,0 +1,32 @@
+.text-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.glowing-text {
+  color: #547256;
+  position: relative;
+  letter-spacing: 15px;
+  text-transform: uppercase;
+  -webkit-box-reflect: below 1px
+    linear-gradient(transparent, rgba(0, 0, 0, 0.062));
+
+  animation: animate 2s linear infinite;
+}
+
+@keyframes animate {
+  0%,
+  50% {
+    color: #2f3f30;
+    text-shadow: none;
+  }
+
+  50.1%,
+  100% {
+    color: white;
+    text-shadow: 0 0 10px #a5e0a8, 0 0 20px #a5e0a8, 0 0 40px #a5e0a8,
+      0 0 80px #a5e0a8, 0 0 160px #a5e0a8;
+  }
+}
