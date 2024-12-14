@@ -3,6 +3,7 @@ import MainLogo from "@/components/shared/MainLogo";
 import { TUser, TUserExtended } from "@/types/auth.type";
 import Loading from "@/components/shared/Loading";
 import AdminSideBarMenu from "./AdminSideBarMenu";
+import UserSideBarMenu from "./UserSideBarMenu";
 
 const Sidebar = ({
   openSidebar,
@@ -55,6 +56,7 @@ const Sidebar = ({
             {(decodedUserInfo as TUser)?.role === "admin" && (
               <AdminSideBarMenu />
             )}
+            {(decodedUserInfo as TUser)?.role === "user" && <UserSideBarMenu />}
           </div>
         </>
       )}
