@@ -4,29 +4,30 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     /*
     ------------------------endpoint for getting products from DB------------------------*/
-
     getProducts: builder.query({
       query: ({
         searchTerm,
         categoryToLoad,
+        minProductPrice,
+        maxProductPrice,
         sort,
         currentPage,
         itemsPerPage,
       }) => {
-        console.log(
-          searchTerm,
-          categoryToLoad,
-          sort,
-          currentPage,
-          itemsPerPage
-        );
-
         const params = new URLSearchParams();
         if (searchTerm) {
           params.append("searchTerm", searchTerm);
         }
         if (categoryToLoad) {
-          params.append("category", categoryToLoad);
+          categoryToLoad.forEach((element: string) => {
+            params.append("category", element);
+          });
+        }
+        if (minProductPrice) {
+          params.append("minProductPrice", minProductPrice);
+        }
+        if (maxProductPrice) {
+          params.append("maxProductPrice", maxProductPrice);
         }
         if (sort) {
           params.append("sort", sort);
@@ -37,32 +38,49 @@ const productApi = baseApi.injectEndpoints({
         if (itemsPerPage) {
           params.append("limit", itemsPerPage);
         }
-        return { url: "/products", method: "GET", params: params };
+
+        return {
+          url: "/products/get-all-products",
+          method: "GET",
+          params: params,
+        };
       },
       providesTags: ["product"],
     }),
+    /*
 
-    getSingleProduct: builder.query({
-      query: (_id) => {
-        return { url: `/products/${_id}`, method: "GET" };
-      },
-      providesTags: ["product"],
-    }),
-
+    ------------------------endpoint for getting products count from DB------------------------*/
     getProductCount: builder.query({
       query: () => {
-        return { url: "/products/count/prod", method: "GET" };
+        return { url: "/products/get-all-products-count", method: "GET" };
       },
       providesTags: ["product"],
     }),
+    /*
 
+    ------------------------endpoint for getting single product from DB------------------------*/
+    getSingleProduct: builder.query({
+      query: (_id) => {
+        return { url: `/products/get-single-product/${_id}`, method: "GET" };
+      },
+      providesTags: ["product"],
+    }),
+    /*
+
+    ------------------------endpoint for getting min max product price from DB------------------------*/
+    getMinMaxProductPrice: builder.query({
+      query: () => {
+        return { url: "/products/get-min-max-price", method: "GET" };
+      },
+      providesTags: ["product"],
+    }),
     /*
 
     ------------------------endpoint for adding product in DB------------------------*/
     addProduct: builder.mutation({
       query: (productInfo) => {
         return {
-          url: "/products",
+          url: "/products/create-product",
           method: "POST",
           body: productInfo,
         };
@@ -75,7 +93,7 @@ const productApi = baseApi.injectEndpoints({
     editProduct: builder.mutation({
       query: (payload) => {
         return {
-          url: `/products/${payload._id}`,
+          url: `/products/edit-product/${payload._id}`,
           method: "PUT",
           body: payload.productDetails,
         };
@@ -88,7 +106,7 @@ const productApi = baseApi.injectEndpoints({
     deleteProduct: builder.mutation({
       query: (id: string) => {
         return {
-          url: `/products/${id}`,
+          url: `/products/delete-product/${id}`,
           method: "DELETE",
         };
       },

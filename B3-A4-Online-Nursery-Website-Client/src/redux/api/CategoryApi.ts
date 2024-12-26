@@ -5,8 +5,34 @@ const categoryApi = baseApi.injectEndpoints({
     /*
     ------------------------endpoint for getting categories from DB------------------------*/
     getCategories: builder.query({
+      query: ({ searchTerm, sort, currentPage, itemsPerPage }) => {
+        const params = new URLSearchParams();
+        if (searchTerm) {
+          params.append("searchTerm", searchTerm);
+        }
+        if (sort) {
+          params.append("sort", sort);
+        }
+        if (currentPage) {
+          params.append("page", currentPage);
+        }
+        if (itemsPerPage) {
+          params.append("limit", itemsPerPage);
+        }
+
+        return {
+          url: "/categories/get-all-categories",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["category"],
+    }),
+    /*
+    ------------------------endpoint for getting categories count from DB------------------------*/
+    getCategoryCount: builder.query({
       query: () => {
-        return { url: "/categories", method: "GET" };
+        return { url: "/categories/get-all-categories-count", method: "GET" };
       },
       providesTags: ["category"],
     }),
@@ -16,7 +42,7 @@ const categoryApi = baseApi.injectEndpoints({
     addCategory: builder.mutation({
       query: (categoryInfo) => {
         return {
-          url: "/categories",
+          url: "/categories/create-category",
           method: "POST",
           body: categoryInfo,
         };
@@ -29,7 +55,7 @@ const categoryApi = baseApi.injectEndpoints({
     editCategory: builder.mutation({
       query: (payload) => {
         return {
-          url: `/categories/${payload._id}`,
+          url: `/categories/edit-catgory/${payload._id}`,
           method: "PUT",
           body: payload.categoryDetails,
         };
@@ -42,7 +68,7 @@ const categoryApi = baseApi.injectEndpoints({
     deleteCategory: builder.mutation({
       query: (id: string) => {
         return {
-          url: `/categories/${id}`,
+          url: `/categories/delete-catgory/${id}`,
           method: "DELETE",
         };
       },
