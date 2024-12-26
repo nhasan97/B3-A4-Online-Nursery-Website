@@ -23,7 +23,7 @@ const Banner = () => {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
-    <div className="w-full  bg-[#98b2992f] md:bg-[url(../public/palm2.png)] bg-no-repeat bg-top-left bg-auto">
+    <div className="w-full bg-[#98b2992f] md:bg-[url(../public/palm2.png)] bg-no-repeat bg-top-left bg-auto">
       <Container>
         <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-3 py-6">
           <div className="w-full md:w-1/2 text-center sm:text-left space-y-3 lg:space-y-6 relative">
@@ -52,7 +52,7 @@ const Banner = () => {
 
             <Button
               className="bg-white text-[#5D7E5F] text-xl rounded-full"
-              onClick={() => navigate("/products-page")}
+              onClick={() => navigate("/all-products")}
             >
               Explore
               <RiArrowRightLine />
