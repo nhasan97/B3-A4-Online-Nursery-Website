@@ -8,7 +8,7 @@ import { categoryServices } from './category.services';
 --------------controller for getting all categories data from DB----------------*/
 const getAllCategories = catchAsync(async (req, res) => {
   //receiving data from service function
-  const response = await categoryServices.getAllCategoriesFromDB();
+  const response = await categoryServices.getAllCategoriesFromDB(req?.query);
 
   //sending response
   if (response.length) {
@@ -22,6 +22,20 @@ const getAllCategories = catchAsync(async (req, res) => {
   } else {
     sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
   }
+});
+/*
+
+--------------controller for getting categories count from DB----------------*/
+const getCategoryCount = catchAsync(async (req, res) => {
+  const response = await categoryServices.getCategoryCountFromDB();
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Data fetched successfully!',
+    response,
+  );
 });
 /*
 
@@ -78,6 +92,7 @@ const deleteCategory = catchAsync(async (req, res) => {
 //exporting all the controller functions through categoryControllers object
 export const categoryControllers = {
   getAllCategories,
+  getCategoryCount,
   createCategory,
   updateCategory,
   deleteCategory,

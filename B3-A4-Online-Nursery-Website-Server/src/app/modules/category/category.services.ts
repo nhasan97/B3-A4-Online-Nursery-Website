@@ -5,8 +5,58 @@ import { TCategory } from './category.interface';
 /*
 
 ----------------service function for fetching all categories data from DB----------------*/
-const getAllCategoriesFromDB = async () => {
-  const response = await categoryModel.find();
+const getAllCategoriesFromDB = async (query: Record<string, unknown>) => {
+  const queryObject = { ...query };
+
+  const searchableFields = ['category'];
+  let searchTerm = '';
+  if (query?.searchTerm) {
+    searchTerm = query?.searchTerm as string;
+  }
+  const searchQuery = categoryModel.find({
+    $or: searchableFields.map((field) => ({
+      [field]: { $regex: searchTerm, $options: 'i' },
+    })),
+  });
+
+  const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
+
+  excludeFields.forEach((el) => delete queryObject[el]);
+  const filterQuery = searchQuery.find({
+    isDeleted: { $ne: true },
+    ...queryObject,
+  });
+
+  let sort = 'category';
+  if (query?.sort) {
+    sort = query?.sort as string;
+  }
+  const sortQuery = filterQuery.sort(sort);
+
+  let limit = 1;
+  let page = 1;
+  let skip = 0;
+  if (query?.limit) {
+    limit = Number(query?.limit);
+  }
+  if (query?.page) {
+    page = Number(query?.page);
+    skip = page * limit;
+  }
+
+  const paginateQuery = sortQuery.skip(skip);
+
+  const limitQuery = await paginateQuery.limit(limit);
+
+  return limitQuery;
+};
+/*
+
+----------------service function for fetching categories count from DB----------------*/
+const getCategoryCountFromDB = async () => {
+  const response = await categoryModel.countDocuments({
+    isDeleted: { $ne: true },
+  });
   return response;
 };
 /*
@@ -67,6 +117,7 @@ const deleteCategoryFromDB = async (id: string) => {
 //exporting all the service functions through categoryServices object
 export const categoryServices = {
   getAllCategoriesFromDB,
+  getCategoryCountFromDB,
   createCategoryIntoDB,
   updateCategoryIntoDB,
   deleteCategoryFromDB,
