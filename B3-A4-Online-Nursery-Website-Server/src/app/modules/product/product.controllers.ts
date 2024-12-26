@@ -46,6 +46,18 @@ const getProductCount = catchAsync(async (req, res) => {
   );
 });
 
+const getMinMaxProductPrice = catchAsync(async (req, res) => {
+  const response = await productServices.getMinMaxProductPriceFromDB();
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Data fetched successfully!',
+    response,
+  );
+});
+
 /*
 
 ----------------controller for inserting new product data in DB----------------*/
@@ -103,6 +115,7 @@ export const productControllers = {
   getAllProducts,
   getSingleProduct,
   getProductCount,
+  getMinMaxProductPrice,
   createProduct,
   updateProduct,
   deleteProduct,

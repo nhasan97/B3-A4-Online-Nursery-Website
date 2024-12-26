@@ -4,6 +4,9 @@ import { categoryRoutes } from '../modules/category/category.route';
 import { orderRoutes } from '../modules/order/order.route';
 import { authRoutes } from '../modules/auth/auth.route';
 import { userRoutes } from '../modules/user/user.routes';
+import { reviewRoutes } from '../modules/reviews/review.route';
+import { blogRoutes } from '../modules/blog/blog.route';
+import { messageRoutes } from '../modules/message/message.route';
 
 const router = express.Router();
 
@@ -27,6 +30,18 @@ const moduleRoutes = [
   {
     path: '/orders',
     routes: orderRoutes,
+  },
+  {
+    path: '/blogs',
+    routes: blogRoutes,
+  },
+  {
+    path: '/reviews',
+    routes: reviewRoutes,
+  },
+  {
+    path: '/messages',
+    routes: messageRoutes,
   },
 ];
 

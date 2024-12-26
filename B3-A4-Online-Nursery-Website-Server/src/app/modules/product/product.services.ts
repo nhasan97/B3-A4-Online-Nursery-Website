@@ -13,15 +13,43 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
   if (query?.searchTerm) {
     searchTerm = query?.searchTerm as string;
   }
+
   const searchQuery = productModel.find({
     $or: searchableFields.map((field) => ({
       [field]: { $regex: searchTerm, $options: 'i' },
     })),
   });
 
-  const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
+  // Handle the `category` query parameter for both single string and array
+  if (queryObject.category) {
+    const category = queryObject.category;
+    if (typeof category === 'string') {
+      queryObject.category = { $in: [category] }; // Convert single string to array
+    } else if (Array.isArray(category)) {
+      queryObject.category = { $in: category }; // Use array directly
+    }
+  }
+
+  if (queryObject.minProductPrice && queryObject.maxProductPrice) {
+    const min: number = parseFloat(queryObject.minProductPrice as string);
+    const max: number = parseFloat(queryObject.maxProductPrice as string);
+    queryObject.price = {
+      $gte: min,
+      $lte: max,
+    };
+  }
+
+  const excludeFields = [
+    'searchTerm',
+    'sort',
+    'limit',
+    'page',
+    'minProductPrice',
+    'maxProductPrice',
+  ];
 
   excludeFields.forEach((el) => delete queryObject[el]);
+
   const filterQuery = searchQuery.find({
     isDeleted: { $ne: true },
     ...queryObject,
@@ -60,6 +88,28 @@ const getProductCountFromDB = async () => {
   const response = await productModel.countDocuments({
     isDeleted: { $ne: true },
   });
+  return response;
+};
+
+const getMinMaxProductPriceFromDB = async () => {
+  const response = await productModel.aggregate([
+    { $match: { isDeleted: { $ne: true } } },
+    {
+      $group: {
+        _id: null, // Grouping everything together
+        minPrice: { $min: '$price' }, // Get the minimum price
+        maxPrice: { $max: '$price' }, // Get the maximum price
+      },
+    },
+    {
+      $project: {
+        _id: 0, // Exclude the _id field from the result
+        minPrice: 1,
+        maxPrice: 1,
+      },
+    },
+  ]);
+
   return response;
 };
 
@@ -123,6 +173,7 @@ export const productServices = {
   getAllProductsFromDB,
   getSingleProductFromDB,
   getProductCountFromDB,
+  getMinMaxProductPriceFromDB,
   createProductIntoDB,
   updateProductIntoDB,
   deleteProductFromDB,
