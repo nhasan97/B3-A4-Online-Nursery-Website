@@ -2,8 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "@/pages/Home";
 import Root from "@/components/layouts/rootLayout/Root";
 import DashboardLayout from "@/components/layouts/dashboardLayout/DashboardLayout";
-import ProductManagement from "@/pages/AdminPages/ProductManagement";
-import CategoryManagement from "@/pages/AdminPages/CategoryManagement";
 import ProductsPage from "@/pages/ProductsPage";
 import CartPage from "@/pages/CartPage";
 import SuccessPage from "@/pages/SuccessPage";
@@ -18,12 +16,9 @@ import AboutUsPage from "@/pages/AboutUsPage";
 import ContactUsPage from "@/pages/ContactUsPage";
 import WhishListPage from "@/pages/WhishListPage";
 import PlantCarePage from "@/pages/PlantCarePage";
-import AdminOverView from "@/pages/AdminPages/AdminOverView";
-import BlogManagement from "@/pages/AdminPages/BlogManagement";
-import OrderManagement from "@/pages/AdminPages/OrderManagement";
-import AllCustomers from "@/pages/AdminPages/AllCustomers";
-import ProfileManagement from "@/pages/AdminPages/ProfileManagement";
 import CheckoutPage from "@/pages/CheckoutPage";
+import adminDashboardPaths from "./admin.routes";
+import userDashboardPaths from "./user.routes";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +47,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/blog-details/:_id",
+        element: <BlogDetails />,
+      },
+      {
+        path: "/all-blogs/blog-details/:_id",
         element: <BlogDetails />,
       },
       {
@@ -98,73 +97,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin-dashboard",
-    element: <DashboardLayout />,
-    children: [
-      {
-        index: true,
-        element: (
-          <ProtectedRoute role="admin">
-            <AdminOverView />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "admin-overview",
-        element: (
-          <ProtectedRoute role="admin">
-            <AdminOverView />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "orders",
-        element: (
-          <ProtectedRoute role="admin">
-            <OrderManagement />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "all-customers",
-        element: (
-          <ProtectedRoute role="admin">
-            <AllCustomers />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "products",
-        element: (
-          <ProtectedRoute role="admin">
-            <ProductManagement />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "categories",
-        element: (
-          <ProtectedRoute role="admin">
-            <CategoryManagement />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "blogs",
-        element: (
-          <ProtectedRoute role="admin">
-            <BlogManagement />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "profile",
-        element: (
-          <ProtectedRoute role="admin">
-            <ProfileManagement />
-          </ProtectedRoute>
-        ),
-      },
-    ],
+    element: (
+      <ProtectedRoute role="admin">
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: adminDashboardPaths,
+  },
+  {
+    path: "/user-dashboard",
+    element: (
+      <ProtectedRoute role="user">
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: userDashboardPaths,
   },
   {
     path: "/login",
