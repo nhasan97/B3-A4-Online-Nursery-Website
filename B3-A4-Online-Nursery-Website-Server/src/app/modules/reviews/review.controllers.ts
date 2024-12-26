@@ -3,28 +3,25 @@ import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import { ReviewServices } from './review.services';
 
-const postReview = catchAsync(async (req, res) => {
-  const response = await ReviewServices.postReviewIntoDB(req.body);
+const postOverallReview = catchAsync(async (req, res) => {
+  const response = await ReviewServices.postOverallReviewIntoDB(req.body);
 
   sendResponse(res, httpStatus.OK, true, 'Review Added Successfully', response);
 });
 
-// const getRecipeReview = catchAsync(async (req, res) => {
-//   const response = await ReviewServices.getRecipeReviewFromDB(
-//     req.params.recipeID,
-//     req?.query?.userId as string | undefined,
-//   );
+const getOverallReviews = catchAsync(async (req, res) => {
+  const response = await ReviewServices.getOverallReviewsFromDB();
 
-//   sendResponse(
-//     res,
-//     httpStatus.OK,
-//     true,
-//     'Review retrieved successfully',
-//     response,
-//   );
-// });
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Review retrieved successfully',
+    response,
+  );
+});
 
 export const ReviewControllers = {
-  postReview,
-  //   getRecipeReview,
+  postOverallReview,
+  getOverallReviews,
 };

@@ -17,7 +17,8 @@ const postReviewValidationSchema = z.object({
       })
       .refine((val) => {
         return mongoose.Types.ObjectId.isValid(val);
-      }),
+      })
+      .optional(),
     rating: z.number({
       required_error: 'Rating is required',
     }),
