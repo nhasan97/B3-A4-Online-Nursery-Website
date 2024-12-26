@@ -12,6 +12,11 @@ import CustomToaster from "./components/shared/CustomToaster.tsx";
 import CategoryProvider from "./providers/CategoryProvider.tsx";
 import ProductProvider from "./providers/ProductProvider.tsx";
 import CartProvider from "./providers/CartProvider.tsx";
+import CategoryCrudFunctionsProvider from "./providers/CategoryCrudFunctionsProvider.tsx";
+import ProductCrudFunctionsProvider from "./providers/ProductCrudFunctionsProvider.tsx";
+import BlogCrudFunctionsProvider from "./providers/BlogCrudFunctionsProvider.tsx";
+import BlogProvider from "./providers/BlogProvider.tsx";
+import MessageProvider from "./providers/MessageProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -19,11 +24,21 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Provider store={store}>
         {/* <PersistGate loading={null} persistor={persistor}> */}
         <CategoryProvider>
-          <ProductProvider>
-            <CartProvider>
-              <RouterProvider router={router}></RouterProvider>
-            </CartProvider>
-          </ProductProvider>
+          <CategoryCrudFunctionsProvider>
+            <ProductProvider>
+              <ProductCrudFunctionsProvider>
+                <BlogProvider>
+                  <BlogCrudFunctionsProvider>
+                    <CartProvider>
+                      <MessageProvider>
+                        <RouterProvider router={router}></RouterProvider>
+                      </MessageProvider>
+                    </CartProvider>
+                  </BlogCrudFunctionsProvider>
+                </BlogProvider>
+              </ProductCrudFunctionsProvider>
+            </ProductProvider>
+          </CategoryCrudFunctionsProvider>
         </CategoryProvider>
         {/* </PersistGate> */}
       </Provider>
