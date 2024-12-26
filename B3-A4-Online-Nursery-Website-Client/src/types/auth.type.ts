@@ -16,6 +16,7 @@ export type TUserExtended = {
   role: string;
   address: string;
   imageUrl: string;
+  createdAt: number;
 };
 
 export type TUserExtendedProp = {

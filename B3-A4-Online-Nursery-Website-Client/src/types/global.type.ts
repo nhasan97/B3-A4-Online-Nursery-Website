@@ -18,3 +18,12 @@ export type ToastMethod = (
   msg: string,
   options?: { duration?: number }
 ) => void;
+
+export type TPaginationProp = {
+  loadingDataLength: boolean;
+  dataLength: number;
+  itemsPerPage: number;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
+};

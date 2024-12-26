@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent } from "react";
 
 export type TProduct = {
@@ -18,16 +19,29 @@ export type TProductContext = {
   products: TProduct[];
   loadingNumberOfProducts: boolean;
   numberOfProducts: number;
+  loadingMinMaxPrice: boolean;
+  defaultMin: number;
+  defaultMax: number;
+  minProductPrice: number;
+  maxProductPrice: number;
   searchTerm: string;
-  categoryToLoad: string;
+  categoryToLoad: string[];
+  setMinProductPrice: React.Dispatch<any>;
+  setMaxProductPrice: React.Dispatch<any>;
   sort: string;
   itemsPerPage: number;
   currentPage: number;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  setCategoryToLoad: React.Dispatch<React.SetStateAction<string>>;
+  setCategoryToLoad: React.Dispatch<React.SetStateAction<string[]>>;
   setSort: React.Dispatch<React.SetStateAction<string>>;
   setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+
+  resetBrower: () => void;
+  resetPagination: () => void;
+};
+
+export type TProductCrudContext = {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
@@ -38,8 +52,6 @@ export type TProductContext = {
   handleAddProduct: (e: FormEvent) => Promise<void>;
   handleEditProduct: (e: FormEvent, passedProduct: TProduct) => Promise<void>;
   handleDeleteProduct: (_id: string) => void;
-  resetBrower: () => void;
-  resetPagination: () => void;
 };
 
 export type TProductManagementProp = {

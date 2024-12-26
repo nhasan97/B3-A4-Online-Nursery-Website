@@ -18,12 +18,30 @@ export type TCategoryProp = { category: TCategory };
 // type DeleteCategoryType = ReturnType<UseDeleteCategoryMutationType>[0];
 
 export type TCategoryContext = {
+  loadingCategoryCount: boolean;
+  totalCategory: number;
+
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  sort: string;
+  setSort: React.Dispatch<React.SetStateAction<string>>;
+  itemsPerPage: number;
+  setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+
   loadingCategories: boolean;
   categories: TCategory[];
-  // deleteCategory: DeleteCategoryType;
+
+  resetBrower: () => void;
+  resetPagination: () => void;
+};
+
+export type TCategoryCrudContext = {
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setImageFile: React.Dispatch<React.SetStateAction<File | null>>;
+
   handleAddCategory: (e: FormEvent) => Promise<void>;
   handleEditCategory: (e: FormEvent, category: TCategory) => Promise<void>;
   handleDeleteCategory: (_id: string) => void;
