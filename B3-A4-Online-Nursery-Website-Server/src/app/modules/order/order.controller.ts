@@ -37,10 +37,25 @@ const getAllOrdersCount = catchAsync(async (req, res) => {
 });
 /*
 
+--------------------------controller for getting all orders count--------------------------*/
+const getOrderCountByStatus = catchAsync(async (req, res) => {
+  const response = await orderServices.getOrderCountByStatusFromDB();
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Data fetched successfully!',
+    response,
+  );
+});
+
+/*
+
 ----------------controller for getting logged in users orders from DB----------------*/
 const getLoggedInUsersOrders = catchAsync(async (req, res) => {
   const response = await orderServices.getLoggedInUsersOrdersFromDB(
-    req?.params?.logggedInUserEmail,
+    req?.params?.loggedInUserEmail,
     req?.query,
   );
 
@@ -62,8 +77,22 @@ const getLoggedInUsersOrders = catchAsync(async (req, res) => {
 --------------------------controller for getting logged in users orders count--------------------------*/
 const getLoggedInUsersOrdersCount = catchAsync(async (req, res) => {
   const response = await orderServices.getLoggedInUsersOrdersCountFromDB(
-    req.params.logggedInUserEmail,
+    req.params.loggedInUserEmail,
   );
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Data fetched successfully!',
+    response,
+  );
+});
+/*
+
+--------------------------controller for getting total sales--------------------------*/
+const getTotalSale = catchAsync(async (req, res) => {
+  const response = await orderServices.getTotalSalesFromDB();
 
   sendResponse(
     res,
@@ -87,6 +116,7 @@ const createOrder = catchAsync(async (req, res) => {
 const getPaymentIntent = catchAsync(async (req, res) => {
   const { price } = req.body;
 
+  alert('wer');
   const response = await orderServices.getPaymentIntentFromStirpe(price);
 
   //sending response
@@ -112,8 +142,10 @@ const updateOrderStatus = catchAsync(async (req, res) => {
 export const orderControllers = {
   getAllOrders,
   getAllOrdersCount,
+  getOrderCountByStatus,
   getLoggedInUsersOrders,
   getLoggedInUsersOrdersCount,
+  getTotalSale,
   createOrder,
   getPaymentIntent,
   updateOrderStatus,

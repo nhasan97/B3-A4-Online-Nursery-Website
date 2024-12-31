@@ -61,6 +61,24 @@ const getAllOrdersCountFromDB = async () => {
 };
 /*
 
+----------------service function for fetching all users count data from DB----------------*/
+const getOrderCountByStatusFromDB = async () => {
+  const response = await orderModel.aggregate([
+    {
+      $match: { isDeleted: { $ne: true } },
+    },
+    {
+      $group: {
+        _id: '$status',
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  return response;
+};
+/*
+
 ----------------service function for fetching all categories data from DB----------------*/
 const getLoggedInUsersOrdersFromDB = async (
   loggedInUserEmail: string,
@@ -124,6 +142,29 @@ const getLoggedInUsersOrdersCountFromDB = async (loggedInUserEmail: string) => {
 /*
 
 ----------------service function for inserting Order data in DB----------------*/
+const getTotalSalesFromDB = async () => {
+  const response = await orderModel.aggregate([
+    {
+      $match: { isDeleted: { $ne: true } },
+    },
+    {
+      $group: {
+        _id: null,
+        totalSales: { $sum: '$paid' },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        totalSales: 1,
+      },
+    },
+  ]);
+  return response; // Return totalSales or 0 if no data
+};
+/*
+
+----------------service function for inserting Order data in DB----------------*/
 const createOrderIntoDB = async (orderData: TOrder) => {
   const response = await orderModel.create(orderData);
 
@@ -142,8 +183,6 @@ const getPaymentIntentFromStirpe = async (price: number) => {
       enabled: true,
     },
   });
-
-  console.log(paymentIntent);
 
   return {
     clientSecret: paymentIntent.client_secret,
@@ -166,8 +205,10 @@ const updateOrderStatusIntoDB = async (id: string, status: string) => {
 export const orderServices = {
   getAllOrdersFromDB,
   getAllOrdersCountFromDB,
+  getOrderCountByStatusFromDB,
   getLoggedInUsersOrdersFromDB,
   getLoggedInUsersOrdersCountFromDB,
+  getTotalSalesFromDB,
   createOrderIntoDB,
   getPaymentIntentFromStirpe,
   updateOrderStatusIntoDB,

@@ -12,14 +12,21 @@ router.get('/get-all-orders', orderControllers.getAllOrders);
 router.get('/get-all-orders-count', orderControllers.getAllOrdersCount);
 
 router.get(
-  '/get-loggedIn-Users-orders/:logggedInUserEmail',
+  '/get-orders-count-by-status',
+  orderControllers.getOrderCountByStatus,
+);
+
+router.get(
+  '/get-loggedIn-Users-orders/:loggedInUserEmail',
   orderControllers.getLoggedInUsersOrders,
 );
 
 router.get(
-  '/get-loggedIn-Users-orders-count/:logggedInUserEmail',
+  '/get-loggedIn-Users-orders-count/:loggedInUserEmail',
   orderControllers.getLoggedInUsersOrdersCount,
 );
+
+router.get('/get-total-sale', orderControllers.getTotalSale);
 
 //------------route for inserting new order data in DB------------
 router.post(
@@ -35,5 +42,6 @@ router.patch(
 );
 
 router.post('/create-payment-intent', orderControllers.getPaymentIntent);
+
 //exporting routes
 export const orderRoutes = router;
