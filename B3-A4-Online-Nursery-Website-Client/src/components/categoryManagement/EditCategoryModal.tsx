@@ -11,12 +11,12 @@ import { MdEditDocument } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { TCategoryContext, TCategoryProp } from "@/types/category.type";
-import useCategoryContext from "@/hooks/useCategoryContext";
+import { TCategoryCrudContext, TCategoryProp } from "@/types/category.type";
+import useCategoryCrudContext from "@/hooks/useCategoryCrudContext";
 
 const EditCategoryModal = ({ category }: TCategoryProp) => {
   const { setCategory, setDescription, setImageFile, handleEditCategory } =
-    useCategoryContext() as TCategoryContext;
+    useCategoryCrudContext() as TCategoryCrudContext;
 
   return (
     <Dialog>

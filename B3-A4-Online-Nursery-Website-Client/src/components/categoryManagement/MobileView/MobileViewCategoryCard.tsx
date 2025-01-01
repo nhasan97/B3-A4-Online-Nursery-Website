@@ -1,12 +1,13 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
-import { TCategoryContext, TCategoryProp } from "@/types/category.type";
+import { TCategoryCrudContext, TCategoryProp } from "@/types/category.type";
 import DetailsCategoryModal from "../DetailsCategoryModal";
 import EditCategoryModal from "../EditCategoryModal";
-import useCategoryContext from "@/hooks/useCategoryContext";
+import useCategoryCrudContext from "@/hooks/useCategoryCrudContext";
 
 const MobileViewCategoryCard = ({ category }: TCategoryProp) => {
-  const { handleDeleteCategory } = useCategoryContext() as TCategoryContext;
+  const { handleDeleteCategory } =
+    useCategoryCrudContext() as TCategoryCrudContext;
 
   return (
     <div className="h-fit  bg-white rounded-md shadow-md">

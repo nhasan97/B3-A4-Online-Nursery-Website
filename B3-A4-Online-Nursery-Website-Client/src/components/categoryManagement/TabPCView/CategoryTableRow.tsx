@@ -1,13 +1,13 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
-import { TCategoryContext, TCategoryProp } from "@/types/category.type";
+import { TCategoryCrudContext, TCategoryProp } from "@/types/category.type";
 import EditCategoryModal from "../EditCategoryModal";
 import DetailsCategoryModal from "../DetailsCategoryModal";
-import useCategoryContext from "@/hooks/useCategoryContext";
+import useCategoryCrudContext from "@/hooks/useCategoryCrudContext";
 
 const CategoryTableRow = ({ category }: TCategoryProp) => {
-  const { handleDeleteCategory } = useCategoryContext() as TCategoryContext;
-
+  const { handleDeleteCategory } =
+    useCategoryCrudContext() as TCategoryCrudContext;
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">

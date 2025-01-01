@@ -11,17 +11,17 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoIosSave } from "react-icons/io";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { TCategoryContext } from "@/types/category.type";
-import useCategoryContext from "@/hooks/useCategoryContext";
+import { TCategoryCrudContext } from "@/types/category.type";
+import useCategoryCrudContext from "@/hooks/useCategoryCrudContext";
 
 const AddCategoryModal = () => {
-  const { setCategory, setDescription, setImageFile, handleAddCategory } =
-    useCategoryContext() as TCategoryContext;
+  const { handleAddCategory, setCategory, setDescription, setImageFile } =
+    useCategoryCrudContext() as TCategoryCrudContext;
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-[#5D7E5F] text-lg font-semibold my-5 space-x-2 rounded-full">
+        <Button className="bg-[#5D7E5F] text-base md:text-lg font-semibold space-x-2 rounded-full">
           <FaCirclePlus /> <p>Category</p>
         </Button>
       </DialogTrigger>
