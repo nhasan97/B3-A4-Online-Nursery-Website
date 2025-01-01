@@ -15,7 +15,7 @@ const MobileViewOrderCard = ({ order }: { order: IOrder }) => {
         <p className="text-sm">{timeStampToDateConverter(estimatedDelivery)}</p>
       </div>
 
-      <div className="flex-1 flex justify-center items-center text-center bg-[#98b2992f] rounded-l-full">
+      <div className="flex-1 flex justify-evenly items-center text-center bg-[#98b2992f] rounded-full">
         <MobileViewOrderDetailsModal
           key={order?._id}
           order={order}

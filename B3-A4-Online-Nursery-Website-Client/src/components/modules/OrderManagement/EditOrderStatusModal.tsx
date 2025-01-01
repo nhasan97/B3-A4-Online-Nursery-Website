@@ -43,7 +43,7 @@ const EditOrderStatusModal = ({
     };
 
     const res = await editOrderStatus(payload).unwrap();
-    toast(res);
+    toast.success(res.message);
   });
 
   return (
@@ -55,7 +55,9 @@ const EditOrderStatusModal = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-[#757575]">Edit Product</DialogTitle>
+          <DialogTitle className="text-[#757575]">
+            Edit Order Status
+          </DialogTitle>
         </DialogHeader>
 
         <form

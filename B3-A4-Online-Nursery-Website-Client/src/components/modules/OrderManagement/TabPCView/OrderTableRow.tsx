@@ -25,7 +25,9 @@ const OrderTableRow = ({ order }: { order: IOrder }) => {
 
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
-      <td className="flex-1 justify-between items-center">{orderId}</td>
+      <td className="flex-1 justify-between items-center font-semibold text-[#5D7E5F]">
+        {orderId}
+      </td>
 
       <td className="flex-1 font-semibold text-[#5D7E5F]">
         <CustomerDetailsModal
@@ -52,7 +54,7 @@ const OrderTableRow = ({ order }: { order: IOrder }) => {
       <td className="flex-1">{timeStampToDateConverter(estimatedDelivery)}</td>
 
       <td className="flex-1">
-        <div className="flex justify-center items-center">
+        <div className="justify-center xl:justify-end items-center">
           <p>{status}</p>
           <EditOrderStatusModal
             passedOrderID={_id as string}
