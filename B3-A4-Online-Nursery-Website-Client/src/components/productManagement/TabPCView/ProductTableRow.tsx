@@ -1,12 +1,13 @@
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
 import EditProductModal from "../EditProductModal";
-import { TProductContext, TProductProp } from "@/types/product.type";
+import { TProductCrudContext, TProductProp } from "@/types/product.type";
 import DetailsProductModal from "../DetailsProductModal";
-import useProductContext from "@/hooks/useProductContext";
+import useProductCrudContext from "@/hooks/useProductCrudContext";
 
 const ProductTableRow = ({ product }: TProductProp) => {
-  const { handleDeleteProduct } = useProductContext() as TProductContext;
+  const { handleDeleteProduct } =
+    useProductCrudContext() as TProductCrudContext;
 
   return (
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">

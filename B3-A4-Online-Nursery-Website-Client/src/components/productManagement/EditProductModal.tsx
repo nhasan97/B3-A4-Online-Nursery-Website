@@ -9,7 +9,7 @@ import {
 import { Button } from "../ui/button";
 import { MdEditDocument } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
-import { TProductContext, TProductProp } from "@/types/product.type";
+import { TProductCrudContext, TProductProp } from "@/types/product.type";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -24,7 +24,7 @@ import Loading from "../shared/Loading";
 import NoData from "../shared/NoData";
 import { TCategory, TCategoryContext } from "@/types/category.type";
 import useCategoryContext from "@/hooks/useCategoryContext";
-import useProductContext from "@/hooks/useProductContext";
+import useProductCrudContext from "@/hooks/useProductCrudContext";
 
 const EditProductModal = ({ product }: TProductProp) => {
   const { loadingCategories, categories } =
@@ -39,7 +39,7 @@ const EditProductModal = ({ product }: TProductProp) => {
     setStock,
     setImageFile,
     handleEditProduct,
-  } = useProductContext() as TProductContext;
+  } = useProductCrudContext() as TProductCrudContext;
 
   return (
     <Dialog>

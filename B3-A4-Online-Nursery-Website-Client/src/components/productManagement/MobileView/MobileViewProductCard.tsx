@@ -1,12 +1,13 @@
-import { TProductContext, TProductProp } from "@/types/product.type";
+import { TProductCrudContext, TProductProp } from "@/types/product.type";
 import EditProductModal from "../EditProductModal";
 import { Button } from "../../ui/button";
 import { MdDelete } from "react-icons/md";
 import DetailsProductModal from "../DetailsProductModal";
-import useProductContext from "@/hooks/useProductContext";
+import useProductCrudContext from "@/hooks/useProductCrudContext";
 
 const MobileViewProductCard = ({ product }: TProductProp) => {
-  const { handleDeleteProduct } = useProductContext() as TProductContext;
+  const { handleDeleteProduct } =
+    useProductCrudContext() as TProductCrudContext;
 
   return (
     <div className="h-fit  bg-white rounded-md shadow-md">

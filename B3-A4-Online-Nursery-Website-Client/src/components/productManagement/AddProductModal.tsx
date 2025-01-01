@@ -9,7 +9,7 @@ import {
 import { Button } from "../ui/button";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoIosSave } from "react-icons/io";
-import { TProductContext } from "@/types/product.type";
+import { TProductCrudContext } from "@/types/product.type";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -24,7 +24,7 @@ import Loading from "../shared/Loading";
 import NoData from "../shared/NoData";
 import { TCategory, TCategoryContext } from "@/types/category.type";
 import useCategoryContext from "@/hooks/useCategoryContext";
-import useProductContext from "@/hooks/useProductContext";
+import useProductCrudContext from "@/hooks/useProductCrudContext";
 
 const AddProductModal = () => {
   const { loadingCategories, categories } =
@@ -39,12 +39,12 @@ const AddProductModal = () => {
     setStock,
     setImageFile,
     handleAddProduct,
-  } = useProductContext() as TProductContext;
+  } = useProductCrudContext() as TProductCrudContext;
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-[#5D7E5F] text-lg font-semibold my-5 space-x-2 rounded-full">
+        <Button className="bg-[#5D7E5F] text-base md:text-lg font-semibold space-x-2 rounded-full">
           <FaCirclePlus /> <p>Product</p>
         </Button>
       </DialogTrigger>

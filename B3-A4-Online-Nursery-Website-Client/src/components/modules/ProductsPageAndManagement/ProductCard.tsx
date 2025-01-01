@@ -9,7 +9,7 @@ const ProductCard = ({ product }: TProductProp) => {
   const { handleAddToCart } = useCartContext() as TCartContext;
 
   return (
-    <div className="w-full p-1 space-y-3 rounded-3xl border group">
+    <div className="w-full h-fit bg-white p-1 space-y-3 rounded-3xl border group">
       <div className="bg-[#98b2992f] rounded-[20px] h-[300px] overflow-hidden">
         <img
           src={product?.image}
@@ -29,8 +29,7 @@ const ProductCard = ({ product }: TProductProp) => {
           </Link>
           <Button
             className="w-full bg-[#5D7E5F] text-lg rounded-none"
-
-            // onClick={}
+            // onClick={() => handleAddToCart(product)}
           >
             <i className="fa-solid fa-heart"></i>
           </Button>
@@ -38,7 +37,7 @@ const ProductCard = ({ product }: TProductProp) => {
           <Button
             className="w-full bg-[#5D7E5F] text-lg rounded-r-[20px] rounded-l-none"
             disabled={product?.stock <= 0}
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCart(1, product)}
           >
             <i className="fa-solid fa-cart-shopping"></i>
           </Button>
@@ -55,31 +54,6 @@ const ProductCard = ({ product }: TProductProp) => {
           </h5>
         </div>
       </div>
-
-      {/* <div className="flex justify-evenly items-center gap-1 translate-y-ful group-hover:translate-y-0">
-        <Button
-          className="w-full bg-[#5D7E5F] text-lg rounded-l-[20px] rounded-r-none"
-          disabled={product?.stock <= 0}
-          // onClick={}
-        >
-          <i className="fa-solid fa-eye"></i>
-        </Button>
-        <Button
-          className="w-full bg-[#5D7E5F] text-lg rounded-none"
-          disabled={product?.stock <= 0}
-          // onClick={}
-        >
-          <i className="fa-solid fa-heart"></i>
-        </Button>
-
-        <Button
-          className="w-full bg-[#5D7E5F] text-lg rounded-r-[20px] rounded-l-none"
-          disabled={product?.stock <= 0}
-          onClick={() => handleAddToCart(product)}
-        >
-          <i className="fa-solid fa-cart-shopping"></i>
-        </Button>
-      </div> */}
     </div>
   );
 };
