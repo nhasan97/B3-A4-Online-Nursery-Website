@@ -11,7 +11,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-const MessagesOverview = () => {
+const MessagesOverview = ({ caller }: { caller: string }) => {
   const { token } = useAppSelector((currentState) => currentState.auth);
 
   let user;
@@ -24,7 +24,8 @@ const MessagesOverview = () => {
       searchTerm: "",
       sort: "-createdAt",
       currentPage: 0,
-      itemsPerPage: 4,
+      itemsPerPage: 3,
+      messageType: "received",
       userEmail: (user as TUser)?.email || "",
     });
 
@@ -37,7 +38,7 @@ const MessagesOverview = () => {
       <table className="w-full">
         <thead className="w-full">
           <tr className="w-full flex justify-between items-center text-left text-[#757575] p-5 border-b">
-            <th className="w-1/2">Customer</th>
+            <th className="w-1/2">Sender</th>
             <th className="w-1/4">Message</th>
             <th className="w-1/4">Sent</th>
           </tr>
@@ -71,8 +72,8 @@ const MessagesOverview = () => {
                 </td>
               </tr>
             ))
-          ) : loadedMessages.data?.receivedMessages?.length > 0 ? (
-            loadedMessages.data?.receivedMessages?.map((message: TMessage) => (
+          ) : loadedMessages.data?.limitQuery?.length > 0 ? (
+            loadedMessages.data?.limitQuery?.map((message: TMessage) => (
               <tr className="w-full flex justify-between items-center text-[#808080] text-left p-5 border-b">
                 <td className="w-1/2 flex flex-col justify-center items-center gap-2">
                   <div className="w-full flex justify-start items-center gap-3">
@@ -91,7 +92,10 @@ const MessagesOverview = () => {
                 </td>
 
                 <td className="w-1/4">
-                  <MessageDetailsModal message={message} />
+                  <MessageDetailsModal
+                    message={message}
+                    caller="admin-received"
+                  />
                 </td>
 
                 <td className="w-1/4">
@@ -105,13 +109,15 @@ const MessagesOverview = () => {
         </tbody>
       </table>
 
-      <Button
-        className="group bg-white text-[#5D7E5F] text-lg rounded-full my-6 mx-auto hover:bg-transparent"
-        onClick={() => navigate("/admin-dashboard/messages")}
-      >
-        View All Messages{" "}
-        <FaArrowRightLong className="ml-2 group-hover:translate-x-2 transition-all" />
-      </Button>
+      {caller === "admin-received" && (
+        <Button
+          className="group bg-white text-[#5D7E5F] text-lg rounded-full my-6 mx-auto hover:bg-transparent"
+          onClick={() => navigate("/admin-dashboard/messages")}
+        >
+          View All Messages{" "}
+          <FaArrowRightLong className="ml-2 group-hover:translate-x-2 transition-all" />
+        </Button>
+      )}
     </div>
   );
 };

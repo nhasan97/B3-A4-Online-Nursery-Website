@@ -1,13 +1,23 @@
 import orderApi from "@/redux/api/orderApi";
+import { useAppSelector } from "@/redux/hooks";
+import { TUser } from "@/types/auth.type";
+import { verifyToken } from "@/utils/verifyToken";
 
 const OrderOverview = () => {
+  const { token } = useAppSelector((currentState) => currentState.auth);
+
+  let user;
+  if (token) {
+    user = verifyToken(token);
+  }
+
   const { isLoading: loadingOrderCount, data: loadedDataCount } =
-    orderApi.useGetAllOrdersCountQuery(undefined);
+    orderApi.useGetAllOrdersCountQuery((user as TUser).id);
 
   const {
     isLoading: loadingOrderCountByStatus,
     data: loadedOrderCountByStatus,
-  } = orderApi.useGetOrderCountByStatusQuery(undefined);
+  } = orderApi.useGetOrderCountByStatusQuery((user as TUser).id);
 
   const overviewData = [
     {
