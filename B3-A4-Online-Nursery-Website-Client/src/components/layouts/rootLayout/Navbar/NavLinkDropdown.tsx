@@ -58,7 +58,7 @@ const NavLinkDropdown = () => {
 
         <DropdownMenuRadioGroup>
           {NavbarLinks.map((link) => (
-            <DropdownMenuRadioItem value="">
+            <DropdownMenuRadioItem key={link.name} value="">
               <NavLink to={link.path}>{link.name}</NavLink>
             </DropdownMenuRadioItem>
           ))}
@@ -69,15 +69,6 @@ const NavLinkDropdown = () => {
               // className="p-2 rounded-full transition duration-300 ease-in-out"
             >
               Cart
-            </NavLink>
-          </DropdownMenuRadioItem>
-
-          <DropdownMenuRadioItem value="">
-            <NavLink
-              to="/whishlist-page"
-              // className="p-2 rounded-full transition duration-300 ease-in-out"
-            >
-              Whish List
             </NavLink>
           </DropdownMenuRadioItem>
 

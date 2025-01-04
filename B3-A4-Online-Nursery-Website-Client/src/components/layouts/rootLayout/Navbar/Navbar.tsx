@@ -41,6 +41,7 @@ const Navbar = () => {
           <div className="nv hidden lg:flex justify-center items-center gap-2 text-[#808080]">
             {NavbarLinks.map((link) => (
               <NavLink
+                key={link.name}
                 to={link.path}
                 className="p-2 rounded-full hover:bg-[#98B299] transition duration-300 ease-in-out"
               >
@@ -72,13 +73,6 @@ const Navbar = () => {
               onClick={() => navigate("/cart-page")}
             >
               <i className="fa-solid fa-cart-shopping" />
-            </Button>
-
-            <Button
-              className="bg-transparent hover:bg-transparent text-lg text-[#808080] hover:text-[#98B299]"
-              onClick={() => navigate("/whishlist-page")}
-            >
-              <i className="fa-solid fa-heart" />
             </Button>
 
             {(user as TUser)?.email ? (
