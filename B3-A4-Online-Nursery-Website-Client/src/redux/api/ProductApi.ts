@@ -76,6 +76,19 @@ const productApi = baseApi.injectEndpoints({
     }),
     /*
 
+    ------------------------endpoint for editing order status in DB------------------------*/
+    updateProductStock: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `/orders/edit-product-stock/${payload._id}`,
+          method: "PATCH",
+          body: { status: payload.status },
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
+    /*
+
     ------------------------endpoint for adding product in DB------------------------*/
     addProduct: builder.mutation({
       query: (productInfo) => {

@@ -5,7 +5,14 @@ const messageApi = baseApi.injectEndpoints({
     /*
     ------------------------endpoint for getting messages from DB------------------------*/
     getMessages: builder.query({
-      query: ({ searchTerm, sort, currentPage, itemsPerPage, userEmail }) => {
+      query: ({
+        searchTerm,
+        sort,
+        currentPage,
+        itemsPerPage,
+        messageType,
+        userEmail,
+      }) => {
         const params = new URLSearchParams();
         if (searchTerm) {
           params.append("searchTerm", searchTerm);
@@ -19,20 +26,15 @@ const messageApi = baseApi.injectEndpoints({
         if (itemsPerPage) {
           params.append("limit", itemsPerPage);
         }
+        if (messageType) {
+          params.append("messageType", messageType);
+        }
 
         return {
-          url: `/messages/get-all-messages/${userEmail}`,
+          url: `/messages/get-user-messages/${userEmail}`,
           method: "GET",
           params: params,
         };
-      },
-      providesTags: ["message"],
-    }),
-    /*
-    ------------------------endpoint for getting messages count from DB------------------------*/
-    getMessageCount: builder.query({
-      query: () => {
-        return { url: "/messages/get-all-messages-count", method: "GET" };
       },
       providesTags: ["message"],
     }),
