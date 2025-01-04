@@ -18,6 +18,12 @@ const UserSideBarMenu = () => {
       ></SidebarMenuItem>
 
       <SidebarMenuItem
+        icon={<i className="fa-solid fa-heart" />}
+        menuText="Wishlist"
+        route="/user-dashboard/whishlist-page"
+      ></SidebarMenuItem>
+
+      <SidebarMenuItem
         icon={<i className="fa-solid fa-arrow-left"></i>}
         menuText="Back to Site"
         route="/"

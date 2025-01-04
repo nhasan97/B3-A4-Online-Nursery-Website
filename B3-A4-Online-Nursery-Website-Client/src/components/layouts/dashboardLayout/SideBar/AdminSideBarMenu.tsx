@@ -3,7 +3,8 @@ import SidebarMenuItem from "./SidebarMenuItem";
 import { BiSolidCategory } from "react-icons/bi";
 import { TbBrandBooking } from "react-icons/tb";
 import { IoIosPeople } from "react-icons/io";
-import { FaChartPie, FaBlog } from "react-icons/fa";
+import { FaBlog, FaChartPie } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const AdminSideBarMenu = () => {
   return (
@@ -18,12 +19,6 @@ const AdminSideBarMenu = () => {
         icon={<TbBrandBooking className="text-xl" />}
         menuText="Orders"
         route="/admin-dashboard/orders"
-      ></SidebarMenuItem>
-
-      <SidebarMenuItem
-        icon={<IoIosPeople className="text-xl" />}
-        menuText="Customers"
-        route="/admin-dashboard/all-customers"
       ></SidebarMenuItem>
 
       <SidebarMenuItem
@@ -42,6 +37,18 @@ const AdminSideBarMenu = () => {
         icon={<FaBlog className="text-xl" />}
         menuText="Blogs"
         route="/admin-dashboard/blogs"
+      ></SidebarMenuItem>
+
+      <SidebarMenuItem
+        icon={<IoIosPeople className="text-xl" />}
+        menuText="Customers"
+        route="/admin-dashboard/all-customers"
+      ></SidebarMenuItem>
+
+      <SidebarMenuItem
+        icon={<MdEmail className="text-xl" />}
+        menuText="Messages"
+        route="/admin-dashboard/messages"
       ></SidebarMenuItem>
 
       <SidebarMenuItem
