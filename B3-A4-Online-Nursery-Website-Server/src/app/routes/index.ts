@@ -7,6 +7,7 @@ import { userRoutes } from '../modules/user/user.routes';
 import { reviewRoutes } from '../modules/reviews/review.route';
 import { blogRoutes } from '../modules/blog/blog.route';
 import { messageRoutes } from '../modules/message/message.route';
+import { wishlistRoutes } from '../modules/wishlist/wishlist.route';
 
 const router = express.Router();
 
@@ -42,6 +43,10 @@ const moduleRoutes = [
   {
     path: '/messages',
     routes: messageRoutes,
+  },
+  {
+    path: '/wishlist',
+    routes: wishlistRoutes,
   },
 ];
 
