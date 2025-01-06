@@ -18,7 +18,9 @@ export type TState = {
 export type TCartContext = {
   itemsInCart: TCartItem[];
   total: number;
-  handleAddToCart: (product: TProduct) => void;
+  desiredQty: number;
+  handleEditQtyInProductDetails: (passedQty: number, product: TProduct) => void;
+  handleAddToCart: (desiredQty: number, product: TProduct) => void;
   handleEditQty: (editedQty: number, item: TCartItem) => void;
   handleDeleteCartItem: (_id: string) => void;
 };
