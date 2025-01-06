@@ -28,7 +28,26 @@ const ProductTableRow = ({ product }: TProductProp) => {
 
       <td className="flex-1">{product?.price}</td>
 
-      <td className="flex-1">{product?.stock}</td>
+      <td className="flex-1">
+        {product?.stock}
+
+        {product?.stock > 10 && (
+          <div className="w-[60%] h-2 mx-auto bg-green-400 text-green-700 rounded-full"></div>
+        )}
+        {product?.stock > 3 && product?.stock < 10 && (
+          <div className="w-[60%] h-2 mx-auto bg-orange-100 text-orange-600 rounded-full">
+            <div className="w-1/2 h-2 bg-orange-400 text-orange-600 rounded-full"></div>
+          </div>
+        )}
+        {product?.stock > 0 && product?.stock <= 3 && (
+          <div className="w-[60%] h-2 mx-auto bg-red-100 text-red-600 rounded-full">
+            <div className="w-1/4 h-2 bg-red-400 text-red-600 rounded-full"></div>
+          </div>
+        )}
+        {product?.stock <= 0 && (
+          <div className="w-[60%] h-2 mx-auto bg-red-100 text-red-600 rounded-full"></div>
+        )}
+      </td>
 
       <td className="flex-1">
         <EditProductModal product={product}></EditProductModal>
