@@ -81,12 +81,10 @@ const Register = () => {
     }
   };
   return (
-    <div className="h-screen flex justify-center items-center bg-[#98b29950] bg-[url(../public/palm2.png)] bg-no-repeat bg-right-top bg-auto">
+    <div className="h-screen flex justify-center items-center bg-[#98b29950] bg-[url(../public/loginregbg.png)] bg-no-repeat bg-right-top bg-cover">
       <Container>
-        {/* pc view */}
-
-        <div className="bg-[#ffffff] hidden lg:flex rounded-lg backdrop-blur-sm shadow-xl">
-          <div className="flex flex-col justify-between pt-5 sm:pt-10">
+        <div className="bg-[#ffffff] flex rounded-lg backdrop-blur-sm shadow-xl">
+          <div className="hidden lg:flex flex-col justify-between pt-5 sm:pt-10">
             <p className="mb-4 text-[#5D7E5F] text-3xl text-center font-bold">
               Welcome<br></br> Let&lsquo;s Go Green with Plants!
             </p>
@@ -99,7 +97,8 @@ const Register = () => {
               />
             </div>
           </div>
-          <div className="w-full p-5 sm:p-10 space-y-6">
+
+          <div className="w-full p-5 sm:p-10 lg:space-y-6">
             <div>
               <Button
                 className="bg-transparent hover:bg-transparent text-lg text-[#5D7E5F] p-0"
@@ -245,155 +244,6 @@ const Register = () => {
                 </Link>
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* tab mobile view */}
-        <div className="block lg:hidden w-full bg-[#ffffff] p-5 sm:p-10 space-y-6 rounded-lg backdrop-blur-sm">
-          <div>
-            <Button
-              className="bg-transparent hover:bg-transparent text-lg text-[#5D7E5F] p-0"
-              onClick={() => {
-                navigate(-1);
-              }}
-            >
-              <i className="fa-solid fa-arrow-left" />
-            </Button>
-          </div>
-
-          <div>
-            <h3 className="my-2 text-2xl md:text-3xl lg:text-4xl font-bold">
-              Register
-            </h3>
-            <p className="mb-4 text-lg">
-              Growing Green, Delivered to Your Doorstep!
-            </p>
-          </div>
-
-          <form
-            className="w-full flex flex-col gap-6 text-left"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="w-full flex flex-col gap-6">
-                <Input
-                  type="text"
-                  {...register("name", { required: true })}
-                  placeholder="Name"
-                  required
-                  className="input w-full"
-                  // defaultValue="Programming Hero8"
-                />
-
-                <Input
-                  type="email"
-                  {...register("email", { required: true })}
-                  placeholder="Email"
-                  required
-                  className="input w-full"
-                  // defaultValue="web@programming-hero8.com"
-                />
-
-                <div className="relative">
-                  <Input
-                    type={showPass ? "text" : "password"}
-                    {...register("password", {
-                      required: true,
-                      minLength: 6,
-                      maxLength: 20,
-                      pattern:
-                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                    })}
-                    placeholder="Password"
-                    required
-                    className="input w-full capitalize"
-                    // defaultValue="123456Aa@"
-                  />
-                  <span
-                    className="h-full absolute right-2 top-0 flex justify-center items-center"
-                    onClick={() => setShowPass(!showPass)}
-                  >
-                    {showPass ? (
-                      <i className="fa-solid fa-eye-slash"></i>
-                    ) : (
-                      <i className="fa-solid fa-eye"></i>
-                    )}
-                  </span>
-
-                  {errors.password?.type === "minLength" && (
-                    <p className="text-red-800">
-                      Password has to be at least 6 characters long
-                    </p>
-                  )}
-                  {errors.password?.type === "pattern" && (
-                    <p className="text-red-800">
-                      Password must have at least 1 uppercase letter, 1
-                      lowercase letter, 1 digit & 1 special character
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="w-full flex flex-col gap-6">
-                <div>
-                  <Input
-                    type="number"
-                    {...register("phone", {
-                      required: true,
-                      minLength: 11,
-                      maxLength: 11,
-                    })}
-                    placeholder="Cell"
-                    required
-                    className="input w-full"
-                    // defaultValue="01322901105"
-                  />
-                  {errors.phone?.type === "minLength" && (
-                    <p className="text-red-800">
-                      Cell has to be 11 characters long
-                    </p>
-                  )}
-                  {errors.phone?.type === "maxLength" && (
-                    <p className="text-red-800">
-                      Cell has to be 11 characters long
-                    </p>
-                  )}
-                </div>
-                <Input
-                  type="text"
-                  {...register("address", { required: true })}
-                  placeholder="Address"
-                  required
-                  className="input w-full"
-                  //defaultValue="Level-4, 34, Awal Centre, Banani, Dhaka"
-                />
-
-                <div className="flex w-full max-w-sm items-center gap-1.5">
-                  <Label htmlFor="picture">DP</Label>
-                  <Input
-                    type="file"
-                    id="picture"
-                    {...register("photo")}
-                    className="input w-full"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <Input
-              type="submit"
-              value="Sign Up"
-              className="btn w-1/2 mx-auto flex-1 bg-[#5D7E5F] text-white"
-            />
-          </form>
-
-          <div className="flex flex-col justify-center items-center mt-5 space-y-5">
-            <p className="text-base font-medium">
-              Already registered? Go to
-              <Link className="ml-1 text-[#5D7E5F]" to="/login">
-                log in
-              </Link>
-            </p>
           </div>
         </div>
       </Container>

@@ -49,10 +49,8 @@ const Login = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#98b29950] bg-[url(../public/palm2.png)] bg-no-repeat bg-right-top bg-auto">
       <Container>
-        {/* Pc view */}
-
-        <div className="bg-[#ffffff] hidden lg:flex rounded-lg backdrop-blur-sm shadow-xl">
-          <div className="flex flex-col w-full p-5 sm:p-10 space-y-6">
+        <div className="bg-[#ffffff] flex rounded-lg backdrop-blur-sm shadow-xl">
+          <div className="flex flex-col w-full p-5 sm:p-10 space-y-1 lg:space-y-6">
             <div>
               <Button
                 className="bg-transparent hover:bg-transparent text-lg text-[#5D7E5F] p-0"
@@ -68,6 +66,9 @@ const Login = () => {
               <h3 className="my-2 text-2xl md:text-3xl lg:text-4xl font-bold">
                 Login
               </h3>
+              <p className=" lg:hidden mb-4 text-lg">
+                Welcome Back! Let&lsquo;s Get Started
+              </p>
             </div>
 
             <div className="border-2 border-default-200 rounded-xl p-3 space-y-3">
@@ -79,7 +80,7 @@ const Login = () => {
               </h3>
               <div className="flex gap-2 items-center">
                 <Button
-                  className="w-1/2 bg-[#5D7E5F] rounded-full text-lg"
+                  className="w-1/2 bg-[#5D7E5F] rounded-full lg:text-lg"
                   onClick={() => {
                     setValue("email", "admin@gmail.com");
                     setValue("password", "123456Aa@");
@@ -88,9 +89,9 @@ const Login = () => {
                   Admin
                 </Button>
                 <Button
-                  className="w-1/2 bg-[#5D7E5F] rounded-full text-lg"
+                  className="w-1/2 bg-[#5D7E5F] rounded-full lg:text-lg"
                   onClick={() => {
-                    setValue("email", "n@yahoo.com");
+                    setValue("email", "a@gmail.com");
                     setValue("password", "123456Aa@");
                   }}
                 >
@@ -144,7 +145,7 @@ const Login = () => {
               <Input
                 type="submit"
                 value="Sign In"
-                className="btn w-1/2 mx-auto flex-1 bg-[#5D7E5F] text-lg text-white"
+                className="btn w-1/2 mx-auto flex-1 bg-[#5D7E5F] lg:text-lg text-white"
               />
             </form>
 
@@ -158,7 +159,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between pt-5 sm:pt-10">
+          <div className="hidden lg:flex flex-col justify-between pt-5 sm:pt-10">
             <p className="mb-4 text-[#5D7E5F] text-3xl text-center font-bold">
               Welcome Back<br></br> Let&lsquo;s Go Green with Plants!
             </p>
@@ -170,114 +171,6 @@ const Login = () => {
                 className="w-3/4 mx-auto"
               />
             </div>
-          </div>
-        </div>
-
-        {/* tab mobile view */}
-        <div className="block lg:hidden w-full bg-[#ffffff] p-5 sm:px-10 space-y-6 rounded-lg backdrop-blur-sm shadow-xl">
-          <div>
-            <Button
-              className="bg-transparent hover:bg-transparent text-lg text-[#5D7E5F] p-0"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <i className="fa-solid fa-arrow-left mr-1" /> Back to Home
-            </Button>
-          </div>
-
-          <div>
-            <h3 className="my-2 text-2xl md:text-3xl lg:text-4xl font-bold">
-              Login
-            </h3>
-            <p className="mb-4 text-lg">
-              Welcome Back! Let&lsquo;s Get Started
-            </p>
-          </div>
-
-          <div className="border-2 border-default-200 rounded-xl p-3 space-y-3">
-            <h2 className="text-xs text-red-600">*Only for testing purpose*</h2>
-            <h3 className="text-sm">
-              Select a role and credentials will be generated automatically
-            </h3>
-            <div className="flex gap-2 items-center">
-              <Button
-                className="w-1/2 bg-[#5D7E5F] rounded-full"
-                onClick={() => {
-                  setValue("email", "admin@gmail.com");
-                  setValue("password", "123456Aa@");
-                }}
-              >
-                Admin
-              </Button>
-              <Button
-                className="w-1/2 bg-[#5D7E5F] rounded-full"
-                onClick={() => {
-                  setValue("email", "n@yahoo.com");
-                  setValue("password", "123456Aa@");
-                }}
-              >
-                Customer
-              </Button>
-            </div>
-          </div>
-
-          <form
-            className="w-full flex flex-col gap-5 text-left"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <Input
-              type="email"
-              id="in2"
-              {...register("email")}
-              placeholder="Email"
-              required
-              className="w-full rounded-full"
-              // defaultValue="n@yahoo.com"
-            />
-
-            <div className="relative">
-              <Input
-                type={showPass ? "text" : "password"}
-                id="in3"
-                {...register("password")}
-                placeholder="Password"
-                required
-                className="w-full rounded-full"
-                // defaultValue="123456Aa@"
-              />
-              <span
-                className="h-full absolute right-2 top-0 flex justify-center items-center"
-                onClick={() => setShowPass(!showPass)}
-              >
-                {showPass ? (
-                  <i className="fa-solid fa-eye-slash"></i>
-                ) : (
-                  <i className="fa-solid fa-eye"></i>
-                )}
-              </span>
-            </div>
-
-            {/* {loginError && (
-                <p className="text-red-500 text-center font-bold">
-                  {loginError}
-                </p>
-              )} */}
-
-            <Input
-              type="submit"
-              value="Sign In"
-              className="btn w-1/2 mx-auto flex-1 bg-[#5D7E5F]  text-white"
-            />
-          </form>
-
-          <div className="flex flex-col justify-center items-center mt-5 space-y-5">
-            <p className="text-base font-medium">
-              Dont have an account?
-              <Link className="ml-3 text-[#5D7E5F]" to="/register">
-                Sign Up
-              </Link>
-            </p>
           </div>
         </div>
       </Container>
