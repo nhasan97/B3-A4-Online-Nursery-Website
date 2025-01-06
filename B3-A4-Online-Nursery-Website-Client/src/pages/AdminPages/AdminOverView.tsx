@@ -10,11 +10,11 @@ import Title from "@/components/shared/Title";
 // } from "@/components/ui/breadcrumb";
 import { Helmet } from "react-helmet-async";
 
-import AccountsOverview from "@/components/modules/AdminOverview/AccountsOverview";
-import OrderOverview from "@/components/modules/AdminOverview/OrderOverview";
-import MessagesOverview from "@/components/modules/AdminOverview/MessagesOverview";
-import ProductOverview from "@/components/modules/AdminOverview/ProductOverview";
-import SalesPurchaseExpanseOverview from "@/components/modules/AdminOverview/SalesPurchaseExpanseOverview";
+import AccountsOverview from "@/components/modules/AdminComponents/AdminOverview/AccountsOverview";
+import OrderOverview from "@/components/modules/AdminCustomerCommonComponents/OrderOverview";
+import MessagesOverview from "@/components/modules/AdminCustomerCommonComponents/MessagesOverview";
+import ProductOverview from "@/components/modules/AdminComponents/AdminOverview/ProductOverview";
+import SalesPurchaseExpanseOverview from "@/components/modules/AdminComponents/AdminOverview/SalesPurchaseExpanseOverview";
 
 const AdminOverView = () => {
   return (
@@ -41,7 +41,7 @@ const AdminOverView = () => {
           </Breadcrumb>
         </div> */}
 
-        <div className="w-full min-h-screen space-y-6">
+        <div className="w-full min-h-screen space-y-6 overflow-y-auto">
           <Title title={"Overview"}></Title>
 
           <AccountsOverview />
@@ -49,7 +49,7 @@ const AdminOverView = () => {
           <OrderOverview />
 
           <div className="w-full h-full flex flex-col xl:flex-row justify-between items-center gap-6">
-            <MessagesOverview />
+            <MessagesOverview caller={"admin-received"} />
 
             <ProductOverview />
           </div>
