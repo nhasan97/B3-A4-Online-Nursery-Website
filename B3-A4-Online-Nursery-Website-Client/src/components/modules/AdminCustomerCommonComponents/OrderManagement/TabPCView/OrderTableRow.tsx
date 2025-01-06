@@ -59,15 +59,35 @@ const OrderTableRow = ({
 
       <td className="flex-1">{timeStampToDateConverter(estimatedDelivery)}</td>
 
-      {caller === "admin" && (
-        <td className="flex-1">
-          <div className="justify-center xl:justify-end items-center">
-            <p>{status}</p>
-            <EditOrderStatusModal
-              passedOrderID={_id as string}
-              passedOrderStatus={status}
-            />
-          </div>
+      {caller === "admin" ? (
+        <td className="flex-1 flex justify-center items-center gap-3">
+          <EditOrderStatusModal
+            passedOrderID={_id as string}
+            passedOrderStatus={status}
+          />
+        </td>
+      ) : (
+        <td className="flex-1 flex justify-center items-center">
+          {status === "Pending" && (
+            <p className="w-fit mx-auto py-2 px-4 bg-gray-100 text-gray-700 rounded-full">
+              {status}
+            </p>
+          )}
+          {status === "Processing" && (
+            <p className="w-fit mx-auto py-2 px-4 bg-orange-100 text-orange-600 rounded-full">
+              {status}
+            </p>
+          )}
+          {status === "Delivered" && (
+            <p className="w-fit mx-auto py-2 px-4 bg-green-100 text-green-700 rounded-full">
+              {status}
+            </p>
+          )}
+          {status === "Canceled" && (
+            <p className="w-fit mx-auto py-2 px-4 bg-red-100 text-red-600 rounded-full">
+              {status}
+            </p>
+          )}
         </td>
       )}
     </tr>

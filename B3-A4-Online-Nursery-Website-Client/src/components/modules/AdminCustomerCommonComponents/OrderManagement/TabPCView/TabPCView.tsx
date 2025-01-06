@@ -25,7 +25,7 @@ const TabPCView = ({
             <th className="flex-1">Items</th>
             <th className="flex-1">Payment Details</th>
             <th className="flex-1">Estimated Delivery</th>
-            {caller === "admin" && <th className="flex-1">Status</th>}
+            <th className="flex-1">Status</th>
           </tr>
         </thead>
         <tbody>

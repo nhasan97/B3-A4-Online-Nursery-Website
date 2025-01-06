@@ -49,7 +49,18 @@ const EditOrderStatusModal = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl sm:text-xl text-[#757575] hover:text-[#5D7E5F] rounded-full">
+        <Button
+          className={`flex justify-between items-center gap-1 px-2 text-xl sm:text-base text-[#757575] hover:text-[#5D7E5F] font-normal bg-transparent hover:bg-[#98b2992f] ${
+            passedOrderStatus === "Pending"
+              ? "sm:bg-gray-100 sm:hover:bg-gray-700 sm:text-gray-700 sm:hover:text-gray-100"
+              : passedOrderStatus === "Processing"
+              ? "sm:bg-orange-100 sm:hover:bg-orange-600 sm:text-orange-600 sm:hover:text-orange-100"
+              : passedOrderStatus === "Delivered"
+              ? "sm:bg-green-100 sm:hover:bg-green-700 sm:text-green-700 sm:hover:text-green-100"
+              : "sm:bg-red-100 sm:hover:bg-red-600 sm:text-red-600 sm:hover:text-red-100"
+          } rounded-full`}
+        >
+          <p className="hidden sm:flex">{passedOrderStatus}</p>{" "}
           <MdEditDocument />
         </Button>
       </DialogTrigger>
