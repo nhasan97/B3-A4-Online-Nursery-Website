@@ -1,0 +1,65 @@
+/* Jodit Editor container */
+
+.jodit-react-container {
+  /* border: 2px solid #d3d3d3; */
+}
+
+.jodit-container {
+  border-radius: 12px !important;
+  border: 2px solid #ececec !important;
+  background-color: transparent !important;
+}
+
+.jodit-toolbar__box {
+  background-color: transparent !important;
+}
+
+/* Jodit toolbar and tollbar button drop down */
+.jodit-toolbar-editor-collection {
+  color: #333;
+  /* border-bottom: 2px solid #d3d3d3; */
+}
+
+/* Jodit toolbar buttons */
+.jodit-toolbar-button__button {
+  background-color: white;
+}
+
+.jodit-toolbar-button__button:hover {
+}
+
+.jodit-toolbar-button__icon {
+  color: #333;
+}
+
+/* drop down text */
+.jodit-toolbar-button__text {
+  color: #333;
+}
+
+/* Customize selected button state */
+.jodit-toolbar-button__button.jodit-toolbar-button__button_active {
+  background-color: #a36b6b;
+  color: white;
+}
+
+.jodit-workplace {
+  background-color: transparent !important;
+}
+
+/* Editor background */
+.jodit-wysiwyg {
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 10px;
+  color: #292929;
+  background-color: #da1e1e00;
+}
+
+.jodit-status-bar {
+  background-color: transparent !important;
+}
+
+/*jodit-toolbar-editor-collection
+ jodit-toolbar-editor-collection_mode_horizontal 
+jodit-toolbar-editor-collection_size_small */
