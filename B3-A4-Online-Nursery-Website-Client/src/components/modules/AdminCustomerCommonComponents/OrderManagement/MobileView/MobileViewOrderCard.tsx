@@ -3,7 +3,13 @@ import MobileViewOrderDetailsModal from "./MobileViewOrderDetailsModal";
 import timeStampToDateConverter from "@/utils/timeStampToDateConverter";
 import EditOrderStatusModal from "../EditOrderStatusModal";
 
-const MobileViewOrderCard = ({ order }: { order: IOrder }) => {
+const MobileViewOrderCard = ({
+  order,
+  caller,
+}: {
+  order: IOrder;
+  caller: string;
+}) => {
   const { _id, estimatedDelivery, status } = order;
 
   return (
@@ -21,10 +27,12 @@ const MobileViewOrderCard = ({ order }: { order: IOrder }) => {
           order={order}
         ></MobileViewOrderDetailsModal>
 
-        <EditOrderStatusModal
-          passedOrderID={_id as string}
-          passedOrderStatus={status}
-        />
+        {caller == "admin" && (
+          <EditOrderStatusModal
+            passedOrderID={_id as string}
+            passedOrderStatus={status}
+          />
+        )}
       </div>
     </div>
   );

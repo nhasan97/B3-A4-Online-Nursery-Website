@@ -5,7 +5,13 @@ import PaymentDetailsModal from "./PaymentDetailsModal";
 import timeStampToDateConverter from "@/utils/timeStampToDateConverter";
 import EditOrderStatusModal from "../EditOrderStatusModal";
 
-const OrderTableRow = ({ order }: { order: IOrder }) => {
+const OrderTableRow = ({
+  order,
+  caller,
+}: {
+  order: IOrder;
+  caller?: string;
+}) => {
   const {
     _id,
     orderId,
@@ -53,15 +59,17 @@ const OrderTableRow = ({ order }: { order: IOrder }) => {
 
       <td className="flex-1">{timeStampToDateConverter(estimatedDelivery)}</td>
 
-      <td className="flex-1">
-        <div className="justify-center xl:justify-end items-center">
-          <p>{status}</p>
-          <EditOrderStatusModal
-            passedOrderID={_id as string}
-            passedOrderStatus={status}
-          />
-        </div>
-      </td>
+      {caller === "admin" && (
+        <td className="flex-1">
+          <div className="justify-center xl:justify-end items-center">
+            <p>{status}</p>
+            <EditOrderStatusModal
+              passedOrderID={_id as string}
+              passedOrderStatus={status}
+            />
+          </div>
+        </td>
+      )}
     </tr>
   );
 };

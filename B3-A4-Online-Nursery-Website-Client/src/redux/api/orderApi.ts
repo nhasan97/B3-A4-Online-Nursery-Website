@@ -6,46 +6,7 @@ const orderApi = baseApi.injectEndpoints({
 
     ------------------------endpoint for getting orders from DB------------------------*/
     getAllOrders: builder.query({
-      query: ({ searchTerm, currentPage, itemsPerPage }) => {
-        const params = new URLSearchParams();
-
-        if (searchTerm) {
-          params.append("searchTerm", searchTerm);
-        }
-        if (currentPage) {
-          params.append("page", currentPage);
-        }
-        if (itemsPerPage) {
-          params.append("limit", itemsPerPage);
-        }
-
-        return { url: "/orders/get-all-orders", method: "GET", params: params };
-      },
-      providesTags: ["order"],
-    }),
-    /*
-
-    ------------------------endpoint for getting orders count from DB------------------------*/
-    getAllOrdersCount: builder.query({
-      query: () => {
-        return { url: "/orders/get-all-orders-count", method: "GET" };
-      },
-      providesTags: ["order"],
-    }),
-    /*
-
-    ------------------------endpoint for getting orders count by status from DB------------------------*/
-    getOrderCountByStatus: builder.query({
-      query: () => {
-        return { url: "/orders/get-orders-count-by-status", method: "GET" };
-      },
-      providesTags: ["order"],
-    }),
-    /*
-
-    ------------------------endpoint for getting orders from DB------------------------*/
-    getLoggedInUsersOrders: builder.query({
-      query: ({ searchTerm, currentPage, itemsPerPage, email }) => {
+      query: ({ searchTerm, currentPage, itemsPerPage, userId }) => {
         const params = new URLSearchParams();
 
         if (searchTerm) {
@@ -59,7 +20,7 @@ const orderApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: `/orders/get-loggedIn-Users-orders/${email}`,
+          url: `/orders/get-all-orders/${userId}`,
           method: "GET",
           params: params,
         };
@@ -68,11 +29,11 @@ const orderApi = baseApi.injectEndpoints({
     }),
     /*
 
-    ------------------------endpoint for getting orders count from DB------------------------*/
-    getLoggedInUsersOrdersCount: builder.query({
-      query: (usersEmail) => {
+    ------------------------endpoint for getting orders count by status from DB------------------------*/
+    getOrderCountByStatus: builder.query({
+      query: (userId) => {
         return {
-          url: `/orders/get-loggedIn-Users-orders-count/${usersEmail}`,
+          url: `/orders/get-orders-count-by-status/${userId}`,
           method: "GET",
         };
       },

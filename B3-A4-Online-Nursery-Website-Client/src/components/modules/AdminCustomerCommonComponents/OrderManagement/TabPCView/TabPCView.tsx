@@ -4,13 +4,15 @@ import OrderTableRow from "./OrderTableRow";
 import LazyLoadingOrderTableRow from "./LazyLoadingOrderTableRow";
 
 const TabPCView = ({
-  loadingOrdersCount,
+  // loadingOrdersCount,
   loadingOrders,
   orders,
+  caller,
 }: {
-  loadingOrdersCount: boolean;
+  // loadingOrdersCount: boolean;
   loadingOrders: boolean;
   orders: IOrder[];
+  caller?: string;
 }) => {
   return (
     <div className="bg-white hidden sm:block w-full h-[80%] overflow-y-auto rounded-lg border">
@@ -23,18 +25,18 @@ const TabPCView = ({
             <th className="flex-1">Items</th>
             <th className="flex-1">Payment Details</th>
             <th className="flex-1">Estimated Delivery</th>
-            <th className="flex-1">Status</th>
+            {caller === "admin" && <th className="flex-1">Status</th>}
           </tr>
         </thead>
         <tbody>
           {/* row  */}
-          {loadingOrders || loadingOrdersCount ? (
+          {loadingOrders ? (
             Array.from({ length: 10 }).map((_, index: number) => (
               <LazyLoadingOrderTableRow index={index} />
             ))
           ) : orders?.length > 0 ? (
             orders?.map((order: IOrder) => (
-              <OrderTableRow key={order?._id} order={order} />
+              <OrderTableRow key={order?._id} order={order} caller={caller} />
             ))
           ) : (
             <NoData text={"No Order Found"}></NoData>
