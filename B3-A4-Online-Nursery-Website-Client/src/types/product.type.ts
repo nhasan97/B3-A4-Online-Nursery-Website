@@ -37,7 +37,7 @@ export type TProductContext = {
   setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 
-  resetBrower: () => void;
+  resetBrowser: () => void;
   resetPagination: () => void;
 };
 
