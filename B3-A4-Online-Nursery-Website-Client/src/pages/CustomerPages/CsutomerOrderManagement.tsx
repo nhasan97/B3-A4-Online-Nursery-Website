@@ -77,7 +77,7 @@ const CsutomerOrderManagement = () => {
             // loadingOrdersCount={loadingOrdersCount}
             loadingOrders={loadingOrders}
             orders={loadedOrders?.data?.orders}
-            caller={"admin"}
+            caller={"customer"}
           />
 
           {/* mobile view */}
@@ -85,7 +85,7 @@ const CsutomerOrderManagement = () => {
             // loadingOrdersCount={loadingOrdersCount}
             loadingOrders={loadingOrders}
             orders={loadedOrders?.data?.orders}
-            caller={"admin"}
+            caller={"customer"}
           />
 
           <Pagination
