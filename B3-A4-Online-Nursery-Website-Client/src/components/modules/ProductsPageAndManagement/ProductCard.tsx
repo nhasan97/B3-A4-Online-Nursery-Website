@@ -4,9 +4,12 @@ import StarRating from "../../shared/StarRating";
 import { Link } from "react-router-dom";
 import useCartContext from "@/hooks/useCartContext";
 import { TCartContext } from "@/types/cart.type";
+import useWishlistContext from "@/hooks/useWishlistContext";
+import { TWishlistContext } from "@/types/wishlist.type";
 
 const ProductCard = ({ product }: TProductProp) => {
   const { handleAddToCart } = useCartContext() as TCartContext;
+  const { handleAddItemToWishlist } = useWishlistContext() as TWishlistContext;
 
   return (
     <div className="w-full h-fit bg-white p-1 space-y-3 rounded-3xl border group">
@@ -19,17 +22,14 @@ const ProductCard = ({ product }: TProductProp) => {
 
         <div className="flex justify-evenly items-center gap-1 px-2 translate-y-full transition-all ease-in-out duration-300 group-hover:-translate-y-12">
           <Link to={`/product-details/${product?._id}`} className="w-full">
-            <Button
-              className="w-full bg-[#5D7E5F] text-lg px-8 rounded-l-[20px] rounded-r-none"
-
-              // onClick={}
-            >
+            <Button className="w-full bg-[#5D7E5F] text-lg px-8 rounded-l-[20px] rounded-r-none">
               <i className="fa-solid fa-eye"></i>
-            </Button>{" "}
+            </Button>
           </Link>
+
           <Button
             className="w-full bg-[#5D7E5F] text-lg rounded-none"
-            // onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddItemToWishlist(product?._id as string)}
           >
             <i className="fa-solid fa-heart"></i>
           </Button>
