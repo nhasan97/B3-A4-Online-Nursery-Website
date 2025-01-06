@@ -1,4 +1,4 @@
-import { Button } from "../../ui/button";
+import { Button } from "../../../../ui/button";
 import { MdDelete } from "react-icons/md";
 import { TCategoryCrudContext, TCategoryProp } from "@/types/category.type";
 import EditCategoryModal from "../EditCategoryModal";

@@ -1,4 +1,4 @@
-import { Button } from "../ui/button";
+import { Button } from "../../../ui/button";
 import { MdInfo } from "react-icons/md";
 import {
   Dialog,
@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from "../ui/dialog";
+} from "../../../ui/dialog";
 import { TCategoryProp } from "@/types/category.type";
 
 const DetailsCategoryModal = ({ category }: TCategoryProp) => {

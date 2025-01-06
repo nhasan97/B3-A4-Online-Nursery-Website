@@ -5,34 +5,34 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
-import { MdEditDocument } from "react-icons/md";
+} from "../../../ui/dialog";
+import { Button } from "../../../ui/button";
+import { FaCirclePlus } from "react-icons/fa6";
 import { IoIosSave } from "react-icons/io";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { TCategoryCrudContext, TCategoryProp } from "@/types/category.type";
+import { Label } from "../../../ui/label";
+import { Input } from "../../../ui/input";
+import { TCategoryCrudContext } from "@/types/category.type";
 import useCategoryCrudContext from "@/hooks/useCategoryCrudContext";
 
-const EditCategoryModal = ({ category }: TCategoryProp) => {
-  const { setCategory, setDescription, setImageFile, handleEditCategory } =
+const AddCategoryModal = () => {
+  const { handleAddCategory, setCategory, setDescription, setImageFile } =
     useCategoryCrudContext() as TCategoryCrudContext;
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl sm:text-xl text-[#757575] hover:text-[#5D7E5F] rounded-full">
-          <MdEditDocument />
+        <Button className="bg-[#5D7E5F] text-base md:text-lg font-semibold space-x-2 rounded-full">
+          <FaCirclePlus /> <p>Category</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-[#757575]">Edit Category</DialogTitle>
+          <DialogTitle className="text-[#757575]">Add Category</DialogTitle>
         </DialogHeader>
 
         <form
           className="grid gap-4 py-4"
-          onSubmit={(e) => handleEditCategory(e, category)}
+          onSubmit={(e) => handleAddCategory(e)}
         >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="category" className="text-left text-[#757575]">
@@ -41,7 +41,7 @@ const EditCategoryModal = ({ category }: TCategoryProp) => {
             <Input
               id="category"
               className="col-span-3"
-              defaultValue={category?.category}
+              required
               onBlur={(e) => setCategory(e.target.value)}
             />
           </div>
@@ -53,31 +53,28 @@ const EditCategoryModal = ({ category }: TCategoryProp) => {
             <Input
               id="description"
               className="col-span-3"
-              defaultValue={category?.description}
+              required
               onBlur={(e) => setDescription(e.target.value)}
             />
           </div>
 
-          <div className="flex  justify-center items-center gap-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <img
-                src={category?.image}
-                alt=""
-                className="size-20 p-[2px] border-2 border-[#5D7E5F] rounded-full"
-              />
-              <Input
-                type="file"
-                id="picture"
-                className="col-span-3"
-                onBlur={(e) => setImageFile(e.target.files?.[0] as File)}
-              />
-            </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="picture" className="text-left text-[#757575]">
+              Picture
+            </Label>
+            <Input
+              type="file"
+              id="picture"
+              required
+              className="col-span-3"
+              onBlur={(e) => setImageFile(e.target.files?.[0] as File)}
+            />
           </div>
 
           <DialogFooter>
             <Button
               type="submit"
-              className="w-full bg-[#5D7E5F] text-lg font-semibold mb-5 space-x-2 rounded-full"
+              className="w-full bg-[#5D7E5F] text-lg font-semibold space-x-2 rounded-full"
             >
               <IoIosSave /> <p>Save</p>
             </Button>
@@ -88,4 +85,4 @@ const EditCategoryModal = ({ category }: TCategoryProp) => {
   );
 };
 
-export default EditCategoryModal;
+export default AddCategoryModal;
