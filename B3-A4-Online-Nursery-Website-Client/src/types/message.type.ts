@@ -21,12 +21,12 @@ export type TMessageContext = {
   setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  messageType: string;
+  setMessageType: React.Dispatch<React.SetStateAction<string>>;
 
   loadingMessages: boolean;
-  receivedMessages: TMessage[];
-  sentMessages: TMessage[];
-  totalReceivedCount: number;
-  totalSentCount: number;
+  messages: TMessage[];
+  totalMessageCount: number;
 
   resetBrower: () => void;
   resetPagination: () => void;

@@ -31,6 +31,7 @@ const MessageProvider = ({ children }: TChildren) => {
   const [sort, setSort] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
+  const [messageType, setMessageType] = useState("received");
 
   //loading Messages
   const { isLoading: loadingMessages, data: loadedMessages } =
@@ -39,12 +40,14 @@ const MessageProvider = ({ children }: TChildren) => {
       sort,
       currentPage,
       itemsPerPage,
+      messageType,
       userEmail: (user as TUser)?.email || "",
     });
 
   const resetBrower = () => {
     setSearchTerm("");
     setSort("");
+    setMessageType("received");
   };
 
   const resetPagination = () => {
@@ -79,12 +82,12 @@ const MessageProvider = ({ children }: TChildren) => {
     setItemsPerPage,
     currentPage,
     setCurrentPage,
+    messageType,
+    setMessageType,
 
     loadingMessages,
-    receivedMessages: loadedMessages?.data?.receivedMessages,
-    sentMessages: loadedMessages?.data?.sentMessages,
-    totalReceivedCount: loadedMessages?.data?.totalReceivedCount,
-    totalSentCount: loadedMessages?.data?.totalSentCount,
+    messages: loadedMessages?.data?.limitQuery,
+    totalMessageCount: loadedMessages?.data?.totalMessageCount,
 
     resetBrower,
     resetPagination,
