@@ -17,6 +17,7 @@ import ProductCrudFunctionsProvider from "./providers/ProductCrudFunctionsProvid
 import BlogCrudFunctionsProvider from "./providers/BlogCrudFunctionsProvider.tsx";
 import BlogProvider from "./providers/BlogProvider.tsx";
 import MessageProvider from "./providers/MessageProvider.tsx";
+import WishlistProvider from "./providers/WishlistProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -31,7 +32,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   <BlogCrudFunctionsProvider>
                     <CartProvider>
                       <MessageProvider>
-                        <RouterProvider router={router}></RouterProvider>
+                        <WishlistProvider>
+                          <RouterProvider router={router}></RouterProvider>
+                        </WishlistProvider>
                       </MessageProvider>
                     </CartProvider>
                   </BlogCrudFunctionsProvider>
