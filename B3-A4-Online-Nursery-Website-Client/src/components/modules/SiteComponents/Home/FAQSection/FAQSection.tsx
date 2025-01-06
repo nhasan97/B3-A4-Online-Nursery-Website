@@ -1,18 +1,18 @@
-import Container from "../../layouts/rootLayout/Container";
-import SiteTitle from "../../shared/SiteTitle";
+import Container from "../../../../layouts/rootLayout/Container";
+import SiteTitle from "../../../../shared/SiteTitle";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../../ui/accordion";
-import faqGif from "../../../assets/gifs/FAQs.gif";
+} from "../../../../ui/accordion";
+import faqGif from "../../../../../assets/gifs/FAQs.gif";
 
 const FAQSection = () => {
   return (
     <div className="py-10 my-10 md:my-20">
       <Container>
-        <div className="w-full h-full flex flex-col gap-8 sm:gap-16">
+        <div className="w-full h-full flex flex-col gap-6 sm:gap-12">
           <SiteTitle title={"FAQ"}></SiteTitle>
           <div className="w-full h-full flex flex-col sm:flex-row gap-6">
             <div className="w-full sm:w-1/2">

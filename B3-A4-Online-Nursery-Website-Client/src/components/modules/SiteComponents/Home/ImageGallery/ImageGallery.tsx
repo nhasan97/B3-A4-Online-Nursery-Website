@@ -1,5 +1,5 @@
-import Container from "../../layouts/rootLayout/Container";
-import SiteTitle from "../../shared/SiteTitle";
+import Container from "../../../../layouts/rootLayout/Container";
+import SiteTitle from "../../../../shared/SiteTitle";
 import Masonry from "./Masonry";
 
 const images = [
@@ -60,7 +60,7 @@ const ImageGallery = () => {
       className="w-full h-full py-10 my-10 md:my-20 bg-[url(../public/leaf2.png)] bg-no-repeat bg-right-top bg-contain bg-fixed"
     >
       <Container>
-        <div className="w-full h-full flex flex-col gap-8 sm:gap-16">
+        <div className="w-full h-full flex flex-col  gap-6 sm:gap-12">
           <SiteTitle title={"Image Gallery"}></SiteTitle>
 
           <Masonry images={images} gap={5}></Masonry>

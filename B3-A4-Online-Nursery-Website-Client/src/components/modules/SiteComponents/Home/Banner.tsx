@@ -1,12 +1,12 @@
-import Container from "../layouts/rootLayout/Container";
-import { Button } from "../ui/button";
+import Container from "../../../layouts/rootLayout/Container";
+import { Button } from "../../../ui/button";
 import { RiArrowRightLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { GiCheckMark } from "react-icons/gi";
-import bannerImg1 from "../../assets/images/slide1.png";
-import bannerImg2 from "../../assets/images/330cfb4a-076c-439c-85d0-5aef6fe74935_360.jpeg";
-import bannerImg3 from "../../assets/images/slide3.png";
-import plant from "../../assets/images/plant1.png";
+import bannerImg1 from "../../../../assets/images/slide1.png";
+import bannerImg2 from "../../../../assets/images/330cfb4a-076c-439c-85d0-5aef6fe74935_360.jpeg";
+import bannerImg3 from "../../../../assets/images/slide3.png";
+import plant from "../../../../assets/images/plant1.png";
 
 import {
   Carousel,

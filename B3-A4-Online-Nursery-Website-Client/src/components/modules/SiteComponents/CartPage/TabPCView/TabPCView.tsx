@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NoData from "@/components/shared/NoData";
 
 import { TCartContext, TCartItem } from "@/types/cart.type";
@@ -5,11 +6,30 @@ import CartTableRow from "./CartTableRow";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import useCartContext from "@/hooks/useCartContext";
+import { toast } from "sonner";
+import { useAppSelector } from "@/redux/hooks";
+import { verifyToken } from "@/utils/verifyToken";
 
 const TabPCView = () => {
   const { itemsInCart, total } = useCartContext() as TCartContext;
 
   const navigate = useNavigate();
+
+  const { token } = useAppSelector((currentState) => currentState.auth);
+
+  let user: any;
+  if (token) {
+    user = verifyToken(token);
+  }
+
+  const handleNavigateToCheckout = () => {
+    if (!user) {
+      toast.error("Please login first");
+      navigate("/login");
+    } else {
+      navigate("/checkout-page");
+    }
+  };
 
   return (
     <div className="hidden w-full h-[80%] sm:flex gap-6">
@@ -62,7 +82,7 @@ const TabPCView = () => {
         <Button
           className="w-full bg-[#5D7E5F] text-lg rounded-full mt-6"
           disabled={itemsInCart.length <= 0}
-          onClick={() => navigate("/checkout-page")}
+          onClick={() => handleNavigateToCheckout()}
         >
           Checkout
         </Button>

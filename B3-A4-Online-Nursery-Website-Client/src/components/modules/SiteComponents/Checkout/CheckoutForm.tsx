@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
+} from "../../../ui/select";
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import orderApi from "@/redux/api/orderApi";
@@ -27,7 +27,7 @@ import axios from "axios";
 const CheckoutForm = () => {
   const { token } = useAppSelector((currentState) => currentState.auth);
 
-  let user;
+  let user: any;
   if (token) {
     user = verifyToken(token);
   }
@@ -38,7 +38,7 @@ const CheckoutForm = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("");
-  const [clientSecret, setClientSecret] = useState("");
+  const [clientSecret] = useState("");
   const [transactionID, setTransactionID] = useState("");
 
   const { itemsInCart, total } = useCartContext() as TCartContext;
@@ -58,12 +58,12 @@ const CheckoutForm = () => {
       .post(
         `${import.meta.env.VITE_BASE_URL}/api/v1/orders/create-payment-intent`,
         {
-          price: total,
+          price: 34534,
         }
       )
       .then((res) => {
         console.log(res.data);
-        setClientSecret(res.data.clientSecret);
+        // setClientSecret(res.data.clientSecret);
       });
   }, [total]);
 

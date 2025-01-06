@@ -1,13 +1,16 @@
 import StarRating from "@/components/shared/StarRating";
+import { TUserExtended } from "@/types/auth.type";
 import { TReview } from "@/types/review.type";
 
 const ReviewCard = ({ review }: { review: TReview }) => {
-  const { image, name, say, rating } = review;
+  const { user, say, rating } = review;
+
+  const { imageUrl, name } = user as TUserExtended;
 
   return (
     <div className="w-fit mx-auto bg-[#ECF1EC] flex flex-col justify-center items-center mb-10 shadow-2xl">
       <img
-        src={image}
+        src={imageUrl}
         className="size-[120px] object-cover object-center rounded-full border-4 border-white translate-y-1/2 z-10 shadow-2xl"
       />
 

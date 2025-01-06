@@ -1,17 +1,17 @@
 import Container from "@/components/layouts/rootLayout/Container";
-import ProductCard from "@/components/modules/ProductsPageAndListSection/ProductCard";
+import ProductCard from "@/components/modules/ProductsPageAndManagement/ProductCard";
 import Loading from "@/components/shared/Loading";
 import NoData from "@/components/shared/NoData";
 import SiteTitle from "@/components/shared/SiteTitle";
 import { TProduct, TProductContext } from "@/types/product.type";
-import "../cssStyles/ProductPage.css";
-import plant from "../../assets/images/plant4.png";
+// import "../cssStyles/ProductPage.css";
+import plant from "../../../../assets/images/plant4.png";
 import useProductContext from "@/hooks/useProductContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
-import "../cssStyles/Tab.css";
+import { Button } from "../../../ui/button";
+import "../../../cssStyles/Tab.css";
 
 const FeaturedProducts = () => {
   const {
@@ -20,15 +20,15 @@ const FeaturedProducts = () => {
     setItemsPerPage,
     loadingProducts,
     products,
-    resetBrower,
+    resetBrowser,
     resetPagination,
   } = useProductContext() as TProductContext;
 
   useEffect(() => {
-    resetBrower();
+    resetBrowser();
     resetPagination();
     setItemsPerPage(numberOfProducts);
-  }, [numberOfProducts, resetBrower, resetPagination, setItemsPerPage]);
+  }, [numberOfProducts, resetBrowser, resetPagination, setItemsPerPage]);
 
   const navigate = useNavigate();
 
@@ -38,13 +38,12 @@ const FeaturedProducts = () => {
       className="w-full h-full py-10 my-10 md:my-20 relative"
     >
       <Container>
-        <div className="w-full h-full flex flex-col justify-center items-center gap-8 sm:gap-16">
+        <div className="w-full h-full flex flex-col justify-center items-center gap-6 sm:gap-12">
           <img
             src={plant}
             alt=""
             className="w-2/3 sm:w-1/2 md:w-[60%] xl:w-1/2 2xl:w-1/4 absolute top-0 translate-y-[-90%]"
           />
-
           <SiteTitle title={"Featured Plants"}></SiteTitle>
 
           <Tabs defaultValue="featured" className="flex flex-col items-center ">
@@ -104,7 +103,7 @@ const FeaturedProducts = () => {
           </Tabs>
 
           <Button
-            className="bg-[#5D7E5F] text-white text-lg"
+            className="bg-[#5D7E5F] text-white text-base sm:text-lg rounded-full -mt-6"
             onClick={() => navigate("/all-products")}
           >
             View All Plants
