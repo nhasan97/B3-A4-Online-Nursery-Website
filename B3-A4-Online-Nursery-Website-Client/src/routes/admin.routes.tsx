@@ -6,9 +6,9 @@ import ProductManagement from "@/pages/AdminPages/ProductManagement";
 import CategoryManagement from "@/pages/AdminPages/CategoryManagement";
 import BlogManagement from "@/pages/AdminPages/BlogManagement";
 import ProfileManagement from "@/pages/AdminPages/ProfileManagement";
-import AddBlogPage from "@/components/modules/BlogManagement/AddBlogPage";
-import BlogDeatilsPage from "@/components/modules/BlogManagement/BlogDeatilsPage";
-import EditBlogPage from "@/components/modules/BlogManagement/EditBlogPage";
+import AddBlogPage from "@/components/modules/AdminComponents/BlogManagement/AddBlogPage";
+import BlogDeatilsPage from "@/components/modules/AdminComponents/BlogManagement/BlogDeatilsPage";
+import EditBlogPage from "@/components/modules/AdminComponents/BlogManagement/EditBlogPage";
 import MessageManagement from "@/pages/AdminPages/MessageManagement";
 
 const adminDashboardPaths = [

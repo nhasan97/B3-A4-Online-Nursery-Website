@@ -1,6 +1,8 @@
-import UserOverView from "@/pages/UserPages/UserOverView";
+import CustomerOverview from "@/pages/CustomerPages/CustomerOverview";
 import ProtectedRoute from "./ProtectedRoute";
-import CsutomerOrderManagement from "@/pages/UserPages/CsutomerOrderManagement";
+import CsutomerOrderManagement from "@/pages/CustomerPages/CsutomerOrderManagement";
+import WhishListPage from "@/pages/CustomerPages/WhishListPage";
+
 // import ProfileManagement from "@/pages/AdminPages/ProfileManagement";
 
 const userDashboardPaths = [
@@ -8,7 +10,7 @@ const userDashboardPaths = [
     index: true,
     element: (
       <ProtectedRoute role="user">
-        <UserOverView />
+        <CustomerOverview />
       </ProtectedRoute>
     ),
   },
@@ -16,7 +18,7 @@ const userDashboardPaths = [
     path: "user-overview",
     element: (
       <ProtectedRoute role="user">
-        <UserOverView />
+        <CustomerOverview />
       </ProtectedRoute>
     ),
   },
@@ -28,14 +30,14 @@ const userDashboardPaths = [
       </ProtectedRoute>
     ),
   },
-  //   {
-  //     path: "profile",
-  //     element: (
-  //       <ProtectedRoute role="admin">
-  //         <ProfileManagement />
-  //       </ProtectedRoute>
-  //     ),
-  //   },
+  {
+    path: "whishlist-page",
+    element: (
+      <ProtectedRoute role="user">
+        <WhishListPage />
+      </ProtectedRoute>
+    ),
+  },
 ];
 
 export default userDashboardPaths;

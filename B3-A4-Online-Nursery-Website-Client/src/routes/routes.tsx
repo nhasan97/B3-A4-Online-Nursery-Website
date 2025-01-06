@@ -1,22 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "@/pages/Home";
+import Home from "@/pages/SitePages/Home";
 import Root from "@/components/layouts/rootLayout/Root";
 import DashboardLayout from "@/components/layouts/dashboardLayout/DashboardLayout";
-import ProductsPage from "@/pages/ProductsPage";
-import CartPage from "@/pages/CartPage";
-import SuccessPage from "@/pages/SuccessPage";
-import StripePaymentPage from "@/pages/StripePaymentPage";
-import ProductDetails from "@/pages/ProductDetails";
-import BlogDetails from "@/pages/BlogDetails";
+import ProductsPage from "@/pages/SitePages/ProductsPage";
+import CartPage from "@/pages/SitePages/CartPage";
+import SuccessPage from "@/pages/SitePages/SuccessPage";
+import StripePaymentPage from "@/pages/SitePages/StripePaymentPage";
+import ProductDetails from "@/pages/SitePages/ProductDetails";
+import BlogDetails from "@/pages/SitePages/BlogDetails";
 import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
-import BlogsPage from "@/pages/BlogsPage";
-import AboutUsPage from "@/pages/AboutUsPage";
-import ContactUsPage from "@/pages/ContactUsPage";
-import WhishListPage from "@/pages/WhishListPage";
-import PlantCarePage from "@/pages/PlantCarePage";
-import CheckoutPage from "@/pages/CheckoutPage";
+import BlogsPage from "@/pages/SitePages/BlogsPage";
+import AboutUsPage from "@/pages/SitePages/AboutUsPage";
+import ContactUsPage from "@/pages/SitePages/ContactUsPage";
+import PlantCarePage from "@/pages/SitePages/PlantCarePage";
+import CheckoutPage from "@/pages/SitePages/CheckoutPage";
 import adminDashboardPaths from "./admin.routes";
 import userDashboardPaths from "./user.routes";
 
@@ -54,24 +53,16 @@ const router = createBrowserRouter([
         element: <BlogDetails />,
       },
       {
-        path: "/whishlist-page",
-        element: (
-          <ProtectedRoute role="user">
-            <WhishListPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: "/cart-page",
-        element: (
-          // <ProtectedRoute role="user">
-          <CartPage />
-          // </ProtectedRoute>
-        ),
+        element: <CartPage />,
       },
       {
         path: "/checkout-page",
-        element: <CheckoutPage />,
+        element: (
+          <ProtectedRoute role="user">
+            <CheckoutPage />{" "}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/stripe-page",
