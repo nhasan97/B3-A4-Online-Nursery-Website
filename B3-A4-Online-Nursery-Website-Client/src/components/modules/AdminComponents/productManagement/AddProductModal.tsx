@@ -5,13 +5,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
-import { MdEditDocument } from "react-icons/md";
+} from "../../../ui/dialog";
+import { Button } from "../../../ui/button";
+import { FaCirclePlus } from "react-icons/fa6";
 import { IoIosSave } from "react-icons/io";
-import { TProductCrudContext, TProductProp } from "@/types/product.type";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { TProductCrudContext } from "@/types/product.type";
+import { Label } from "../../../ui/label";
+import { Input } from "../../../ui/input";
 import {
   Select,
   SelectContent,
@@ -19,14 +19,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import Loading from "../shared/Loading";
-import NoData from "../shared/NoData";
+} from "../../../ui/select";
+import Loading from "../../../shared/Loading";
+import NoData from "../../../shared/NoData";
 import { TCategory, TCategoryContext } from "@/types/category.type";
 import useCategoryContext from "@/hooks/useCategoryContext";
 import useProductCrudContext from "@/hooks/useProductCrudContext";
 
-const EditProductModal = ({ product }: TProductProp) => {
+const AddProductModal = () => {
   const { loadingCategories, categories } =
     useCategoryContext() as TCategoryContext;
 
@@ -38,25 +38,22 @@ const EditProductModal = ({ product }: TProductProp) => {
     setRating,
     setStock,
     setImageFile,
-    handleEditProduct,
+    handleAddProduct,
   } = useProductCrudContext() as TProductCrudContext;
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl sm:text-xl text-[#757575] hover:text-[#5D7E5F] rounded-full">
-          <MdEditDocument />
+        <Button className="bg-[#5D7E5F] text-base md:text-lg font-semibold space-x-2 rounded-full">
+          <FaCirclePlus /> <p>Product</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-[#757575]">Edit Product</DialogTitle>
+          <DialogTitle className="text-[#757575]">Add Product</DialogTitle>
         </DialogHeader>
 
-        <form
-          className="grid gap-4 py-4"
-          onSubmit={(e) => handleEditProduct(e, product)}
-        >
+        <form className="grid gap-4 py-4" onSubmit={(e) => handleAddProduct(e)}>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-left text-[#757575]">
               Title
@@ -64,7 +61,7 @@ const EditProductModal = ({ product }: TProductProp) => {
             <Input
               id="title"
               className="col-span-3"
-              defaultValue={product?.title}
+              required
               onBlur={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -76,7 +73,7 @@ const EditProductModal = ({ product }: TProductProp) => {
             <Input
               id="description"
               className="col-span-3"
-              defaultValue={product?.description}
+              required
               onBlur={(e) => setDescription(e.target.value)}
             />
           </div>
@@ -85,10 +82,7 @@ const EditProductModal = ({ product }: TProductProp) => {
             <Label htmlFor="category" className="text-left text-[#757575]">
               Category
             </Label>
-            <Select
-              defaultValue={product?.category}
-              onValueChange={(value) => setCategory(value)}
-            >
+            <Select required onValueChange={(value) => setCategory(value)}>
               <SelectTrigger className="col-span-3">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
@@ -119,8 +113,8 @@ const EditProductModal = ({ product }: TProductProp) => {
               id="price"
               min={0}
               step={0.01}
+              required
               className="col-span-3"
-              defaultValue={product?.price}
               onBlur={(e) => setPrice(Number(e.target.value))}
             />
           </div>
@@ -135,8 +129,8 @@ const EditProductModal = ({ product }: TProductProp) => {
               min={0}
               max={5}
               step={0.5}
+              required
               className="col-span-3"
-              defaultValue={product?.rating}
               onBlur={(e) => setRating(Number(e.target.value))}
             />
           </div>
@@ -149,31 +143,29 @@ const EditProductModal = ({ product }: TProductProp) => {
               type="number"
               id="stock"
               min={0}
+              required
               className="col-span-3"
-              defaultValue={product?.stock}
               onBlur={(e) => setStock(Number(e.target.value))}
             />
           </div>
-          <div className="flex  justify-center items-center gap-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <img
-                src={product?.image}
-                alt=""
-                className="size-20 p-[2px] border-2 border-[#5D7E5F] rounded-full"
-              />
-              <Input
-                type="file"
-                id="picture"
-                className="col-span-3"
-                onBlur={(e) => setImageFile(e.target.files?.[0] as File)}
-              />
-            </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="picture" className="text-left text-[#757575]">
+              Picture
+            </Label>
+            <Input
+              type="file"
+              id="picture"
+              required
+              className="col-span-3"
+              onBlur={(e) => setImageFile(e.target.files?.[0] as File)}
+            />
           </div>
 
           <DialogFooter>
             <Button
               type="submit"
-              className="w-full bg-[#5D7E5F] text-lg font-semibold mb-5 space-x-2 rounded-full"
+              className="w-full bg-[#5D7E5F] text-lg font-semibold space-x-2 rounded-full"
             >
               <IoIosSave /> <p>Save</p>
             </Button>
@@ -184,4 +176,4 @@ const EditProductModal = ({ product }: TProductProp) => {
   );
 };
 
-export default EditProductModal;
+export default AddProductModal;

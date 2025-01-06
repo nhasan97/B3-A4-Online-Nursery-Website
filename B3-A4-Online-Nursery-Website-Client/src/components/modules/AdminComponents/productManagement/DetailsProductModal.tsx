@@ -1,4 +1,4 @@
-import { Button } from "../ui/button";
+import { Button } from "../../../ui/button";
 import { MdInfo } from "react-icons/md";
 import {
   Dialog,
@@ -7,9 +7,9 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from "../ui/dialog";
+} from "../../../ui/dialog";
 import { TProductProp } from "@/types/product.type";
-import StarRating from "../shared/StarRating";
+import StarRating from "../../../shared/StarRating";
 
 const DetailsProductModal = ({ product }: TProductProp) => {
   return (

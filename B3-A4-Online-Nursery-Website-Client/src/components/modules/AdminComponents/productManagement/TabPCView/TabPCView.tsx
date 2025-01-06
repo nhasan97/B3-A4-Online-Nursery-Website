@@ -13,7 +13,7 @@ const TabPCView = ({
       <table className="w-full">
         {/* head */}
         <thead>
-          <tr className="flex  justify-between items-center text-[#757575] p-5 border-b">
+          <tr className="flex justify-between items-center text-[#757575] p-5 border-b">
             <th className="flex-1">Image</th>
             <th className="flex-1">Title</th>
             <th className="flex-1">Details</th>

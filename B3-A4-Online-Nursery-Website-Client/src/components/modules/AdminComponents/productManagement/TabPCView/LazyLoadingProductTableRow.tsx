@@ -17,21 +17,21 @@ const LazyLoadingProductTableRow = ({ index }: { index: number }) => {
       </td>
 
       <td className="flex-1">
-        <div className="w-2/3 h-4 bg-[#98B299] mx-auto animate-pulse rounded-lg"></div>
+        <div className="w-full h-4 bg-[#98B299] mx-auto animate-pulse rounded-lg"></div>
       </td>
 
       <td className="flex-1">
-        <div className="w-2/3 h-4 bg-[#98B299] mx-auto animate-pulse rounded-lg"></div>
+        <div className="w-full h-4 bg-[#98B299] mx-auto animate-pulse rounded-lg"></div>
       </td>
 
       <td className="flex-1">
-        <div className="w-2/3 h-4 bg-[#98B299] mx-auto animate-pulse rounded-lg"></div>
+        <div className="w-full h-4 bg-[#98B299] mx-auto animate-pulse rounded-lg"></div>
       </td>
 
-      <td className="flex-1 flex justify-between items-center">
-        <div className="size-4 bg-[#98B299] mx-auto animate-pulse rounded-full"></div>
+      <td className="flex-1 flex justify-center gap-8">
+        <div className="size-4 bg-[#98B299] animate-pulse rounded-full"></div>
 
-        <div className="size-4 bg-[#98B299] mx-auto animate-pulse rounded-full"></div>
+        <div className="size-4 bg-[#98B299] animate-pulse rounded-full"></div>
       </td>
     </tr>
   );

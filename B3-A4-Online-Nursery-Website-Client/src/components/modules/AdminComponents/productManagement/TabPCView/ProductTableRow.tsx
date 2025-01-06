@@ -1,4 +1,4 @@
-import { Button } from "../../ui/button";
+import { Button } from "../../../../ui/button";
 import { MdDelete } from "react-icons/md";
 import EditProductModal from "../EditProductModal";
 import { TProductCrudContext, TProductProp } from "@/types/product.type";

@@ -1,6 +1,6 @@
 import { TProductCrudContext, TProductProp } from "@/types/product.type";
 import EditProductModal from "../EditProductModal";
-import { Button } from "../../ui/button";
+import { Button } from "../../../../ui/button";
 import { MdDelete } from "react-icons/md";
 import DetailsProductModal from "../DetailsProductModal";
 import useProductCrudContext from "@/hooks/useProductCrudContext";
