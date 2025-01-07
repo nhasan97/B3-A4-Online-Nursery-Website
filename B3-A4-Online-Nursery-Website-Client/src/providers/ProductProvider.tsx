@@ -26,7 +26,7 @@ const ProductProvider = ({ children }: TChildren) => {
     loadedMinMaxPrice?.data?.maxPrice
   );
   const [sort, setSort] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
 
   //loading products
@@ -41,7 +41,7 @@ const ProductProvider = ({ children }: TChildren) => {
       itemsPerPage,
     });
 
-  const resetBrower = () => {
+  const resetBrowser = () => {
     setSearchTerm("");
     setCategoryToLoad([]);
     setSort("");
@@ -76,7 +76,7 @@ const ProductProvider = ({ children }: TChildren) => {
     setItemsPerPage,
     setCurrentPage,
 
-    resetBrower,
+    resetBrowser,
     resetPagination,
   };
 
