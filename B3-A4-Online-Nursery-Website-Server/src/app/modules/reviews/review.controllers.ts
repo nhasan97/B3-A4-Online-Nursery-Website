@@ -21,7 +21,14 @@ const getOverallReviews = catchAsync(async (req, res) => {
   );
 });
 
+const postProductReview = catchAsync(async (req, res) => {
+  const response = await ReviewServices.postProductReviewIntoDB(req.body);
+
+  sendResponse(res, httpStatus.OK, true, 'Review Added Successfully', response);
+});
+
 export const ReviewControllers = {
   postOverallReview,
   getOverallReviews,
+  postProductReview,
 };

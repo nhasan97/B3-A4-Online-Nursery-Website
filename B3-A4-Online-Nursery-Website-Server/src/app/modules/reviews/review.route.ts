@@ -13,4 +13,10 @@ router.post(
   ReviewControllers.postOverallReview,
 );
 
+router.post(
+  '/post-product-review',
+  validateRequest(ReviewValidation.postReviewValidationSchema),
+  ReviewControllers.postProductReview,
+);
+
 export const reviewRoutes = router;
