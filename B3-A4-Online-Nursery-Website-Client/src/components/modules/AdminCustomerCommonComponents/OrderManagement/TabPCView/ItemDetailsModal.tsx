@@ -8,8 +8,15 @@ import {
 } from "@/components/ui/dialog";
 import { TCartItem } from "@/types/order.type";
 import { RiPlantFill } from "react-icons/ri";
+import PostReviewModal from "../PostReviewModal";
 
-const ItemDetailsModal = ({ items }: { items: TCartItem[] }) => {
+const ItemDetailsModal = ({
+  items,
+  caller,
+}: {
+  items: TCartItem[];
+  caller: string;
+}) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,9 +33,10 @@ const ItemDetailsModal = ({ items }: { items: TCartItem[] }) => {
           <thead>
             <tr className="w-full flex justify-between items-center text-[#757575] text-center p-5 border-b">
               <th className="flex-1">Product</th>
-              <th className="flex-1">Stock</th>
+              {caller === "admin" && <th className="flex-1">Stock</th>}
               <th className="flex-1">Qty</th>
               <th className="flex-1">Price</th>
+              {caller === "customer" && <th className="flex-1">Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -40,13 +48,24 @@ const ItemDetailsModal = ({ items }: { items: TCartItem[] }) => {
                 >
                   <td className="flex-1">
                     <div className="flex flex-col justify-center items-center gap-2">
-                      <img src={item?.image} alt="" className="size-16" />
+                      <img
+                        src={item?.image}
+                        alt=""
+                        className="size-16 rounded-lg"
+                      />
                       <p>{item?.title}</p>
                     </div>
                   </td>
-                  <td className="flex-1">{item?.stock}</td>
+                  {caller === "admin" && (
+                    <td className="flex-1">{item?.stock}</td>
+                  )}
                   <td className="flex-1">{item?.qty}</td>
                   <td className="flex-1">${item?.price}</td>
+                  {caller === "customer" && (
+                    <td className="flex-1">
+                      <PostReviewModal productId={item?._id as string} />
+                    </td>
+                  )}
                 </tr>
               ))}
             </div>

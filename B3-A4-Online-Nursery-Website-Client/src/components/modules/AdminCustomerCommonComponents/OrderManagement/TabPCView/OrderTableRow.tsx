@@ -42,7 +42,7 @@ const OrderTableRow = ({
       </td>
 
       <td className="flex-1">
-        <ItemDetailsModal items={items} />
+        <ItemDetailsModal items={items} caller={caller as string} />
       </td>
 
       <td className="flex-1">

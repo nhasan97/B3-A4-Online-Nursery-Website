@@ -21,6 +21,19 @@ const reviewApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["review"],
     }),
+    /*
+
+    ------------------------endpoint for adding review in DB------------------------*/
+    addProductReview: builder.mutation({
+      query: (reviewInfo) => {
+        return {
+          url: "/reviews/post-product-review",
+          method: "POST",
+          body: reviewInfo,
+        };
+      },
+      invalidatesTags: ["review"],
+    }),
   }),
 });
 

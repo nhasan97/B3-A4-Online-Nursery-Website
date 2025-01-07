@@ -25,6 +25,7 @@ const MobileViewOrderCard = ({
         <MobileViewOrderDetailsModal
           key={order?._id}
           order={order}
+          caller={caller}
         ></MobileViewOrderDetailsModal>
 
         {caller == "admin" && (
