@@ -19,6 +19,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Rating } from "@smastrom/react-rating";
 
 const PostReviewModal = () => {
   const { token } = useAppSelector((currentState) => currentState.auth);
@@ -67,15 +68,13 @@ const PostReviewModal = () => {
             <Label htmlFor="rating" className="text-left text-[#757575]">
               Rating
             </Label>
-            <Input
-              type="number"
-              min={1}
-              max={5}
-              step={0.5}
-              id="rating"
-              className="col-span-3"
-              required
-              onBlur={(e) => setrating(parseFloat(e.target.value))}
+
+            <Rating
+              style={{ width: 180 }}
+              isRequired
+              value={rating}
+              visibleLabelId="cleanliness_rating"
+              onChange={(selectedValue: number) => setrating(selectedValue)}
             />
           </div>
 
