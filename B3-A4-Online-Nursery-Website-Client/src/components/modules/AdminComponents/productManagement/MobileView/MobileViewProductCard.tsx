@@ -14,7 +14,7 @@ const MobileViewProductCard = ({ product }: TProductProp) => {
       <div className=" p-5 space-y-3">
         <div className="flex items-center gap-3">
           <img
-            src={product?.image}
+            src={product?.images[0]}
             className="size-14 p-[2px] border-2 border-[#5D7E5F] rounded-full"
           ></img>
 

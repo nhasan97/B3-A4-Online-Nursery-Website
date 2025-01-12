@@ -57,7 +57,7 @@ const ProductOverview = () => {
               <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
                 <td className="flex-1 justify-between items-center">
                   <img
-                    src={product?.image}
+                    src={product?.images[0]}
                     className="size-14 mx-auto p-[2px] border-2 border-[#5D7E5F] rounded-full"
                   ></img>
                 </td>
