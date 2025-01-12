@@ -15,7 +15,7 @@ const ProductCard = ({ product }: TProductProp) => {
     <div className="w-full h-fit bg-white p-1 space-y-3 rounded-3xl border group">
       <div className="bg-[#98b2992f] rounded-[20px] h-[300px] overflow-hidden">
         <img
-          src={product?.image}
+          src={product?.images[0]}
           alt=""
           className="w-full h-full rounded-[20px] transition-all ease-in-out duration-300 group-hover:scale-110 "
         />

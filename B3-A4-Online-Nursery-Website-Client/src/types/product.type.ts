@@ -9,7 +9,7 @@ export type TProduct = {
   price: number;
   rating: number;
   stock: number;
-  image: string;
+  images: string[];
 };
 
 export type TProductProp = { product: TProduct };

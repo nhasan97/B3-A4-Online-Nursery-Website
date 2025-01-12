@@ -8,7 +8,7 @@ import useCartContext from "@/hooks/useCartContext";
 import useWishlistContext from "@/hooks/useWishlistContext";
 
 const WishlistTableRow = ({ item }: { item: TWishlist }) => {
-  const { image, title, price, stock } = item?.productId as TProduct;
+  const { images, title, price, stock } = item?.productId as TProduct;
 
   const { handleAddToCart } = useCartContext() as TCartContext;
   const { handleDeleteItemfromWishlist } =
@@ -18,7 +18,7 @@ const WishlistTableRow = ({ item }: { item: TWishlist }) => {
     <tr className="flex justify-between items-center text-[#808080] text-center p-5 border-b">
       <td className="flex-1 justify-between items-center">
         <img
-          src={image}
+          src={images[0]}
           className="size-14 mx-auto p-[2px] border-2 border-[#5D7E5F] rounded-full"
         ></img>
       </td>

@@ -8,7 +8,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
 const MobileViewWishlistCard = ({ item }: { item: TWishlist }) => {
-  const { image, title, price, stock } = item?.productId as TProduct;
+  const { images, title, price, stock } = item?.productId as TProduct;
 
   const { handleAddToCart } = useCartContext() as TCartContext;
 
@@ -20,7 +20,7 @@ const MobileViewWishlistCard = ({ item }: { item: TWishlist }) => {
       <div className=" p-5 space-y-3">
         <div className="flex items-center gap-3">
           <img
-            src={image}
+            src={images[0]}
             className="size-14 p-[2px] border-2 border-[#5D7E5F] rounded-full"
           ></img>
 
