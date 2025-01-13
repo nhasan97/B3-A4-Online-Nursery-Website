@@ -10,6 +10,15 @@ export type TProduct = {
   rating: number;
   stock: number;
   images: string[];
+  botanicalName: string;
+  plantType: string;
+  growthRate: string;
+  height: string;
+  spread: string;
+  sunlightRequirements: string;
+  wateringNeeds: string;
+  soilType: string;
+  careInstructions: string;
 };
 
 export type TProductProp = { product: TProduct };
