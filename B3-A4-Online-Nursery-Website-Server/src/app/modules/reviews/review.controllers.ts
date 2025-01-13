@@ -27,8 +27,23 @@ const postProductReview = catchAsync(async (req, res) => {
   sendResponse(res, httpStatus.OK, true, 'Review Added Successfully', response);
 });
 
+const getProductReviews = catchAsync(async (req, res) => {
+  const response = await ReviewServices.getProductReviewsFromDB(
+    req?.params?.productId,
+  );
+
+  sendResponse(
+    res,
+    httpStatus.OK,
+    true,
+    'Review retrieved Successfully',
+    response,
+  );
+});
+
 export const ReviewControllers = {
   postOverallReview,
   getOverallReviews,
   postProductReview,
+  getProductReviews,
 };

@@ -94,8 +94,19 @@ const postProductReviewIntoDB = async (reviewData: TReview) => {
   }
 };
 
+const getProductReviewsFromDB = async (productId: string) => {
+  const response = await Review.find({
+    isDeleted: { $ne: true },
+    type: REVIEW_TYPE.Product,
+    product: new mongoose.Types.ObjectId(productId),
+  }).populate('user');
+
+  return response;
+};
+
 export const ReviewServices = {
   postOverallReviewIntoDB,
   getOverallReviewsFromDB,
   postProductReviewIntoDB,
+  getProductReviewsFromDB,
 };

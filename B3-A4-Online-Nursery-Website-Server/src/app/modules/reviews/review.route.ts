@@ -13,6 +13,11 @@ router.post(
   ReviewControllers.postOverallReview,
 );
 
+router.get(
+  '/get-product-review/:productId',
+  ReviewControllers.getProductReviews,
+);
+
 router.post(
   '/post-product-review',
   validateRequest(ReviewValidation.postReviewValidationSchema),
