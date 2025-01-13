@@ -22,7 +22,7 @@ const DetailsProductModal = ({ product }: TProductProp) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <img
-            src={product?.image}
+            src={product?.images[0]}
             alt=""
             className="w-full h-[250px] xl:h-[300px] mb-4 object-fill object-center rounded-lg"
           />

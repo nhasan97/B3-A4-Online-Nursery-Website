@@ -20,7 +20,11 @@ const DetailsCategoryModal = ({ category }: TCategoryProp) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <img src={category?.image} alt="" className="w-full mb-4" />
+          <img
+            src={category?.image}
+            alt=""
+            className="w-full h-[250px] xl:h-[300px] mb-4 object-fill object-center rounded-lg"
+          />
           <DialogTitle className="text-[#757575]">
             {category?.category}
           </DialogTitle>
