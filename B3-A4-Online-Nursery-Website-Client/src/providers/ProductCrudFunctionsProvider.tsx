@@ -3,7 +3,6 @@ import { TChildren } from "@/types/children.type";
 import { TProduct, TProductCrudContext } from "@/types/product.type";
 import { catchAsync } from "@/utils/catchAsync";
 import { displaySuccessToast } from "@/utils/displaySuccessToast";
-import { uploadImage } from "@/utils/imageUploader";
 import { createContext, FormEvent, useState } from "react";
 import { toast } from "sonner";
 
@@ -19,7 +18,16 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(0);
   const [stock, setStock] = useState(0);
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [botanicalName, setBotanicalName] = useState("");
+  const [plantType, setPlantType] = useState("");
+  const [growthRate, setGrowthRate] = useState("");
+  const [height, setHeight] = useState("");
+  const [spread, setSpread] = useState("");
+  const [sunlightRequirements, setSunlightRequirements] = useState("");
+  const [wateringNeeds, setWateringNeeds] = useState("");
+  const [soilType, setSoilType] = useState("");
+  const [careInstructions, setCareInstructions] = useState("");
 
   //destructuring DB operation functions from hooks
   const [addProduct] = productApi.useAddProductMutation();
@@ -29,17 +37,34 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
   //handling addition
   const handleAddProduct = catchAsync(async (e: FormEvent) => {
     e.preventDefault();
-    const image = await uploadImage(imageFile as File);
-    const productDetails: TProduct = {
+
+    const formData = new FormData();
+
+    const productDetails = {
       title,
       description,
       category,
       price,
       rating,
       stock,
-      image,
+      botanicalName,
+      plantType,
+      growthRate,
+      height,
+      spread,
+      sunlightRequirements,
+      wateringNeeds,
+      soilType,
+      careInstructions,
     };
-    const res = await addProduct(productDetails).unwrap();
+
+    formData.append("data", JSON.stringify(productDetails));
+
+    for (const image of imageFiles) {
+      formData.append("plantImages", image);
+    }
+
+    const res = await addProduct(formData).unwrap();
     displaySuccessToast(res);
   });
 
@@ -47,26 +72,26 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
   const handleEditProduct = catchAsync(
     async (e: FormEvent, passedProduct: TProduct) => {
       e.preventDefault();
-      let editedImage;
-      if (imageFile) {
-        editedImage = await uploadImage(imageFile as File);
-      } else {
-        editedImage = passedProduct?.image;
-      }
-      const payload = {
-        _id: passedProduct?._id,
-        productDetails: {
-          title: title,
-          description: description,
-          category: category,
-          price: price,
-          rating: rating,
-          stock: stock,
-          image: editedImage,
-        },
-      };
-      const res = await editProduct(payload).unwrap();
-      displaySuccessToast(res);
+      // let editedImage;
+      // if (imageFile) {
+      //   editedImage = await uploadImage(imageFile as File);
+      // } else {
+      //   editedImage = passedProduct?.images[0];
+      // }
+      // const payload = {
+      //   _id: passedProduct?._id,
+      //   productDetails: {
+      //     title: title,
+      //     description: description,
+      //     category: category,
+      //     price: price,
+      //     rating: rating,
+      //     stock: stock,
+      //     images: [editedImage],
+      //   },
+      // };
+      // const res = await editProduct(payload).unwrap();
+      // displaySuccessToast(res);
     }
   );
 
@@ -94,7 +119,18 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
     setPrice,
     setRating,
     setStock,
-    setImageFile,
+    imageFiles,
+    setImageFiles,
+    setBotanicalName,
+    setPlantType,
+    setGrowthRate,
+    setHeight,
+    setSpread,
+    setSunlightRequirements,
+    setWateringNeeds,
+    setSoilType,
+    setCareInstructions,
+
     handleAddProduct,
     handleEditProduct,
     handleDeleteProduct,

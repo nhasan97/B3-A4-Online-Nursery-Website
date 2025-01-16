@@ -57,7 +57,18 @@ export type TProductCrudContext = {
   setPrice: React.Dispatch<React.SetStateAction<number>>;
   setRating: React.Dispatch<React.SetStateAction<number>>;
   setStock: React.Dispatch<React.SetStateAction<number>>;
-  setImageFile: React.Dispatch<React.SetStateAction<File | null>>;
+  imageFiles: [] | File[];
+  setImageFiles: React.Dispatch<React.SetStateAction<[] | File[]>>;
+  setBotanicalName: React.Dispatch<React.SetStateAction<string>>;
+  setPlantType: React.Dispatch<React.SetStateAction<string>>;
+  setGrowthRate: React.Dispatch<React.SetStateAction<string>>;
+  setHeight: React.Dispatch<React.SetStateAction<string>>;
+  setSpread: React.Dispatch<React.SetStateAction<string>>;
+  setSunlightRequirements: React.Dispatch<React.SetStateAction<string>>;
+  setWateringNeeds: React.Dispatch<React.SetStateAction<string>>;
+  setSoilType: React.Dispatch<React.SetStateAction<string>>;
+  setCareInstructions: React.Dispatch<React.SetStateAction<string>>;
+
   handleAddProduct: (e: FormEvent) => Promise<void>;
   handleEditProduct: (e: FormEvent, passedProduct: TProduct) => Promise<void>;
   handleDeleteProduct: (_id: string) => void;

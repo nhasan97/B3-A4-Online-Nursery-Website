@@ -209,6 +209,27 @@ const ProductDetailsSection = ({
               </p>
             </div>
 
+            <div className="space-y-2">
+              <h6 className="text-lg lg:text-xl text-[#505050] font-medium">
+                Stock Status
+              </h6>
+              {product?.stock > 10 && (
+                <p className="w-fit py-2 px-4 bg-green-100 text-green-700 rounded-full">
+                  In Stock
+                </p>
+              )}
+              {product?.stock > 0 && product?.stock < 10 && (
+                <p className="w-fit py-2 px-4 bg-orange-100 text-orange-600 rounded-full">
+                  Low In Stock
+                </p>
+              )}
+              {product?.stock <= 0 && (
+                <p className="w-fit py-2 px-4 bg-red-100 text-red-600 rounded-full">
+                  Stock Out
+                </p>
+              )}
+            </div>
+
             <h5 className="text-xl lg:text-2xl font-semibold">
               Price: ${product?.price}
             </h5>

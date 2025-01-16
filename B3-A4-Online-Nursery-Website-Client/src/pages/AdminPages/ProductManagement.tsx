@@ -13,9 +13,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import Pagination from "@/components/shared/Pagination";
 import ProductBrowser from "@/components/modules/ProductsPageAndManagement/ProductBrowser";
-import AddProductModal from "@/components/modules/AdminComponents/productManagement/AddProductModal";
 import TabPCView from "@/components/modules/AdminComponents/productManagement/TabPCView/TabPCView";
 import MobileView from "@/components/modules/AdminComponents/productManagement/MobileView/MobileView";
+import { Button } from "@/components/ui/button";
+import { FaCirclePlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const ProductManagement = () => {
   const {
@@ -58,7 +60,11 @@ const ProductManagement = () => {
           <div className="w-full flex justify-between items-center gap-12">
             {/* browser */}
             <ProductBrowser caller={"ProductManagement"} />
-            <AddProductModal></AddProductModal>
+            <Link to="/admin-dashboard/add-products">
+              <Button className="bg-[#5D7E5F] text-base md:text-lg font-semibold space-x-2 rounded-full">
+                <FaCirclePlus /> <p>Product</p>
+              </Button>
+            </Link>
           </div>
 
           {/*tab pc view */}
