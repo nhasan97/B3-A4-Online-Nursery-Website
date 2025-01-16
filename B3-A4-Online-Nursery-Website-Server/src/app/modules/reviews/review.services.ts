@@ -28,9 +28,9 @@ const getOverallReviewsFromDB = async () => {
 const postProductReviewIntoDB = async (reviewData: TReview) => {
   // userId: new mongoose.Types.ObjectId(userId),
 
-  const query = {
-    _id: new mongoose.Types.ObjectId(reviewData?.product),
-  };
+  const query = reviewData?.product
+    ? { _id: new mongoose.Types.ObjectId(reviewData.product.toString()) }
+    : {};
 
   const product = await productModel.findOne(query);
 

@@ -2,6 +2,7 @@ import httpStatus from 'http-status';
 import { TProduct } from './product.interface';
 import { productModel } from './product.model';
 import AppError from '../../Errors/AppError';
+import { TImageFiles } from '../images/image.interface';
 /*
 
 ----------------service function for fetching all products data from DB----------------*/
@@ -116,7 +117,13 @@ const getMinMaxProductPriceFromDB = async () => {
 /*
 
 ----------------service function for inserting product data in DB----------------*/
-const createProductIntoDB = async (productData: TProduct) => {
+const createProductIntoDB = async (
+  productData: TProduct,
+  productImages: TImageFiles,
+) => {
+  const { plantImages } = productImages;
+  productData.images = plantImages.map((image) => image.path);
+
   const response = await productModel.create(productData);
   return response;
 };

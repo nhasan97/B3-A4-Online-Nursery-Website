@@ -33,7 +33,52 @@ const productSchema = new Schema<TProduct, ProductModel>({
     type: Number,
     required: true,
   },
-  image: {
+  images: {
+    type: [String],
+    required: true,
+    trim: true,
+  },
+  botanicalName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  plantType: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  growthRate: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  height: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  spread: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  sunlightRequirements: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  wateringNeeds: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  soilType: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  careInstructions: {
     type: String,
     required: true,
     trim: true,
@@ -54,7 +99,16 @@ productSchema.pre('save', async function (next) {
     price: this.price,
     rating: this.rating,
     stock: this.stock,
-    image: this.image,
+    images: this.images,
+    botanicalName: this.botanicalName,
+    plantType: this.plantType,
+    growthRate: this.growthRate,
+    height: this.height,
+    spread: this.spread,
+    sunlightRequirements: this.sunlightRequirements,
+    wateringNeeds: this.wateringNeeds,
+    soilType: this.soilType,
+    careInstructions: this.careInstructions,
   });
   if (doesExist) {
     throw new AppError(

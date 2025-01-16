@@ -8,7 +8,16 @@ export interface TProduct {
   price: number;
   rating: number;
   stock: number;
-  image: string;
+  images?: string[];
+  botanicalName: string;
+  plantType: string;
+  growthRate: string;
+  height: string;
+  spread: string;
+  sunlightRequirements: string;
+  wateringNeeds: string;
+  soilType: string;
+  careInstructions: string;
   isDeleted?: boolean;
 }
 

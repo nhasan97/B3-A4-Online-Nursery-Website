@@ -2,6 +2,8 @@ import catchAsync from '../../utils/catchAsync';
 import { productServices } from './product.services';
 import { sendResponse } from '../../utils/sendResponse';
 import httpStatus from 'http-status';
+import AppError from '../../Errors/AppError';
+import { TImageFiles } from '../images/image.interface';
 /*
 
 --------------controller for getting all product data from DB----------------*/
@@ -62,8 +64,18 @@ const getMinMaxProductPrice = catchAsync(async (req, res) => {
 
 ----------------controller for inserting new product data in DB----------------*/
 const createProduct = catchAsync(async (req, res) => {
+  if (!req.files) {
+    throw new AppError(400, 'Please upload an image');
+  }
+
   //Passing data to service function
-  const response = await productServices.createProductIntoDB(req.body);
+  const response = await productServices.createProductIntoDB(
+    req.body,
+    req.files as TImageFiles,
+  );
+
+  console.log(req.body);
+  console.log(req.files);
 
   //sending response
   sendResponse(
