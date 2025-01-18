@@ -243,7 +243,7 @@ const AddProductPage = () => {
                   <div className="w-full flex items-center gap-4 my-4 flex-wrap">
                     {imagePreviews.length > 0 &&
                       imagePreviews.map((imageDataUrl, index) => (
-                        <div key={index}>
+                        <div key={index} className="relative">
                           <img
                             key={imageDataUrl}
                             src={imageDataUrl}
@@ -253,32 +253,16 @@ const AddProductPage = () => {
 
                           <Button
                             type="button"
+                            className="size-2 p-3 rounded-full absolute -top-2 -right-2"
                             onClick={() => handleRemoveImage(index)}
                           >
-                            x
+                            <i className="fa-solid fa-xmark text-sm"></i>
                           </Button>
                         </div>
                       ))}
                   </div>
                 </div>
               </div>
-
-              {/* <div>
-                  <label
-                    className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
-                    htmlFor="image"
-                  >
-                    Upload image
-                  </label>
-                  <input
-                    type="file"
-                    multiple
-                    id="image"
-                    name="title"
-                    className="hidden"
-                    onChange={(e) => handlImageChange(e)}
-                  />
-                </div> */}
             </div>
 
             <div className="space-y-3 sm:space-y-6">
@@ -420,9 +404,6 @@ const AddProductPage = () => {
               <Input
                 type="number"
                 id="rating"
-                // min={0}
-                // max={5}
-                // step={0.5}
                 value={0}
                 required
                 hidden
