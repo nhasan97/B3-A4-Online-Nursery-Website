@@ -51,13 +51,29 @@ export type TProductContext = {
 };
 
 export type TProductCrudContext = {
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  rating: number;
+  stock: number;
+  imageFiles: [] | File[];
+  botanicalName: string;
+  plantType: string;
+  growthRate: string;
+  height: string;
+  spread: string;
+  sunlightRequirements: string;
+  wateringNeeds: string;
+  soilType: string;
+  careInstructions: string;
+
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setPrice: React.Dispatch<React.SetStateAction<number>>;
   setRating: React.Dispatch<React.SetStateAction<number>>;
   setStock: React.Dispatch<React.SetStateAction<number>>;
-  imageFiles: [] | File[];
   setImageFiles: React.Dispatch<React.SetStateAction<[] | File[]>>;
   setBotanicalName: React.Dispatch<React.SetStateAction<string>>;
   setPlantType: React.Dispatch<React.SetStateAction<string>>;
@@ -70,7 +86,7 @@ export type TProductCrudContext = {
   setCareInstructions: React.Dispatch<React.SetStateAction<string>>;
 
   handleAddProduct: (e: FormEvent) => Promise<void>;
-  handleEditProduct: (e: FormEvent, passedProduct: TProduct) => Promise<void>;
+  handleEditProduct: (e: FormEvent, ...args: any[]) => Promise<void>;
   handleDeleteProduct: (_id: string) => void;
 };
 

@@ -70,28 +70,42 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
 
   //handling edit
   const handleEditProduct = catchAsync(
-    async (e: FormEvent, passedProduct: TProduct) => {
+    async (e: FormEvent, passedProduct: TProduct, existingImages: string[]) => {
       e.preventDefault();
-      // let editedImage;
-      // if (imageFile) {
-      //   editedImage = await uploadImage(imageFile as File);
-      // } else {
-      //   editedImage = passedProduct?.images[0];
-      // }
-      // const payload = {
-      //   _id: passedProduct?._id,
-      //   productDetails: {
-      //     title: title,
-      //     description: description,
-      //     category: category,
-      //     price: price,
-      //     rating: rating,
-      //     stock: stock,
-      //     images: [editedImage],
-      //   },
-      // };
-      // const res = await editProduct(payload).unwrap();
-      // displaySuccessToast(res);
+
+      const formData = new FormData();
+
+      const productDetails = {
+        title,
+        description,
+        category,
+        price,
+        stock,
+        images: [...existingImages],
+        botanicalName,
+        plantType,
+        growthRate,
+        height,
+        spread,
+        sunlightRequirements,
+        wateringNeeds,
+        soilType,
+        careInstructions,
+      };
+
+      formData.append("data", JSON.stringify(productDetails));
+
+      for (const image of imageFiles) {
+        formData.append("plantImages", image);
+      }
+
+      const payload = {
+        _id: passedProduct?._id,
+        formData,
+      };
+
+      const res = await editProduct(payload).unwrap();
+      displaySuccessToast(res);
     }
   );
 
@@ -113,13 +127,29 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
   };
 
   const productCrudFunctions: TProductCrudContext = {
+    title,
+    description,
+    category,
+    price,
+    rating,
+    stock,
+    imageFiles,
+    botanicalName,
+    plantType,
+    growthRate,
+    height,
+    spread,
+    sunlightRequirements,
+    wateringNeeds,
+    soilType,
+    careInstructions,
+
     setTitle,
     setDescription,
     setCategory,
     setPrice,
     setRating,
     setStock,
-    imageFiles,
     setImageFiles,
     setBotanicalName,
     setPlantType,

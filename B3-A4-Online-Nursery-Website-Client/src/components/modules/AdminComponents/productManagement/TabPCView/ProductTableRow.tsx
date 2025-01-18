@@ -1,9 +1,9 @@
 import { Button } from "../../../../ui/button";
-import { MdDelete } from "react-icons/md";
-import EditProductModal from "../EditProductModal";
+import { MdDelete, MdEditDocument } from "react-icons/md";
 import { TProductCrudContext, TProductProp } from "@/types/product.type";
 import DetailsProductModal from "../DetailsProductModal";
 import useProductCrudContext from "@/hooks/useProductCrudContext";
+import { Link } from "react-router-dom";
 
 const ProductTableRow = ({ product }: TProductProp) => {
   const { handleDeleteProduct } =
@@ -50,7 +50,11 @@ const ProductTableRow = ({ product }: TProductProp) => {
       </td>
 
       <td className="flex-1">
-        <EditProductModal product={product}></EditProductModal>
+        <Link to={`/admin-dashboard/edit-products/${product?._id}`}>
+          <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl sm:text-xl text-[#757575] hover:text-[#5D7E5F] rounded-full">
+            <MdEditDocument />
+          </Button>
+        </Link>
         <Button
           className="bg-transparent hover:bg-red-100 text-2xl sm:text-xl text-[#757575] hover:text-red-600 rounded-full"
           onClick={() => handleDeleteProduct(product?._id as string)}

@@ -108,7 +108,7 @@ const productApi = baseApi.injectEndpoints({
         return {
           url: `/products/edit-product/${payload._id}`,
           method: "PUT",
-          body: payload.productDetails,
+          body: payload.formData,
         };
       },
       invalidatesTags: ["product"],

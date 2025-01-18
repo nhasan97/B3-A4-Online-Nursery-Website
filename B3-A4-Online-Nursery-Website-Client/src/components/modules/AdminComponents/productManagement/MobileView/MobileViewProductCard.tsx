@@ -1,9 +1,9 @@
 import { TProductCrudContext, TProductProp } from "@/types/product.type";
-import EditProductModal from "../EditProductModal";
 import { Button } from "../../../../ui/button";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEditDocument } from "react-icons/md";
 import DetailsProductModal from "../DetailsProductModal";
 import useProductCrudContext from "@/hooks/useProductCrudContext";
+import { Link } from "react-router-dom";
 
 const MobileViewProductCard = ({ product }: TProductProp) => {
   const { handleDeleteProduct } =
@@ -27,7 +27,11 @@ const MobileViewProductCard = ({ product }: TProductProp) => {
           </div>
 
           <div className="flex-1 flex justify-center items-center bg-[#98b2992f] border-x-2">
-            <EditProductModal product={product}></EditProductModal>
+            <Link to={`/admin-dashboard/edit-products/${product?._id}`}>
+              <Button className="bg-transparent hover:bg-[#98b2992f] text-2xl sm:text-xl text-[#757575] hover:text-[#5D7E5F] rounded-full">
+                <MdEditDocument />
+              </Button>
+            </Link>
           </div>
 
           <div className="flex-1 flex justify-center items-center bg-[#98b2992f] rounded-r-full">

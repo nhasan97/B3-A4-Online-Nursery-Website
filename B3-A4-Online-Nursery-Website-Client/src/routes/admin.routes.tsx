@@ -10,6 +10,8 @@ import AddBlogPage from "@/components/modules/AdminComponents/BlogManagement/Add
 import BlogDeatilsPage from "@/components/modules/AdminComponents/BlogManagement/BlogDeatilsPage";
 import EditBlogPage from "@/components/modules/AdminComponents/BlogManagement/EditBlogPage";
 import MessageManagement from "@/pages/AdminPages/MessageManagement";
+import AddProductPage from "@/components/modules/AdminComponents/productManagement/AddProductPage";
+import EditProductPage from "@/components/modules/AdminComponents/productManagement/EditProductPage/EditProductPage";
 
 const adminDashboardPaths = [
   {
@@ -49,6 +51,22 @@ const adminDashboardPaths = [
     element: (
       <ProtectedRoute role="admin">
         <ProductManagement />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "add-products",
+    element: (
+      <ProtectedRoute role="admin">
+        <AddProductPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "edit-products/:_id",
+    element: (
+      <ProtectedRoute role="admin">
+        <EditProductPage />
       </ProtectedRoute>
     ),
   },
