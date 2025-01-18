@@ -31,6 +31,9 @@ router.post(
 //------------route for updating product data in DB------------
 router.put(
   '/edit-product/:id',
+  multerUpload.fields([{ name: 'plantImages' }]),
+  // validateImageFileRequest(ImageFilesArrayZodSchema),
+  parseBody,
   validateRequest(ProductValidations.updateProductValidationSchema),
   productControllers.updateProduct,
 );

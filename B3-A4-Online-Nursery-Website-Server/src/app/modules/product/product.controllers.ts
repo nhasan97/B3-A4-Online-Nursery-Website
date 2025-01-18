@@ -74,9 +74,6 @@ const createProduct = catchAsync(async (req, res) => {
     req.files as TImageFiles,
   );
 
-  console.log(req.body);
-  console.log(req.files);
-
   //sending response
   sendResponse(
     res,
@@ -94,6 +91,7 @@ const updateProduct = catchAsync(async (req, res) => {
   const response = await productServices.updateProductIntoDB(
     req.params.id,
     req.body,
+    req.files as TImageFiles,
   );
 
   //sending response

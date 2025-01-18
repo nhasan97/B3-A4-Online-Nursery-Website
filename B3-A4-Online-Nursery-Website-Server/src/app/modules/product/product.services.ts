@@ -3,6 +3,7 @@ import { TProduct } from './product.interface';
 import { productModel } from './product.model';
 import AppError from '../../Errors/AppError';
 import { TImageFiles } from '../images/image.interface';
+import { areArraysEqualUnorderedDeep } from './product.utils';
 /*
 
 ----------------service function for fetching all products data from DB----------------*/
@@ -133,11 +134,35 @@ const createProductIntoDB = async (
 const updateProductIntoDB = async (
   id: string,
   updatedProductData: Partial<TProduct>,
+  productImages: TImageFiles,
 ) => {
   //checking if the selected product exists or not. If not throwing an error.
   const loadedProduct = await productModel.doesProductExist(id);
   if (!loadedProduct) {
     throw new AppError(httpStatus.NOT_FOUND, 'Product not found');
+  }
+
+  let updatedImageData: string[] = [];
+  if (
+    !areArraysEqualUnorderedDeep(
+      loadedProduct.images as string[],
+      updatedProductData.images as string[],
+    )
+  ) {
+    updatedImageData = [...(updatedProductData.images as string[])];
+  } else {
+    updatedImageData = [...(loadedProduct.images as string[])];
+  }
+
+  const plantImages = productImages['plantImages'];
+
+  if (plantImages && plantImages.length > 0) {
+    updatedProductData.images = [
+      ...(updatedImageData as string[]),
+      ...plantImages.map((image) => image.path),
+    ];
+  } else {
+    updatedProductData.images = [...(updatedImageData as string[])];
   }
 
   //updating product data in DB
