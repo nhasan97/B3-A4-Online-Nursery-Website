@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import MainLogo from "@/components/shared/MainLogo";
 import { NavLink, useNavigate } from "react-router-dom";
 import Container from "../Container";
@@ -23,7 +24,7 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((currentState) => currentState.auth);
 
-  let user;
+  let user: any;
   if (token) {
     user = verifyToken(token);
   }
@@ -101,7 +102,17 @@ const Navbar = () => {
                       </span>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() =>
+                        navigate(
+                          (user as TUser)?.role === "admin"
+                            ? "/admin-dashboard/profile"
+                            : "/user-dashboard/profile"
+                        )
+                      }
+                    >
+                      Profile
+                    </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Button
                         className="p-2 bg-transparent hover:bg-[#98B299] text-[#98B299] hover:text-[rgba(255,255,255,0.88)] text-base rounded-full border border-[#98B299] hover:border-transparent"

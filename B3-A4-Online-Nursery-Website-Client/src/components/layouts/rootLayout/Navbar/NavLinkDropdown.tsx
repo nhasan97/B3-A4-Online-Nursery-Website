@@ -35,7 +35,7 @@ const NavLinkDropdown = () => {
           <HiMenuAlt3 className="text-2xl text-[#808080]" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="m-3">
         {(user as TUser)?.email && (
           <DropdownMenuLabel>
             Signed In as <br />
@@ -84,9 +84,15 @@ const NavLinkDropdown = () => {
             </DropdownMenuRadioItem>
           )}
 
+          {(user as TUser)?.role === "admin" && (
+            <DropdownMenuRadioItem value="">
+              <NavLink to="/admin-dashboard/profile">Profile</NavLink>
+            </DropdownMenuRadioItem>
+          )}
+
           {(user as TUser)?.role === "user" && (
             <DropdownMenuRadioItem value="">
-              <NavLink to="/profile">Profile</NavLink>
+              <NavLink to="/user-dashboard/profile">Profile</NavLink>
             </DropdownMenuRadioItem>
           )}
 
