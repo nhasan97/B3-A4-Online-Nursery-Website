@@ -2,6 +2,7 @@ import httpStatus from 'http-status';
 import AppError from '../../Errors/AppError';
 import { userModel } from './user.model';
 import { userRole } from './user.constant';
+import { TUser } from './user.interface';
 /*
 
 ----------------service function for fetching all users data from DB----------------*/
@@ -76,9 +77,29 @@ const getUserFromDB = async (id: string) => {
   //returning response
   return response;
 };
+/*
+
+--------------------------service function for updating the user info in db--------------------------*/
+const updateLoggedInUserInfoInDB = async (
+  userId: string,
+  updatedUserInfo: Partial<TUser>,
+) => {
+  const user = await userModel.findById(userId);
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  const response = await userModel.findByIdAndUpdate(userId, updatedUserInfo, {
+    new: true,
+  });
+
+  return response;
+};
 
 export const userServices = {
   getAllUsersFromDB,
   getAllUsersCountFromDB,
   getUserFromDB,
+  updateLoggedInUserInfoInDB,
 };

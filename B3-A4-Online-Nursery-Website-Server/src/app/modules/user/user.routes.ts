@@ -12,4 +12,7 @@ router.get('/get-all-users-count', userControllers.getAllUsersCount);
 //------------route for getting user from DB------------
 router.get('/get-speicific-user/:id', userControllers.getUser);
 
+//------------route for updating user info in DB------------
+router.put('/edit-user-info/:userId', userControllers.updateLoggedInUserInfo);
+
 export const userRoutes = router;
