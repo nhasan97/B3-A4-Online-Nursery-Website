@@ -2,31 +2,23 @@ import Container from "@/components/layouts/rootLayout/Container";
 import ProductCard from "@/components/modules/ProductsPageAndManagement/ProductCard";
 import NoData from "@/components/shared/NoData";
 import SiteTitle from "@/components/shared/SiteTitle";
-import { TProduct, TProductContext } from "@/types/product.type";
-import useProductContext from "@/hooks/useProductContext";
+import { TProduct } from "@/types/product.type";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../ui/button";
 import "../../../cssStyles/Tab.css";
 import ProductCardSkeleton from "../../ProductsPageAndManagement/ProductCardSkeleton";
+import productApi from "@/redux/api/ProductApi";
 
 const FeaturedProducts = () => {
-  const {
-    loadingNumberOfProducts,
-    numberOfProducts,
-    setItemsPerPage,
-    loadingProducts,
-    products,
-    resetBrowser,
-    resetPagination,
-  } = useProductContext() as TProductContext;
-
-  useEffect(() => {
-    resetBrowser();
-    resetPagination();
-    setItemsPerPage(numberOfProducts);
-  }, [numberOfProducts, resetBrowser, resetPagination, setItemsPerPage]);
+  const { isLoading: loadingProducts, data: products } =
+    productApi.useGetProductsQuery({
+      searchTerm: "",
+      categoryToLoad: "",
+      sort: "",
+      currentPage: 0,
+      itemsPerPage: 12,
+    });
 
   const navigate = useNavigate();
 
@@ -60,15 +52,15 @@ const FeaturedProducts = () => {
             </TabsList>
 
             <TabsContent value="featured">
-              {loadingProducts || loadingNumberOfProducts ? (
+              {loadingProducts ? (
                 <div className="w-full h-[80%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 my-5 overflow-y-auto">
                   {Array.from({ length: 4 }).map((_, index) => (
                     <ProductCardSkeleton key={index} />
                   ))}
                 </div>
-              ) : products?.length > 0 ? (
+              ) : products?.data?.length > 0 ? (
                 <div className="w-full h-[80%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 my-5 overflow-y-auto">
-                  {products.slice(0, 4).map((product: TProduct) => (
+                  {products?.data?.slice(0, 4).map((product: TProduct) => (
                     <ProductCard key={product._id} product={product} />
                   ))}
                 </div>
@@ -78,15 +70,15 @@ const FeaturedProducts = () => {
             </TabsContent>
 
             <TabsContent value="newArrivals">
-              {loadingProducts || loadingNumberOfProducts ? (
+              {loadingProducts ? (
                 <div className="w-full h-[80%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 my-5 overflow-y-auto">
                   {Array.from({ length: 4 }).map((_, index) => (
                     <ProductCardSkeleton key={index} />
                   ))}
                 </div>
-              ) : products?.length > 0 ? (
+              ) : products?.data?.length > 0 ? (
                 <div className="w-full h-[80%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 my-5 overflow-y-auto">
-                  {products.slice(4, 8).map((product: TProduct) => (
+                  {products?.data?.slice(4, 8).map((product: TProduct) => (
                     <ProductCard key={product._id} product={product} />
                   ))}
                 </div>
@@ -96,15 +88,15 @@ const FeaturedProducts = () => {
             </TabsContent>
 
             <TabsContent value="bestSeller">
-              {loadingProducts || loadingNumberOfProducts ? (
+              {loadingProducts ? (
                 <div className="w-full h-[80%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 my-5 overflow-y-auto">
                   {Array.from({ length: 4 }).map((_, index) => (
                     <ProductCardSkeleton key={index} />
                   ))}
                 </div>
-              ) : products?.length > 0 ? (
+              ) : products?.data?.length > 0 ? (
                 <div className="w-full h-[80%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 my-5 overflow-y-auto">
-                  {products.slice(8, 12).map((product: TProduct) => (
+                  {products?.data?.slice(8, 12).map((product: TProduct) => (
                     <ProductCard key={product._id} product={product} />
                   ))}
                 </div>
