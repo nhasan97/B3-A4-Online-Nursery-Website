@@ -4,51 +4,51 @@ import Masonry from "./Masonry";
 
 const images = [
   {
-    path: "https://i.ibb.co/wygztjZ/10-most-beautiful-plants-in-the-world.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459496/BleedingHeart_dlb6fn.webp",
     name: "Bleeding Heart",
   },
   {
-    path: "https://i.ibb.co/mhP6gP5/images-3.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459490/BlueAgave_ghd9cf.webp",
     name: "Blue Agave",
   },
   {
-    path: "https://i.ibb.co/jrHfNTh/fern-leaf-roll-nature-preview.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459492/FernRollup_d6xugg.webp",
     name: "Fern Rollup",
   },
   {
-    path: "https://i.ibb.co/XVnzg41/1409fa55f66e24fdd7df383fce42e0d1.jpg",
-    name: "lotus",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459494/Lotus_lekftd.webp",
+    name: "Lotus",
   },
   {
-    path: "https://i.ibb.co/rf52NpB/get-to-know-most-popular-houseplants-on-pinterest-instagram-section-9.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459491/FicusElastica_gnua1e.webp",
     name: "Ficus Elastica",
   },
   {
-    path: "https://i.ibb.co/C1sDyLk/57f83ff5ae182c8c982843138de4a487.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459495/Monstera_lvkgi4.webp",
     name: "Monstera",
   },
   {
-    path: "https://i.ibb.co/CKcY10F/cerulean-splendor-mesmerizing-bluey-flower-260nw-2468261027.webp",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459489/BlueDahlia_dbhwpt.webp",
     name: "Blue Dahlia",
   },
   {
-    path: "https://i.ibb.co/99Zxkws/ai-generated-a-mesmerizing-macro-capture-of-a-green-succulent-plant-free-photo.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459492/GreenSucculent_a57stx.webp",
     name: "Green Succulent",
   },
   {
-    path: "https://i.ibb.co/LPP2f5c/a00eae159337987e3ea9b0f56ede72fd.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459494/Tulip_md1xd0.webp",
     name: "Tulip",
   },
   {
-    path: "https://i.ibb.co/LvvHKDs/images-5.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459489/OrangeDaisy_r4ltm7.webp",
     name: "Orange Daisy",
   },
   {
-    path: "https://i.ibb.co/GV4LLJ6/IMG-1056.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459489/Hibiscus_coeazs.webp",
     name: "Hibiscus",
   },
   {
-    path: "https://i.ibb.co/JH8dLM2/images-4.jpg",
+    path: "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737459489/ParrotsFeather_q0tprh.webp",
     name: "Parrots Feather",
   },
 ];
