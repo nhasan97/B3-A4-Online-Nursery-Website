@@ -1,6 +1,5 @@
 import Container from "@/components/layouts/rootLayout/Container";
 import SiteTitle from "@/components/shared/SiteTitle";
-import howToOrder from "../../../../../assets/images/howToOrder.png";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +44,12 @@ const HowToOrder = () => {
             </div>
 
             <div className="flex-1 flex justify-center items-center relative">
-              <img src={howToOrder} alt="" />
+              <img
+                src={
+                  "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737471187/howToOrder_sxqsak.webp"
+                }
+                alt=""
+              />
               <Button
                 className="bg-[#5D7E5F] text-white text-lg lg:text-2xl size-[120px] sm:size-[150px] md:size-[100px] lg:size-[150px] rounded-full absolute animate-pulse hover:animate-none"
                 onClick={() => navigate("/all-products")}

@@ -1,5 +1,4 @@
 import Container from "@/components/layouts/rootLayout/Container";
-import offer from "../../../../../assets/images/offer.png";
 import "../../../../cssStyles/textPreview.css";
 
 const SpecialOfferSection = () => {
@@ -8,7 +7,12 @@ const SpecialOfferSection = () => {
       <Container>
         <div className="w-full h-full flex flex-col md:flex-row gap-8 sm:gap-16">
           <div className="w-full md:w-1/2 h-full flex justify-center items-center bg-white px-5">
-            <img src={offer} className="w-2/3 mx-auto my-auto" />
+            <img
+              src={
+                "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737471188/offer_lwedw3.webp"
+              }
+              className="w-2/3 mx-auto my-auto"
+            />
           </div>
 
           <div className="w-full md:w-1/2 flex flex-col justify-center items-center gap-6 p-5 text-center text-white">

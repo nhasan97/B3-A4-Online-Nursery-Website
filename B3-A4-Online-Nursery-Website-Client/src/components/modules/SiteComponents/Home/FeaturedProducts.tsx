@@ -3,7 +3,6 @@ import ProductCard from "@/components/modules/ProductsPageAndManagement/ProductC
 import NoData from "@/components/shared/NoData";
 import SiteTitle from "@/components/shared/SiteTitle";
 import { TProduct, TProductContext } from "@/types/product.type";
-import plant from "../../../../assets/images/plant4.png";
 import useProductContext from "@/hooks/useProductContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect } from "react";
@@ -39,7 +38,9 @@ const FeaturedProducts = () => {
       <Container>
         <div className="w-full h-full flex flex-col justify-center items-center gap-6 sm:gap-12">
           <img
-            src={plant}
+            src={
+              "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737471189/featured_zwzssb.webp"
+            }
             alt=""
             className="w-2/3 sm:w-1/2 md:w-[60%] xl:w-1/2 2xl:w-1/4 absolute top-0 translate-y-[-90%]"
           />

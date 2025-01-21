@@ -3,10 +3,7 @@ import { Button } from "../../../ui/button";
 import { RiArrowRightLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { GiCheckMark } from "react-icons/gi";
-import bannerImg1 from "../../../../assets/images/slide1.png";
-import bannerImg2 from "../../../../assets/images/330cfb4a-076c-439c-85d0-5aef6fe74935_360.jpeg";
-import bannerImg3 from "../../../../assets/images/slide3.png";
-import plant from "../../../../assets/images/plant1.png";
+// import plant from "../../../../assets/images/plant1.png";
 
 import {
   Carousel,
@@ -59,7 +56,9 @@ const Banner = () => {
             </Button>
 
             <img
-              src={plant}
+              src={
+                "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737470095/plant1_df5bu1.webp"
+              }
               alt=""
               className="hidden lg:flex w-[55%] absolute bottom-0 right-0 lg:translate-x-[70%] xl:translate-x-[50%] lg:translate-y-[55%] xl:translate-y-[62%] z-20"
             />
@@ -74,13 +73,34 @@ const Banner = () => {
             >
               <CarouselContent>
                 <CarouselItem>
-                  <img src={bannerImg1} alt="" className="w-full" />
+                  <img
+                    src={
+                      "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737467408/slide1_x3jlmw.webp"
+                    }
+                    alt=""
+                    loading="lazy"
+                    className="w-full"
+                  />
                 </CarouselItem>
                 <CarouselItem>
-                  <img src={bannerImg2} alt="" className="w-full" />
+                  <img
+                    src={
+                      "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737467407/slide2_aayzob.webp"
+                    }
+                    alt=""
+                    loading="lazy"
+                    className="w-full"
+                  />
                 </CarouselItem>
                 <CarouselItem>
-                  <img src={bannerImg3} alt="" className="w-full" />
+                  <img
+                    src={
+                      "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737467407/slide3_acedaw.webp"
+                    }
+                    alt=""
+                    loading="lazy"
+                    className="w-full"
+                  />
                 </CarouselItem>
               </CarouselContent>
               <CarouselPrevious />
