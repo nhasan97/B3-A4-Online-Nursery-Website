@@ -6,7 +6,7 @@ const GeneralCare = () => {
     <div className="w-full h-full flex flex-col xl:flex-row 2xl:flex-col">
       <div className="w-full xl:w-1/2 2xl:w-full h-full">
         <img
-          src="https://i.ibb.co.com/wLpts57/pexels-karolina-grabowska-6640487.jpg"
+          src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737476079/pexels-karolina-grabowska-6640487_kbnu9f.webp"
           alt=""
           className="w-full h-full bg-[#B0C3B1] p-1 rounded-md object-fill object-center"
         />

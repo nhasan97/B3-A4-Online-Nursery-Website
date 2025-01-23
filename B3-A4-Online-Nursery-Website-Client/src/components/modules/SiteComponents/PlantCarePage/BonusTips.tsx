@@ -25,7 +25,7 @@ const BonusTips = () => {
 
       <div className="w-full h-[70%]">
         <img
-          src="https://i.ibb.co.com/hfvPmMP/bonustip-bg.png"
+          src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737476082/bonustip-bg_ggtisp.webp"
           alt=""
           className="h-full mx-auto"
         />

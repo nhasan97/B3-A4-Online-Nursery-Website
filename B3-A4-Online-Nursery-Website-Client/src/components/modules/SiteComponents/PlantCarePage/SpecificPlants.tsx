@@ -8,7 +8,7 @@ const SpecificPlants = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         <div className="w-full flex flex-col justify-center items-center gap-3 bg-[#b0c3b148]  p-5 rounded-lg shadow-lg">
           <img
-            src="https://i.ibb.co.com/44wWJKF/Astrofarer-bowl-shaped-pot-of-beautiful-cacti-and-succulents.webp"
+            src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737476083/Astrofarer_bowl-shaped_pot_of_beautiful_cacti_and_succulents_ba0mnd.webp"
             alt=""
             className="h-[200px]"
           />
@@ -20,7 +20,7 @@ const SpecificPlants = () => {
 
         <div className="w-full flex flex-col justify-center items-center gap-3 bg-[#b0c3b148]  p-5 rounded-lg shadow-lg">
           <img
-            src="https://i.ibb.co.com/NjgQ3HF/pngtree-table-with-an-herb-garden-on-it-picture-image-2762219.png"
+            src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737476079/pngtree-table-with-an-herb-garden-on-it-picture-image_2762219_vfwj6m.webp"
             alt=""
             className="h-[200px]"
           />
@@ -32,7 +32,7 @@ const SpecificPlants = () => {
 
         <div className="w-full flex flex-col justify-center items-center gap-3 bg-[#b0c3b148]  p-5 rounded-lg shadow-lg">
           <img
-            src="https://i.ibb.co.com/qpwq0DF/FINAL-CUT-dark-blue-orchid2.jpg"
+            src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737476079/FINAL_CUT-dark-blue-orchid2_jy3rzi.webp"
             alt=""
             className="h-[200px]"
           />
