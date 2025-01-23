@@ -41,7 +41,7 @@ const PlantCarePage = () => {
               defaultValue="general"
               className="w-full h-[calc(100%-48px)] flex flex-col my-6"
             >
-              <TabsList className="TabsList bg-white">
+              <TabsList className="TabsList bg-white overflow-x-auto">
                 <TabsTrigger className="TabsTrigger" value="general">
                   General Care
                 </TabsTrigger>

@@ -10,7 +10,7 @@ const BonusTips = () => {
       </div>
 
       <div className="w-full lg:w-1/2 mx-auto h-[10%] space-y-3">
-        <p className="ft text-[#757575] text-lg">
+        <p className="ft text-[#757575] text-lg text-center">
           Subscribe to our newsletter for seasonal care tips tailored to your
           plants!
         </p>
