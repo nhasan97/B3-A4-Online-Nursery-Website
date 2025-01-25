@@ -8,7 +8,7 @@ const AboutUsPage = () => {
 
   return (
     <div className="w-full">
-      <div className="w-full flex flex-col justify-center items-center gap-3 text-center p-20 bg-[url('https://i.ibb.co.com/fG0PNfY/Serene-Indoor-Botanical-Corner-Vibrant-Plant-Background-HD.webp')] bg-[#00000077] bg-blend-overlay bg-cover bg-no-repeat bg-center bg-fixed">
+      <div className="w-full flex flex-col justify-center items-center gap-3 text-center p-20 bg-[url('https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816291/Serene_Indoor_Botanical_Corner_Vibrant_Plant_Background-HD_d6sz7s.webp')] bg-[#00000077] bg-blend-overlay bg-cover bg-no-repeat bg-center bg-fixed">
         <h1 className=" text-white text-3xl md:text-[40px] lg:text-[50px] font-bold leading-[40px] md:leading-[55px] lg:leading-[70px]">
           Bringing Nature Home
         </h1>
@@ -33,7 +33,7 @@ const AboutUsPage = () => {
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 pt-10 lg:pt-20 pb-5 lg:pb-10">
           <div className="w-full lg:w-1/2">
             <img
-              src="https://i.ibb.co.com/HCbhkj4/images-6.jpg"
+              src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816291/a965527e784d75ac33f7ab3054bc3757-removebg-preview_xz8is8.webp"
               alt=""
               className="w-full h-full"
             />
@@ -62,7 +62,7 @@ const AboutUsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
             <div className="bg-[#b0c3b148] w-full p-1 space-y-3 rounded-3xl border">
               <img
-                src="https://i.ibb.co.com/SJ2MXqy/istockphoto-1280008207-612x612.jpg"
+                src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816535/istockphoto-1280008207-612x612_mnrhx6.webp"
                 alt=""
                 className="w-full h-[200px] object-fill object-center rounded-[20px]"
               />
@@ -81,7 +81,7 @@ const AboutUsPage = () => {
 
             <div className="bg-[#b0c3b148] w-full p-1 space-y-3 rounded-3xl border">
               <img
-                src="https://i.ibb.co.com/KzZvg02/hands-holding-seedling-eggshells-montessori-260nw-1634965723.jpg"
+                src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816535/hands-holding-seedling-eggshells-montessori-260nw-1634965723_ph2wdj.webp"
                 alt=""
                 className="w-full h-[200px] object-fill object-center rounded-[20px]"
               />
@@ -98,7 +98,7 @@ const AboutUsPage = () => {
 
             <div className="bg-[#b0c3b148] w-full p-1 space-y-3 rounded-3xl border">
               <img
-                src="https://i.ibb.co.com/tMCNrZp/feature-3-scaled.jpg"
+                src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816536/feature-3-scaled_dzqufh.webp"
                 alt=""
                 className="w-full h-[200px] object-fill object-center rounded-[20px]"
               />
@@ -124,7 +124,7 @@ const AboutUsPage = () => {
           <div className="flex flex-col gap-12 text-center">
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6">
               <img
-                src="https://i.ibb.co.com/hH8hBzy/service.png"
+                src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816290/service_fg2mrj.webp"
                 alt=""
                 className="size-fit md:size-[200px] bg-[#b0c3b148] p-2 rounded-full"
               />
@@ -150,7 +150,7 @@ const AboutUsPage = () => {
                 </p>
               </div>{" "}
               <img
-                src="https://i.ibb.co.com/gDXWHy6/price-down.png"
+                src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816290/price-down_w7ru9z.webp"
                 alt=""
                 className="size-fit md:size-[200px] bg-[#b0c3b148] p-2 rounded-full"
               />
@@ -158,7 +158,7 @@ const AboutUsPage = () => {
 
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6">
               <img
-                src="https://i.ibb.co.com/QF3R2Zw/customer-service.png"
+                src="https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816290/customer-service_ut6wgz.webp"
                 alt=""
                 className="size-fit md:size-[200px] bg-[#b0c3b148] p-2 rounded-full"
               />
@@ -176,7 +176,7 @@ const AboutUsPage = () => {
         </div>
       </Container>
 
-      <div className="w-full flex flex-col justify-center items-center gap-3 text-center p-10 md:p-20 bg-[url('https://i.ibb.co.com/Pj0Q1JJ/terrace-with-potted-plants-and-flowers-free-photo.jpg')] bg-[#00000077] bg-blend-overlay bg-cover bg-no-repeat bg-center bg-fixed">
+      <div className="w-full flex flex-col justify-center items-center gap-3 text-center p-10 md:p-20 bg-[url('https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816290/terrace-with-potted-plants-and-flowers-free-photo_cz73q2.webp')] bg-[#00000077] bg-blend-overlay bg-cover bg-no-repeat bg-center bg-fixed">
         <div className="bg-white w-full lg:w-1/2 p-5 rounded-lg">
           <h1 className="text-center text-[#757575] text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-semibold mb-3 md:mb-6">
             Our Vision
