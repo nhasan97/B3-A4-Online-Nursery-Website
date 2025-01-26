@@ -74,7 +74,12 @@ const EditProductPage = () => {
             <form
               className="bg-white grid gap-12 p-2 sm:p-5 rounded-lg overflow-y-auto"
               onSubmit={(e) =>
-                handleEditProduct(e, product?.data, existingImages)
+                handleEditProduct(
+                  e,
+                  product?.data,
+                  existingImages,
+                  setExisitingImages
+                )
               }
             >
               <BasicInfo product={product?.data} />

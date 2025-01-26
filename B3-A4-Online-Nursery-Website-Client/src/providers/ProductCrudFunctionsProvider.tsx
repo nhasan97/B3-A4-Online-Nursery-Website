@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import productApi from "@/redux/api/ProductApi";
 import { TChildren } from "@/types/children.type";
 import { TProduct, TProductCrudContext } from "@/types/product.type";
@@ -64,13 +65,20 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
       formData.append("plantImages", image);
     }
 
+    formData.append("folderName", "plants");
+
     const res = await addProduct(formData).unwrap();
     displaySuccessToast(res);
   });
 
   //handling edit
   const handleEditProduct = catchAsync(
-    async (e: FormEvent, passedProduct: TProduct, existingImages: string[]) => {
+    async (
+      e: FormEvent,
+      passedProduct: TProduct,
+      existingImages: string[],
+      setExisitingImages: any
+    ) => {
       e.preventDefault();
 
       const formData = new FormData();
@@ -98,6 +106,7 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
       for (const image of imageFiles) {
         formData.append("plantImages", image);
       }
+      formData.append("folderName", "plants");
 
       const payload = {
         _id: passedProduct?._id,
@@ -106,6 +115,8 @@ const ProductCrudFunctionsProvider = ({ children }: TChildren) => {
 
       const res = await editProduct(payload).unwrap();
       displaySuccessToast(res);
+      setImageFiles([]);
+      setExisitingImages([]);
     }
   );
 
