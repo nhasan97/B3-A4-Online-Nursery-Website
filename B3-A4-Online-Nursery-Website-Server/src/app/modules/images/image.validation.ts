@@ -1,16 +1,5 @@
 import { z } from 'zod';
-
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 3; // 3MB
-const ACCEPTED_FILE_TYPES = [
-  'image/png',
-  'image/jpeg',
-  'image/jpg',
-  'image/webp',
-  'png',
-  'jpeg',
-  'jpg',
-  'webp',
-] as const;
+import { ACCEPTED_FILE_TYPES, MAX_UPLOAD_SIZE } from './image.constant';
 
 const ImageFileZodSchema = z.object({
   fieldname: z.string(),
