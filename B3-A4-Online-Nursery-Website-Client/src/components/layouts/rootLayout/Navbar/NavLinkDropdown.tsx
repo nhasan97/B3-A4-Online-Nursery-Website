@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { verifyToken } from "@/utils/verifyToken";
 import { logout } from "@/redux/features/auth/authSlice";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import useCartContext from "@/hooks/useCartContext";
+import { TCartContext } from "@/types/cart.type";
 
 const NavLinkDropdown = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +29,8 @@ const NavLinkDropdown = () => {
   }
 
   const navigate = useNavigate();
+
+  const { itemsInCartCount } = useCartContext() as TCartContext;
 
   return (
     <DropdownMenu>
@@ -64,11 +68,11 @@ const NavLinkDropdown = () => {
           ))}
 
           <DropdownMenuRadioItem value="">
-            <NavLink
-              to="/cart-page"
-              // className="p-2 rounded-full transition duration-300 ease-in-out"
-            >
-              Cart
+            <NavLink to="/cart-page" className="flex items-center gap-1">
+              <p>Cart</p>
+              <p className="size-5 bg-[#808080] text-white text-xs text-center rounded-full">
+                {itemsInCartCount}
+              </p>
             </NavLink>
           </DropdownMenuRadioItem>
 

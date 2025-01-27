@@ -19,6 +19,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import useCartContext from "@/hooks/useCartContext";
+import { TCartContext } from "@/types/cart.type";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +32,8 @@ const Navbar = () => {
   }
 
   const navigate = useNavigate();
+
+  const { itemsInCartCount } = useCartContext() as TCartContext;
 
   return (
     <div className="w-full py-5">
@@ -68,12 +72,15 @@ const Navbar = () => {
             )}
           </div>
 
-          <div className="hidden lg:flex justify-between items-center">
+          <div className="hidden lg:flex justify-between items-center gap-2">
             <Button
-              className="bg-transparent hover:bg-transparent text-lg text-[#808080] hover:text-[#98B299]"
+              className="bg-transparent hover:bg-transparent text-lg text-[#808080] hover:text-[#98B299] relative"
               onClick={() => navigate("/cart-page")}
             >
               <i className="fa-solid fa-cart-shopping" />
+              <p className="size-5 bg-[#808080] text-white text-xs border-2 border-white rounded-full absolute top-0 right-0">
+                {itemsInCartCount}
+              </p>
             </Button>
 
             {(user as TUser)?.email ? (
