@@ -38,7 +38,7 @@ const MobileView = () => {
           </p>
           <p className="flex justify-between">
             <span className="font-medium text-[#757575]">Grand Total -</span>
-            <span>${total + Number(80)}</span>
+            <span>${(total + Number(80)).toFixed(2)}</span>
           </p>
         </div>
 

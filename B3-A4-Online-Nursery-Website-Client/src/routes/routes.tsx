@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         element: <StripePaymentPage />,
       },
       {
-        path: "/success-page",
+        path: "/success-page/:orderId",
         element: <SuccessPage />,
       },
       {
