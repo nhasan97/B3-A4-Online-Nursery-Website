@@ -16,7 +16,7 @@ const FAQSection = () => {
           <SiteTitle title={"FAQ"}></SiteTitle>
           <div className="w-full h-full flex flex-col sm:flex-row gap-6">
             <div className="w-full sm:w-1/2">
-              <img src={faqGif} alt="" />
+              <img src={faqGif} alt="" loading="lazy" />
             </div>
             <div className="w-full sm:w-1/2 flex items-center">
               <Accordion type="single" collapsible className="w-full">

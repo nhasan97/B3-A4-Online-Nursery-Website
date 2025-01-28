@@ -13,6 +13,7 @@ const BlogCards = ({ blog }: { blog: Tblog }) => {
       <div className="absolute xl:left-0 -translate-y-1/4 xl:-translate-x-1/4 xl:translate-y-0 rounded-lg">
         <img
           src={thumbnail}
+          loading="lazy"
           className="w-[240px] h-[150px] xl:size-[200px] bg-[#B0C3B1] p-1 rounded-md object-fill object-center shadow-2xl"
         />
       </div>
@@ -36,6 +37,7 @@ const BlogCards = ({ blog }: { blog: Tblog }) => {
         <div className="flex items-center gap-3">
           <img
             src={authorImage}
+            loading="lazy"
             className="size-12 rounded-full object-fill object-center"
           />
           <div className="space-y-1">

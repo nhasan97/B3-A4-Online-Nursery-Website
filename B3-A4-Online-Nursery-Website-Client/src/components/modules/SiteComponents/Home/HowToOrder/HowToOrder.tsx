@@ -48,7 +48,7 @@ const HowToOrder = () => {
                 src={
                   "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737471187/howToOrder_sxqsak.webp"
                 }
-                alt=""
+                loading="lazy"
               />
               <Button
                 className="bg-[#5D7E5F] text-white text-lg lg:text-2xl size-[120px] sm:size-[150px] md:size-[100px] lg:size-[150px] rounded-full absolute animate-pulse hover:animate-none"

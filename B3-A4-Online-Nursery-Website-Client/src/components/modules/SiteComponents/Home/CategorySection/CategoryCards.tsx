@@ -11,6 +11,7 @@ const CategoryCards = ({ category }: TCategoryProp) => {
             <AvatarImage
               src={category?.image}
               alt="@shadcn"
+              loading="lazy"
               className=" rounded-full"
             />
             <AvatarFallback className="bg-[#98b2992f] text-4xl text-[#808080]">

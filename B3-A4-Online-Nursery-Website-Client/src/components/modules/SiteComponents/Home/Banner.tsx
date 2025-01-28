@@ -59,6 +59,7 @@ const Banner = () => {
               src={
                 "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737470095/plant1_df5bu1.webp"
               }
+              loading="lazy"
               alt=""
               className="hidden lg:flex w-[55%] absolute bottom-0 right-0 lg:translate-x-[70%] xl:translate-x-[50%] lg:translate-y-[55%] xl:translate-y-[62%] z-20"
             />

@@ -11,6 +11,7 @@ const SpecialOfferSection = () => {
               src={
                 "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737471188/offer_lwedw3.webp"
               }
+              loading="lazy"
               className="w-2/3 mx-auto my-auto"
             />
           </div>

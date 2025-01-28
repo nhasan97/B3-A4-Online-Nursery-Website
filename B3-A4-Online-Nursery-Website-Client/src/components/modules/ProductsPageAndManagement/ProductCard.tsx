@@ -16,6 +16,7 @@ const ProductCard = ({ product }: TProductProp) => {
       <div className="bg-[#98b2992f] rounded-[20px] h-[300px] overflow-hidden">
         <img
           src={product?.images[0]}
+          loading="lazy"
           alt=""
           className="w-full h-full rounded-[20px] transition-all ease-in-out duration-300 group-hover:scale-110 "
         />

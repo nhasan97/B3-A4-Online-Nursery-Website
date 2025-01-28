@@ -11,6 +11,7 @@ const ReviewCard = ({ review }: { review: TReview }) => {
     <div className="w-fit mx-auto bg-[#ECF1EC] flex flex-col justify-center items-center mb-10 shadow-2xl">
       <img
         src={imageUrl}
+        loading="lazy"
         className="size-[120px] object-cover object-center rounded-full border-4 border-white translate-y-1/2 z-10 shadow-2xl"
       />
 

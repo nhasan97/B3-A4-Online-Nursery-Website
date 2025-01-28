@@ -15,7 +15,13 @@ const Masonry = ({
           style={{ width: "100%", display: "block", padding: gap / 2 }}
           className="w-fit flex flex-col items-center relative"
         >
-          <img key={i} src={image.path} alt="" className="w-full" />
+          <img
+            key={i}
+            src={image.path}
+            loading="lazy"
+            alt=""
+            className="w-full"
+          />
           <div
             //right-[${ gap / 2}px] bottom-[${gap / 2}px]
 

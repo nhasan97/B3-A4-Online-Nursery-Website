@@ -33,7 +33,7 @@ const FeaturedProducts = () => {
             src={
               "https://res.cloudinary.com/dcnktq9l2/image/upload/v1737471189/featured_zwzssb.webp"
             }
-            alt=""
+            loading="lazy"
             className="w-2/3 sm:w-1/2 md:w-[60%] xl:w-1/2 2xl:w-1/4 absolute top-0 translate-y-[-90%]"
           />
           <SiteTitle title={"Featured Plants"}></SiteTitle>
