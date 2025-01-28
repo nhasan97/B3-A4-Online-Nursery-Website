@@ -40,6 +40,9 @@ const CsutomerOrderManagement = () => {
       userId: (user as TUser)?.id,
     });
 
+  const { isLoading: loadingOrdersCount, data: ordersCount } =
+    orderApi.useGetAllOrdersCountQuery((user as TUser)?.id);
+
   return (
     <div className="h-[calc(100vh-64px)]">
       <DashboardContainer>
@@ -74,23 +77,23 @@ const CsutomerOrderManagement = () => {
 
           {/*tab pc view */}
           <TabPCView
-            // loadingOrdersCount={loadingOrdersCount}
+            loadingOrdersCount={loadingOrdersCount}
             loadingOrders={loadingOrders}
-            orders={loadedOrders?.data?.orders}
+            orders={loadedOrders?.data}
             caller={"customer"}
           />
 
           {/* mobile view */}
           <MobileView
-            // loadingOrdersCount={loadingOrdersCount}
+            loadingOrdersCount={loadingOrdersCount}
             loadingOrders={loadingOrders}
-            orders={loadedOrders?.data?.orders}
+            orders={loadedOrders?.data}
             caller={"customer"}
           />
 
           <Pagination
-            loadingDataLength={loadingOrders}
-            dataLength={loadedOrders?.data?.orderCount}
+            loadingDataLength={loadingOrdersCount}
+            dataLength={ordersCount?.data}
             itemsPerPage={itemsPerPage}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}

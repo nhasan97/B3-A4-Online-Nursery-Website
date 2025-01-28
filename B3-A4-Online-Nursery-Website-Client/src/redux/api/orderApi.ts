@@ -30,10 +30,34 @@ const orderApi = baseApi.injectEndpoints({
     /*
 
     ------------------------endpoint for getting orders count by status from DB------------------------*/
+    getAllOrdersCount: builder.query({
+      query: (userId) => {
+        return {
+          url: `/orders/get-all-orders-count/${userId}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["order"],
+    }),
+    /*
+
+    ------------------------endpoint for getting orders count by status from DB------------------------*/
     getOrderCountByStatus: builder.query({
       query: (userId) => {
         return {
           url: `/orders/get-orders-count-by-status/${userId}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["order"],
+    }),
+    /*
+
+    ------------------------endpoint for getting orders count by status from DB------------------------*/
+    getSpecificOrder: builder.query({
+      query: (orderId) => {
+        return {
+          url: `/orders/get-specific-order/${orderId}`,
           method: "GET",
         };
       },
@@ -57,8 +81,6 @@ const orderApi = baseApi.injectEndpoints({
     ------------------------endpoint for adding order in DB------------------------*/
     placeOrder: builder.mutation({
       query: (orderInfo) => {
-        console.log(orderInfo);
-
         return {
           url: "/orders",
           method: "POST",

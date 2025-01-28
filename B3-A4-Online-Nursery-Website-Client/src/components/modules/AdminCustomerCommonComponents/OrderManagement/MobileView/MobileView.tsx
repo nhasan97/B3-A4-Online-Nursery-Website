@@ -4,19 +4,19 @@ import MobileViewOrderCard from "./MobileViewOrderCard";
 import LazyLoadingOrderCard from "./LazyLoadingOrderCard";
 
 const MobileView = ({
-  // loadingOrdersCount,
+  loadingOrdersCount,
   loadingOrders,
   orders,
   caller,
 }: {
-  // loadingOrdersCount: boolean;
+  loadingOrdersCount: boolean;
   loadingOrders: boolean;
   orders: IOrder[];
   caller?: string;
 }) => {
   return (
     <div className="grid grid-cols-1 gap-3 sm:hidden w-full h-[80%] overflow-y-auto rounded-lg">
-      {loadingOrders ? (
+      {loadingOrders || loadingOrdersCount ? (
         Array.from({ length: 10 }).map((_, index: number) => (
           <LazyLoadingOrderCard index={index} />
         ))

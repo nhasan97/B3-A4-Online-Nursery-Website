@@ -11,8 +11,8 @@ const OrderOverview = () => {
     user = verifyToken(token);
   }
 
-  const { isLoading: loadingOrderCount, data: loadedDataCount } =
-    orderApi.useGetAllOrdersCountQuery((user as TUser).id);
+  const { isLoading: loadingOrdersCount, data: ordersCount } =
+    orderApi.useGetAllOrdersCountQuery((user as TUser)?.id);
 
   const {
     isLoading: loadingOrderCountByStatus,
@@ -22,7 +22,7 @@ const OrderOverview = () => {
   const overviewData = [
     {
       title: "Total Orders",
-      data: loadedDataCount?.data,
+      data: ordersCount?.data,
       imageSrc: "https://i.ibb.co.com/BcWghB0/sustainable.png",
     },
     {
@@ -53,7 +53,7 @@ const OrderOverview = () => {
 
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-      {loadingOrderCount || loadingOrderCountByStatus
+      {loadingOrdersCount || loadingOrderCountByStatus
         ? Array.from({ length: 4 }).map((_, index: number) => (
             <div
               key={index}

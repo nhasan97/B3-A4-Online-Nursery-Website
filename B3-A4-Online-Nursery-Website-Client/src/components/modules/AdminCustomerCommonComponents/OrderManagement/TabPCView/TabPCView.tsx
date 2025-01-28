@@ -4,12 +4,12 @@ import OrderTableRow from "./OrderTableRow";
 import LazyLoadingOrderTableRow from "./LazyLoadingOrderTableRow";
 
 const TabPCView = ({
-  // loadingOrdersCount,
+  loadingOrdersCount,
   loadingOrders,
   orders,
   caller,
 }: {
-  // loadingOrdersCount: boolean;
+  loadingOrdersCount: boolean;
   loadingOrders: boolean;
   orders: IOrder[];
   caller?: string;
@@ -30,7 +30,7 @@ const TabPCView = ({
         </thead>
         <tbody>
           {/* row  */}
-          {loadingOrders ? (
+          {loadingOrders || loadingOrdersCount ? (
             Array.from({ length: 10 }).map((_, index: number) => (
               <LazyLoadingOrderTableRow index={index} />
             ))
