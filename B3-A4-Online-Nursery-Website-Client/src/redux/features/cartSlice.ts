@@ -27,28 +27,13 @@ const cartSlice = createSlice({
         (item) => item._id !== action.payload
       );
     },
-    // toggleTodoStatus: (currentState, action: PayloadAction<string>) => {
-    //   const task = currentState.todos.find(
-    //     (todo) => todo.id === action.payload
-    //   );
-    //   task!.isCompleted = !task?.isCompleted;
-    //   currentState.todos.sort((a, b) =>
-    //     a.isCompleted > b.isCompleted
-    //       ? 1
-    //       : a.isCompleted < b.isCompleted
-    //       ? -1
-    //       : 0
-    //   );
-    // },
-    // filterTodos: (currentState, action: PayloadAction<string>) => {
-    //   const status = action.payload === "pending" ? false : true;
-    //   currentState.todos = currentState.todos.filter(
-    //     (todo) => todo.isCompleted === status
-    //   );
-    // },
+    removeAllItemsFromCart: (currentState) => {
+      currentState.cartItems = [];
+    },
   },
 });
 
-export const { addToCart, removeItem, editQty } = cartSlice.actions;
+export const { addToCart, removeItem, editQty, removeAllItemsFromCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

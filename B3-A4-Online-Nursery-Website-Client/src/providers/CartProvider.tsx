@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TCartContext, TCartItem } from "@/types/cart.type";
 import { TChildren } from "@/types/children.type";
 import { TProduct } from "@/types/product.type";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { toast } from "sonner";
 
 export const CartContext = createContext<TCartContext | undefined>(undefined);
@@ -16,31 +16,59 @@ const CartProvider = ({ children }: TChildren) => {
 
   const dispatch = useAppDispatch();
 
-  //handling add to cart
-  const handleAddToCart = (product: TProduct) => {
-    if (product.stock > 0) {
-      const matchedItem = itemsInCart.find(
-        (item) => item?._id === product?._id
-      );
+  //checking if the item already is in cart
+  const isItemAlreadyInCart = (_id: string) => {
+    const matchedItem = itemsInCart.find((item) => item?._id === _id);
+    if (matchedItem) {
+      return matchedItem;
+    } else return false;
+  };
 
-      if (matchedItem && matchedItem?.qty + 1 <= product?.stock) {
+  const [desiredQty, setDesiredQty] = useState(1);
+  const handleEditQtyInProductDetails = (
+    passedQty: number,
+    product: TProduct
+  ) => {
+    const matchedItem = isItemAlreadyInCart(product?._id as string);
+
+    if (
+      matchedItem &&
+      matchedItem?.qty + (desiredQty + passedQty) <= product?.stock
+    ) {
+      setDesiredQty(desiredQty + passedQty);
+    } else if (
+      desiredQty + passedQty > 0 ||
+      desiredQty + passedQty <= product?.stock
+    ) {
+      setDesiredQty(desiredQty + passedQty);
+    }
+  };
+
+  //handling add to cart
+  const handleAddToCart = (desiredQty: number, product: TProduct) => {
+    if (product.stock > 0) {
+      const matchedItem = isItemAlreadyInCart(product?._id as string);
+
+      if (matchedItem && matchedItem?.qty + desiredQty <= product?.stock) {
         const payload = {
           _id: matchedItem?._id,
-          qty: matchedItem?.qty + 1,
+          qty: matchedItem?.qty + desiredQty,
         };
         dispatch(editQty(payload));
         toast.success("Product quantity increased in cart");
-      } else if (product?.stock - 1 > 0) {
+      } else if (product?.stock - desiredQty > 0) {
         const item = {
           _id: product?._id,
           title: product?.title,
           price: product?.price,
           stock: product?.stock,
-          qty: 1,
-          image: product?.image,
+          qty: desiredQty,
+          image: product?.images[0],
         };
         dispatch(addToCart(item));
         toast.success("Product successfully added to cart");
+      } else if (product?.stock - desiredQty < 0) {
+        toast.error("Sorry! Not enough quantity left");
       }
     } else {
       toast.error("Out of Stock");
@@ -88,7 +116,10 @@ const CartProvider = ({ children }: TChildren) => {
 
   const cartInfo: TCartContext = {
     itemsInCart,
+    itemsInCartCount: itemsInCart?.length,
     total,
+    desiredQty,
+    handleEditQtyInProductDetails,
     handleAddToCart,
     handleEditQty,
     handleDeleteCartItem,
