@@ -6,10 +6,10 @@ import { MessageValidation } from './message.validation';
 const router = express.Router();
 
 //------------route for fetching all the message data from DB------------
-router.get('/get-all-messages/:userEmail', messageControllers.getAllMessages);
-
-//------------route for fetching message count from DB------------
-router.get('/get-all-messages-count', messageControllers.getMessageCount);
+router.get(
+  '/get-user-messages/:userEmail',
+  messageControllers.getMessagesForUser,
+);
 
 //------------route for inserting new message data in DB------------
 router.post(

@@ -6,9 +6,9 @@ import { messageServices } from './message.service';
 /*
 
 --------------controller for getting all messages data from DB----------------*/
-const getAllMessages = catchAsync(async (req, res) => {
+const getMessagesForUser = catchAsync(async (req, res) => {
   //receiving data from service function
-  const response = await messageServices.getMessagesForUser(
+  const response = await messageServices.getMessagesForUserFromDB(
     req?.params?.userEmail,
     req?.query,
   );
@@ -25,20 +25,6 @@ const getAllMessages = catchAsync(async (req, res) => {
   //   } else {
   //     sendResponse(res, httpStatus.NOT_FOUND, false, 'No Data Found', response);
   //   }
-});
-/*
-
---------------controller for getting messages count from DB----------------*/
-const getMessageCount = catchAsync(async (req, res) => {
-  const response = await messageServices.getMessageCountFromDB();
-
-  sendResponse(
-    res,
-    httpStatus.OK,
-    true,
-    'Data fetched successfully!',
-    response,
-  );
 });
 /*
 
@@ -86,8 +72,7 @@ const deleteMessage = catchAsync(async (req, res) => {
 });
 //exporting all the controller functions through messageControllers object
 export const messageControllers = {
-  getAllMessages,
-  getMessageCount,
+  getMessagesForUser,
   postMessage,
   updateMessageStatus,
   deleteMessage,

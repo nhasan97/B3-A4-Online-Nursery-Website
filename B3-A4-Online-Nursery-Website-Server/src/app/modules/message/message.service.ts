@@ -5,48 +5,49 @@ import { messageModel } from './message.model';
 
 /*
 
-----------------service function for fetching all categories data from DB----------------*/
-const getMessagesForUser = async (
+----------------service function for fetching messgaes from DB----------------*/
+const getMessagesForUserFromDB = async (
   userEmail: string,
   query: Record<string, unknown>,
 ) => {
   const queryObject = { ...query };
 
-  const searchableFields = ['name', 'email', 'subject'];
+  const searchableFields = ['name', 'email', 'subject', 'sentTo', 'status'];
   let searchTerm = '';
   if (query?.searchTerm) {
     searchTerm = query?.searchTerm as string;
   }
-
-  // Base query to handle search
   const searchQuery = messageModel.find({
     $or: searchableFields.map((field) => ({
       [field]: { $regex: searchTerm, $options: 'i' },
     })),
   });
 
-  // Filtering and excluding unnecessary fields
   const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
+
   excludeFields.forEach((el) => delete queryObject[el]);
 
-  const filterQuery = searchQuery.find({
-    isDeleted: { $ne: true },
-    ...queryObject,
-    $or: [
-      { sentTo: userEmail }, // Messages received by the user
-      { email: userEmail }, // Messages sent by the user
-    ],
-  });
+  let filterQuery;
+  if (query?.messageType === 'received') {
+    filterQuery = searchQuery.find({
+      isDeleted: { $ne: true },
+      sentTo: userEmail,
+    });
+  }
+  if (query?.messageType === 'sent') {
+    filterQuery = searchQuery.find({
+      isDeleted: { $ne: true },
+      email: userEmail,
+    });
+  }
 
-  // Sorting
   let sort = '-createdAt';
   if (query?.sort) {
     sort = query?.sort as string;
   }
-  const sortQuery = filterQuery.sort(sort);
+  const sortQuery = filterQuery?.sort(sort);
 
-  // Pagination
-  let limit = 10; // Default limit to 10
+  let limit = 1;
   let page = 1;
   let skip = 0;
   if (query?.limit) {
@@ -57,89 +58,28 @@ const getMessagesForUser = async (
     skip = page * limit;
   }
 
-  const paginateQuery = sortQuery.skip(skip);
+  const paginateQuery = sortQuery?.skip(skip);
 
-  // Get paginated data
-  const messages = await paginateQuery.limit(limit);
+  const limitQuery = await paginateQuery?.limit(limit);
 
-  // Classify messages
-  const receivedMessages = messages.filter((msg) => msg.sentTo === userEmail);
-  const sentMessages = messages.filter((msg) => msg.email === userEmail);
+  let messageCountQuery;
+  if (query?.messageType === 'received') {
+    messageCountQuery = {
+      isDeleted: { $ne: true },
+      sentTo: userEmail,
+    };
+  }
+  if (query?.messageType === 'sent') {
+    messageCountQuery = {
+      isDeleted: { $ne: true },
+      email: userEmail,
+    };
+  }
 
-  // Get document counts for received and sent messages
-  const totalReceivedCount = await messageModel.countDocuments({
-    isDeleted: { $ne: true },
-    sentTo: userEmail,
-    // ...queryObject,
-  });
+  const totalMessageCount =
+    await messageModel.countDocuments(messageCountQuery);
 
-  const totalSentCount = await messageModel.countDocuments({
-    isDeleted: { $ne: true },
-    email: userEmail,
-    // ...queryObject,
-  });
-
-  return {
-    receivedMessages,
-    sentMessages,
-    totalReceivedCount,
-    totalSentCount,
-  };
-};
-
-// const getAllMessagesFromDB = async (query: Record<string, unknown>) => {
-//   const queryObject = { ...query };
-
-//   const searchableFields = ['name', 'email', 'subject'];
-//   let searchTerm = '';
-//   if (query?.searchTerm) {
-//     searchTerm = query?.searchTerm as string;
-//   }
-//   const searchQuery = messageModel.find({
-//     $or: searchableFields.map((field) => ({
-//       [field]: { $regex: searchTerm, $options: 'i' },
-//     })),
-//   });
-
-//   const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
-
-//   excludeFields.forEach((el) => delete queryObject[el]);
-//   const filterQuery = searchQuery.find({
-//     isDeleted: { $ne: true },
-//     ...queryObject,
-//   });
-
-//   let sort = '-createdAt';
-//   if (query?.sort) {
-//     sort = query?.sort as string;
-//   }
-//   const sortQuery = filterQuery.sort(sort);
-
-//   let limit = 1;
-//   let page = 1;
-//   let skip = 0;
-//   if (query?.limit) {
-//     limit = Number(query?.limit);
-//   }
-//   if (query?.page) {
-//     page = Number(query?.page);
-//     skip = page * limit;
-//   }
-
-//   const paginateQuery = sortQuery.skip(skip);
-
-//   const limitQuery = await paginateQuery.limit(limit);
-
-//   return limitQuery;
-// };
-/*
-
-----------------service function for fetching categories count from DB----------------*/
-const getMessageCountFromDB = async () => {
-  const response = await messageModel.countDocuments({
-    isDeleted: { $ne: true },
-  });
-  return response;
+  return { limitQuery, totalMessageCount };
 };
 /*
 
@@ -190,8 +130,7 @@ const deleteMessageFromDB = async (id: string) => {
 
 //exporting all the service functions through messageServices object
 export const messageServices = {
-  getMessagesForUser,
-  getMessageCountFromDB,
+  getMessagesForUserFromDB,
   postMessageIntoDB,
   updateMessageStatusIntoDB,
   deleteMessageFromDB,
