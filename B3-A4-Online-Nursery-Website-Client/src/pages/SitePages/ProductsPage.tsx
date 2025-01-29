@@ -20,6 +20,8 @@ import Pagination from "@/components/shared/Pagination";
 import categoryApi from "@/redux/api/CategoryApi";
 import MultiRangeSlider from "@/components/ui/MultiRangeSlider";
 import ProductBrowser from "@/components/modules/ProductsPageAndManagement/ProductBrowser";
+import ProductCardSkeleton from "@/components/modules/ProductsPageAndManagement/ProductCardSkeleton";
+import { Button } from "@/components/ui/button";
 
 const ProductsPage = () => {
   const { category: urlCategory } = useParams();
@@ -44,6 +46,7 @@ const ProductsPage = () => {
     // resetPagination,
   } = useProductContext() as TProductContext;
 
+  const [openFilter, setOpenFilter] = useState(false);
   const { loadingCategoryCount, totalCategory } =
     useCategoryContext() as TCategoryContext;
 
@@ -107,76 +110,95 @@ const ProductsPage = () => {
           </div>
 
           {/* browser */}
-          <div className="w-full h-[5%]">
+          <div className="w-full h-[5%] flex">
             <ProductBrowser caller={"ProductsPage"} />
+
+            <Button
+              className="flex lg:hidden bg-[#5D7E5F] text-base font-semibold space-x-2 rounded-full ml-2"
+              onClick={() => setOpenFilter(!openFilter)}
+            >
+              <i className="fa-solid fa-filter"></i>
+            </Button>
           </div>
 
-          <div className="w-full h-[80%] flex items-center my-6 gap-6">
-            {loadingCategoryCount || loadingCategories || loadingMinMaxPrice ? (
-              <Loading />
-            ) : (
-              <div className="w-[20%] h-full border rounded-[20px]">
-                <div className="h-[50%] p-5">
-                  <h2 className="text-[#757575] text-lg font-semibold mb-2">
-                    Filter by category
-                  </h2>
-                  <div className="h-[70%] xl:h-[90%] space-y-3 overflow-y-auto">
-                    {loadedCategories?.data?.map((category: TCategory) => (
-                      <div
-                        key={category.category}
-                        className="flex justify-start items-center gap-3"
-                      >
-                        <input
-                          type="checkbox"
-                          value={category.category}
-                          checked={selectedCategories.includes(
-                            category.category
-                          )}
-                          onChange={handleCheckboxCheckChange}
-                        />
-                        <p>{category.category}</p>
-                      </div>
-                    ))}
+          <div className="w-full h-[80%] flex items-center my-6 gap-6 relative overflow-hidden">
+            <div
+              className={`bg-white w-60 lg:w-[20%] h-full border rounded-l-[20px] lg:rounded-[20px] absolute z-20 lg:z-auto lg:static right-0 lg:translate-x-0 ${
+                openFilter
+                  ? "translate-x-0 transition duration-300 ease-in-out"
+                  : "translate-x-full transition duration-300 ease-in-out"
+              }`}
+            >
+              {loadingCategoryCount ||
+              loadingCategories ||
+              loadingMinMaxPrice ? (
+                <Loading />
+              ) : (
+                <>
+                  <div className="h-[50%] p-5">
+                    <h2 className="text-[#757575] text-lg font-semibold mb-2">
+                      Filter by category
+                    </h2>
+                    <div className="h-[70%] xl:h-[90%] space-y-3 overflow-y-auto">
+                      {loadedCategories?.data?.map((category: TCategory) => (
+                        <div
+                          key={category.category}
+                          className="flex justify-start items-center gap-3"
+                        >
+                          <input
+                            type="checkbox"
+                            value={category.category}
+                            checked={selectedCategories.includes(
+                              category.category
+                            )}
+                            onChange={handleCheckboxCheckChange}
+                          />
+                          <p>{category.category}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div className="h-[25%] p-5 flex flex-col justify-center border-y">
-                  <h2 className="text-[#757575] text-lg font-semibold">
-                    Filter by price
-                  </h2>
+                  <div className="h-[25%] p-5 flex flex-col justify-center border-y">
+                    <h2 className="text-[#757575] text-lg font-semibold">
+                      Filter by price
+                    </h2>
 
-                  <MultiRangeSlider
-                    min={defaultMin}
-                    max={defaultMax}
-                    onChange={handlePriceSliderChange}
-                  />
+                    <MultiRangeSlider
+                      min={defaultMin}
+                      max={defaultMax}
+                      onChange={handlePriceSliderChange}
+                    />
 
-                  <div className="flex justify-between items-center">
-                    <p>${minProductPrice}</p>-<p>${maxProductPrice}</p>
+                    <div className="flex justify-between items-center">
+                      <p>${minProductPrice}</p>-<p>${maxProductPrice}</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="h-[25%] p-5 flex flex-col justify-center">
-                  <h2 className="text-[#757575] text-lg font-semibold">
-                    Filter by rating
-                  </h2>
-                  <MultiRangeSlider
-                    min={0}
-                    max={5}
-                    step={0.5}
-                    onChange={handleRatingSliderChange}
-                  />
-                  <div className="flex justify-between items-center">
-                    <p>{ratingRangeValue[0]}</p>-<p>{ratingRangeValue[1]}</p>
+                  <div className="h-[25%] p-5 flex flex-col justify-center">
+                    <h2 className="text-[#757575] text-lg font-semibold">
+                      Filter by rating
+                    </h2>
+                    <MultiRangeSlider
+                      min={0}
+                      max={5}
+                      step={0.5}
+                      onChange={handleRatingSliderChange}
+                    />
+                    <div className="flex justify-between items-center">
+                      <p>{ratingRangeValue[0]}</p>-<p>{ratingRangeValue[1]}</p>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
+                </>
+              )}
+            </div>
 
-            <div className="w-[80%] h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 overflow-y-auto">
+            <div className="w-full lg:w-[80%] h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 overflow-y-auto">
               {/* <ProductsContainer> */}
               {loadingProducts || loadingNumberOfProducts ? (
-                <Loading></Loading>
+                Array.from({ length: 4 }).map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))
               ) : products?.length > 0 ? (
                 <>
                   {products

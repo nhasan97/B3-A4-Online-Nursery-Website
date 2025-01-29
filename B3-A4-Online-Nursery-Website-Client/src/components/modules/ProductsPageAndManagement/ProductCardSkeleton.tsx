@@ -1,6 +1,6 @@
 const ProductCardSkeleton = () => {
   return (
-    <div className="w-full h-fit bg-white p-1 space-y-3 rounded-3xl border">
+    <div className="w-[275px] h-fit bg-white p-1 space-y-3 rounded-3xl border">
       <div className="w-full bg-[#98b2992f] rounded-[20px] h-[300px]">
         <div className="w-full h-full rounded-[20px] " />
       </div>
