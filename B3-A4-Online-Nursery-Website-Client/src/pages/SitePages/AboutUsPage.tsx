@@ -8,7 +8,7 @@ const AboutUsPage = () => {
 
   return (
     <div className="w-full">
-      <div className="w-full flex flex-col justify-center items-center gap-3 text-center p-20 bg-[url('https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816291/Serene_Indoor_Botanical_Corner_Vibrant_Plant_Background-HD_d6sz7s.webp')] bg-[#00000077] bg-blend-overlay bg-cover bg-no-repeat bg-center bg-fixed">
+      <div className="w-full flex flex-col justify-center items-center gap-3 text-center px-10 sm:px-20 py-20 bg-[url('https://res.cloudinary.com/dcnktq9l2/image/upload/v1737816291/Serene_Indoor_Botanical_Corner_Vibrant_Plant_Background-HD_d6sz7s.webp')] bg-[#00000077] bg-blend-overlay bg-cover bg-no-repeat bg-center bg-fixed">
         <h1 className=" text-white text-3xl md:text-[40px] lg:text-[50px] font-bold leading-[40px] md:leading-[55px] lg:leading-[70px]">
           Bringing Nature Home
         </h1>
